@@ -1,4 +1,4 @@
-title: "My Blogs Name"
+title: "Welcome to my land"
 author: "Edward Nguyen"
 description: "Sharing insights and knowledge on machine learning and AI to help you stay ahead in the evolving world of technology." # This will show up in places like twitter, linkedin, etc, if you share your sites url as a post.
 
@@ -17,7 +17,7 @@ linkedin_username: "tungedng2719"
 #########################################################################################
 ######### Nothing below needs to be changed (unless you know what you're doing) #########
 #########################################################################################
-theme: "jekyll-theme-cayman"
+theme: "jekyll-theme-minimal"
 
 rss: rss
 
