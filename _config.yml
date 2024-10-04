@@ -1,43 +1,97 @@
-title: Tung Nguyen's Blog
-description: Sharing insights and knowledge on machine learning and AI to help you stay ahead in the evolving world of technology.
-author: Tung Nguyen
-avatar: /logo.png
+# WhatATheme
+markdown: kramdown
+
+# URL of the Site
+url: ''
+# Base URL of the Site (i.e., Name of the Repository in which the Site is hosted)
+baseurl: 
+
+# Title of the Site
+title: What A Theme
+# Description of the Site
+description: A customizable Jekyll portfolio theme
+# URL of Image of the Site
+site-image: /WhatATheme/assets/images/meta.jpg
+# Keywords of the Site
+site-keywords: Site, Template, Theme
+# URL for the Image of custom Favicon
+favicon-url: 
+
+# URL of the Image of Custom Hero Image (i.e., the image in the background of the very first section of the Homepage)
+heroimage: https://images.pexels.com/photos/220444/pexels-photo-220444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+
+# Social Media and Contact
+# If you don't want to use any icon, you can leave them blank.
 email: tungnguyen99.tn@gmail.com
+facebook_username: /
+twitter_username: /
+instagram_username: /
+linkedin_username: tungedng2710
+github_username:  tungedng2710
+# youtube_channel_id: UCk_93NXYP-U_AOB5GfWlOow
+reddit_username: /
+behance_username: /
+dribbble_username: /
+spotify_username: /
 
+# Google Analytics
+google-analytics: UA-163806439-1
+
+# Disqus
+# disqus-shortname: tungedng2710
+
+# Name of the Author
+author-name: tungedng2710
+# URL for the Image of the Author
+author-image: https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png
+# 60 Words About the Author
+author-about: AI Engineer
+# URL to the Author's Profile (i.e., Github, Twitter, Stackoverflow, etc)
+author-url: https://github.com/tungedng2710
+
+# SASS
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Build settings
 plugins:
-  - jekyll-seo-tag
+  - jekyll-admin
   - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-paginate
 
-paginate: 10
+# Permalink
+permalink: "blog/:title"
 
-# Uncomment the below line and set the tracking ID for enabling Google Analytics
-# 
-# google_analytics: 
+# Compress
+compress_html:
+  clippings: all
 
-# Uncomment the below lines and set the Disqus shortname for enabling Disqus
-# 
-# disqus:
+# Defaults
+defaults:
+  -
+    scope:
+      type: 'posts'
+    values:
+      layout: post
+      post-image: ""
+      description: ""
+      tags:
+        - ""
+  -
+    scope:
+      type: 'pages'
+    values:
+      layout: page
 
-# Jekyll
-# ======
+# Exclude
 exclude:
-  - scripts/
-  - README.md
-  - jekyll-theme-hamilton.gemspec
-
-# Jekyll SEO Tag (Optional)
-# =========================
-twitter:
-  username: ngzhio
-  card: summary
-logo: logo.png
-social:
-  name: Shangzhi Huang
-  links:
-    - https://twitter.com/ngzhio
-    - https://www.facebook.com/ngzhio
-    - https://github.com/ngzhio
-google_site_verification: u4WXQl0Eu66rsQo2kRdCNx
-lang: en
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
+  - Gemfile
+  - Gemfile.lock
+  - node_modules/
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/

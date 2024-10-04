@@ -1,32 +1,41 @@
+---
+layout: compress
+---
+
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html>
+{% include head.html %}
 
-  <head>
-    {% include head.html %}
-  </head>
+<body>
+  {% include navbar.html %}
+  {% include showcase.html %}
+  {% include about.html %}
+  {% include contact.html %}
+  <!--Footer begins here-->
+  {% include footer.html %}
+</body>
+<script>
+  var navItems = document.getElementsByClassName('navbar-item');
+  var heroes = document.getElementsByClassName('hero');
+  const viewOffset = 200; 
 
-  <body>
-    <div class="site-container">
-      <header class="site-header">
-        {% include header.html %}
-      </header>
-      
-      <div class="site-body wrapper">
-        <aside class="site-sidebar" id="site-sidebar">
-          {% if page.toc %}
-            {% include sidebar-toc.html %}
-          {% else %}
-            {% include sidebar.html %}
-          {% endif %}
-        </aside>
-        <main class="site-main" id="site-main" aria-label="Content" tabindex="1">
-          {{ content }}
-          <footer class="site-footer">
-            {% include footer.html %}
-          </footer>
-        </main>
-      </div>
-    </div>
-  </body>
+  window.addEventListener("scroll", function (event) {
+    var scroll = this.scrollY;
+    var position = window.pageYOffset;
+
+    for (var i = 0; i < navItems.length; i++) {
+      navItems[i].classList.remove('is-active');
+    }
+
+    for (var i = 0; i < heroes.length; i++) {
+        var sectionTop = heroes[i].offsetTop-viewOffset;
+        var sectionBottom = heroes[i].offsetTop + heroes[i].offsetHeight-viewOffset;
+
+        if (scroll >= sectionTop && scroll < sectionBottom) {
+          navItems[i+1].classList.add('is-active');
+      }
+    }
+  });
+</script>
 
 </html>
