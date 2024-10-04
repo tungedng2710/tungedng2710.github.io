@@ -7,7 +7,7 @@ url: ''
 baseurl: 
 
 # Title of the Site
-title: Beyond Algorithms
+title: Hugging Island
 # Description of the Site
 description: Unlocking the Power of AI
 # URL of Image of the Site
@@ -18,7 +18,7 @@ site-keywords: Site, Template, Theme
 favicon-url: 
 
 # URL of the Image of Custom Hero Image (i.e., the image in the background of the very first section of the Homepage)
-heroimage: https://images.pexels.com/photos/220444/pexels-photo-220444.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940
+heroimage: https://media-wbp.wgcdn.co/media/filer_public/87/2e/872ea855-8d20-4eae-8888-ba2d5210f6d6/chieftain_mk6_1920_1080.jpg
 
 # Social Media and Contact
 # If you don't want to use any icon, you can leave them blank.
