@@ -1,8 +1,8 @@
 - name: TonAI Creative
-  image: https://cdn.pixabay.com/photo/2015/01/08/18/27/startup-593341_960_720.jpg
+  image: https://github.com/tungedng2710/TonAI-Creative/blob/main/stuffs/logo.png?raw=true
   link: https://github.com/tungedng2710/TonAI-Creative
   description: A simple web UI for AI art creation
 - name: TonAI OCR
   link: https://github.com/tungedng2710/TonAI-OCR
-  image: https://cdn.pixabay.com/photo/2015/01/09/11/08/startup-594090_960_720.jpg
+  image: https://github.com/tungedng2710/TonAI-Creative/blob/main/stuffs/logo.png?raw=true
   description: Text recognition Python package
