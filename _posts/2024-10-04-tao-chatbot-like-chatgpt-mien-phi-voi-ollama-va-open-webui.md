@@ -1,12 +1,14 @@
 ---
 title: Tạo chatbot "like ChatGPT" miễn phí với Ollama và Open WebUI
 layout: post
-post-image: "https://images.viblo.asia/100x100/38326b12-21d0-4a55-b299-70c29eca1c2c.png"
+post-image: "https://i.ytimg.com/vi/Ox8hhpgrUi0/maxresdefault.jpg"
 description: Hướng dẫn tạo chatbot
 tags:
-- sample
-- post
-- test
+- Generative AI
+- Chatbot AI
+- Large language models
+- Ollama
+- Open WebUI
 ---
 
 # Giới thiệu

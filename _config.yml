@@ -1,5 +1,5 @@
 # WhatATheme
-# markdown: kramdown
+markdown: kramdown
 
 # URL of the Site
 url: ''
@@ -11,9 +11,9 @@ title: Hugging Island
 # Description of the Site
 description: Unlocking the Power of AI
 # URL of Image of the Site
-site-image: /WhatATheme/assets/images/meta.jpg
+site-image: /tungedng2710.github.io/assets/images/futureisland.png
 # Keywords of the Site
-site-keywords: Site, Template, Theme
+site-keywords: AI, Mathematics
 # URL for the Image of custom Favicon
 favicon-url: 
 
@@ -28,7 +28,7 @@ email: tungnguyen99.tn@gmail.com
 instagram_username: tungedng2710
 linkedin_username: tungedng2710
 github_username:  tungedng2710
-# youtube_channel_id: UCk_93NXYP-U_AOB5GfWlOow
+youtube_channel_id: UCfdJlJUx5UKzM9EYqh9faxQ
 reddit_username: tungedng2710
 # behance_username: /
 # dribbble_username: /
@@ -43,9 +43,9 @@ google-analytics: UA-163806439-1
 # Name of the Author
 author-name: Tung Nguyen
 # URL for the Image of the Author
-author-image: https://avatars.githubusercontent.com/u/48611435?v=4
+author-image: assets/images/avatar.jpeg
 # 60 Words About the Author
-author-about: I'm deeply engaged in the dynamic field of Artificial Intelligence, where I focus my research on cutting-edge areas such as Data Science, Computer Vision, and Generative AI. My passion lies in exploring how these disciplines intersect to push the boundaries of machine learning, enabling innovative solutions that mimic human-like intelligence and creativity.
+author-about: I'm an AI Engineer with a keen interest in Generative AI and Computer Vision. Through my personal blog, I share knowledge about AI, its mathematical concepts, and occasionally other topics, aiming to make complex ideas more accessible for a wider audience. Always exploring new ways to learn and contribute to the field.
 # URL to the Author's Profile (i.e., Github, Twitter, Stackoverflow, etc)
 author-url: https://github.com/tungedng2710
 

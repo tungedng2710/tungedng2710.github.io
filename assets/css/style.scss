@@ -25,11 +25,11 @@ a.navbar-item:hover,
 
 a.navbar-item.is-active {
     background-color: rgba($color: #fff, $alpha: 0.25) !important;
-    color: white !important;
+    color: rgb(255, 255, 255) !important;
 
     &:hover {
         background-color: rgba($color: #fff, $alpha: 0.25) !important;
-        color: grey;
+        color: rgb(128, 128, 128);
     }
 }
 

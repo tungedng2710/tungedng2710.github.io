@@ -1,12 +1,11 @@
 ---
 title: Sigmoid dưới góc nhìn xác suất
 layout: post
-post-image: "https://images.viblo.asia/100x100/38326b12-21d0-4a55-b299-70c29eca1c2c.png"
+post-image: "https://cloud2data.com/activation-function-sigmoid/2560px-Sigmoid-function-2.svg"
 description: Giải thích công thức toán học của Sigmoid trong Machine Learning
 tags:
-- sample
-- post
-- test
+- Sigmoid
+- Probability and Statistics
 ---
 
 Trong các bài toán phân lớp (classification) sử dụng Deep Learning, phần không thể thiếu cho đầu ra chính là hàm sigmoid (cho 2 classes) hay softmax (biến thể của sigmoid cho nhiều classes). Mục đích của hàm sigmoid là cho ra output là một vector, trong đó tổng các phần tử bằng 1, biểu thị xác suất khả năng mà sample đang xét rơi vào từng class. Vậy tại sao sigmoid lại có thể biểu diễn xác suất, chúng ta cùng làm rõ trong bài viết này 😄.
