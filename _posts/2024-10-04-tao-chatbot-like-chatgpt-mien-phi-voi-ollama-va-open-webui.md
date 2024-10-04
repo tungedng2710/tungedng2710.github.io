@@ -33,7 +33,7 @@ Tiếp theo, bạn có thể truy cập [thư viện mô hình của Ollama](htt
 Trên thư viện của Ollama, bạn có thể xem các biển thể model và số lượng tham số của chúng để có thể lựa chọn model phù hợp với nhu cầu sử dụng
 
 <div align="center">
-  <img src="https://images.viblo.asia/038918e9-366a-4344-b6dd-f570e1dfbb5d.png" alt="image.png" />
+  <img src="https://images.viblo.asia/038918e9-366a-4344-b6dd-f570e1dfbb5d.png" alt="image.png" /> <br>
   Thư viện mô hình Ollama
 </div>
 
