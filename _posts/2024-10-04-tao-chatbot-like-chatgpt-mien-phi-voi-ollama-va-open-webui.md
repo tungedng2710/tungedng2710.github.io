@@ -145,15 +145,13 @@ $ bash start.sh
 ## Trải nghiệm thôi nào 😎
 
 <div align="center">
-  <img src="https://images.viblo.asia/d088e487-1846-428f-aa6f-724d1fb44b50.png" alt="image.png" />
-
+  <img src="https://images.viblo.asia/d088e487-1846-428f-aa6f-724d1fb44b50.png" alt="image.png" /> <br>
   Customize model trả lời theo ý bạn
 </div>
 
 
 <div align="center">
-  <img src="https://images.viblo.asia/b144d940-4441-4471-a33a-bb1ef221cd7f.png" alt="image.png" />
-  
+  <img src="https://images.viblo.asia/b144d940-4441-4471-a33a-bb1ef221cd7f.png" alt="image.png" /> <br>
   Ollama có thể truy cập link, tài liệu để đọc. 
 </div>
 
