@@ -128,8 +128,11 @@ $ bash start.sh
 
 ## Trải nghiệm thôi nào 😎
 Sau khi cài đặt các bạn sẽ có giao diện sử dụng như sau
+
 ![image.png](https://images.viblo.asia/d088e487-1846-428f-aa6f-724d1fb44b50.png)
+
 Customize model trả lời theo ý bạn
+
 ![image.png](https://images.viblo.asia/b144d940-4441-4471-a33a-bb1ef221cd7f.png)
 Ollama có thể truy cập link, tài liệu để đọc. Với một số mô hình vision có thể nhận diện được ảnh input.
 Giao diện Open WebUI có khá nhiều chức năng như quản lý model, quản lý user (nếu bạn là admin), quản lý database... Ngoài ra có cả một số tính năng nâng cao như kết nối với image generator với ComfyUI hay A1111.
