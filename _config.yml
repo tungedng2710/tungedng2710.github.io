@@ -1,5 +1,5 @@
 # WhatATheme
-markdown: kramdown
+# markdown: kramdown
 
 # URL of the Site
 url: ''
@@ -25,11 +25,11 @@ heroimage: https://raw.githubusercontent.com/tungedng2710/tungedng2710.github.io
 email: tungnguyen99.tn@gmail.com
 # facebook_username: /
 # twitter_username: /
-# instagram_username: /
+instagram_username: tungedng2710
 linkedin_username: tungedng2710
 github_username:  tungedng2710
 # youtube_channel_id: UCk_93NXYP-U_AOB5GfWlOow
-reddit_username: /
+reddit_username: tungedng2710
 # behance_username: /
 # dribbble_username: /
 # spotify_username: /
@@ -41,7 +41,7 @@ google-analytics: UA-163806439-1
 # disqus-shortname: tungedng2710
 
 # Name of the Author
-author-name: tungedng2710
+author-name: Tung Nguyen
 # URL for the Image of the Author
 author-image: https://avatars.githubusercontent.com/u/48611435?v=4
 # 60 Words About the Author
