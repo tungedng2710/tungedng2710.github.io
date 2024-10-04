@@ -18,7 +18,7 @@ site-keywords: Site, Template, Theme
 favicon-url: 
 
 # URL of the Image of Custom Hero Image (i.e., the image in the background of the very first section of the Homepage)
-heroimage: https://github.com/tungedng2710/tungedng2710.github.io/blob/main/assets/futureisland.png?raw=true
+heroimage: https://raw.githubusercontent.com/tungedng2710/tungedng2710.github.io/refs/heads/main/assets/futureisland.png
 
 # Social Media and Contact
 # If you don't want to use any icon, you can leave them blank.
