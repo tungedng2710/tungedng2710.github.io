@@ -34,6 +34,7 @@ Trên thư viện của Ollama, bạn có thể xem các biển thể model và 
 
 <div align="center">
   <img src="https://images.viblo.asia/038918e9-366a-4344-b6dd-f570e1dfbb5d.png" alt="image.png" />
+  Thư viện mô hình Ollama
 </div>
 
 Bạn có thể chạy mô hình bằng lệnh `ollama run` để tải về và bắt đầu tương tác với mô hình trực tiếp. Tuy nhiên, bạn cũng có thể kéo (pull) mô hình về máy trước và sau đó mới chạy. Điều này tương tự như cách bạn làm việc với các Docker image.
@@ -142,16 +143,14 @@ $ bash start.sh
 Để tránh trường hợp khi bạn tắt Terminal, ứng dụng sẽ bị down thì có thể tham khảo [cách sử dụng Tmux](https://viblo.asia/p/toi-uu-hoa-tmux-trong-lap-trinh-zXRJ8DQ5JGq) để treo ứng dụng này liên tục
 
 ## Trải nghiệm thôi nào 😎
-Sau khi cài đặt các bạn sẽ có giao diện sử dụng như sau
-
 <div align="center">
   <img src="https://images.viblo.asia/d088e487-1846-428f-aa6f-724d1fb44b50.png" alt="image.png" />
+  Customize model trả lời theo ý bạn
 </div>
-
-Customize model trả lời theo ý bạn
 
 <div align="center">
   <img src="https://images.viblo.asia/b144d940-4441-4471-a33a-bb1ef221cd7f.png" alt="image.png" />
+  Ollama có thể truy cập link, tài liệu để đọc. 
 </div>
 
 
