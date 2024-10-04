@@ -18,7 +18,7 @@ site-keywords: Site, Template, Theme
 favicon-url: 
 
 # URL of the Image of Custom Hero Image (i.e., the image in the background of the very first section of the Homepage)
-heroimage: https://media-wbp.wgcdn.co/media/filer_public/87/2e/872ea855-8d20-4eae-8888-ba2d5210f6d6/chieftain_mk6_1920_1080.jpg
+heroimage: assets/futureisland.png
 
 # Social Media and Contact
 # If you don't want to use any icon, you can leave them blank.
