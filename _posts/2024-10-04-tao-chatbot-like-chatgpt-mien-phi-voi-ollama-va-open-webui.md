@@ -143,16 +143,19 @@ $ bash start.sh
 Để tránh trường hợp khi bạn tắt Terminal, ứng dụng sẽ bị down thì có thể tham khảo [cách sử dụng Tmux](https://viblo.asia/p/toi-uu-hoa-tmux-trong-lap-trinh-zXRJ8DQ5JGq) để treo ứng dụng này liên tục
 
 ## Trải nghiệm thôi nào 😎
+
 <div align="center">
   <img src="https://images.viblo.asia/d088e487-1846-428f-aa6f-724d1fb44b50.png" alt="image.png" />
+
   Customize model trả lời theo ý bạn
 </div>
 
+
 <div align="center">
   <img src="https://images.viblo.asia/b144d940-4441-4471-a33a-bb1ef221cd7f.png" alt="image.png" />
+  
   Ollama có thể truy cập link, tài liệu để đọc. 
 </div>
-
 
 Ollama có thể truy cập link, tài liệu để đọc. Với một số mô hình vision có thể nhận diện được ảnh input.
 Giao diện Open WebUI có khá nhiều chức năng như quản lý model, quản lý user (nếu bạn là admin), quản lý database... Ngoài ra có cả một số tính năng nâng cao như kết nối với image generator với ComfyUI hay A1111.
