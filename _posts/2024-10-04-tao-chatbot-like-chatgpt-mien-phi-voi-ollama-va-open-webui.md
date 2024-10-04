@@ -31,7 +31,11 @@ Quá trình cài đặt thường mất vài phút. Trong quá trình cài đặ
 ## Kéo model về và chạy
 Tiếp theo, bạn có thể truy cập [thư viện mô hình của Ollama](https://ollama.com/library) để kiểm tra danh sách tất cả các họ mô hình hiện đang được hỗ trợ (đến thời điểm mình viết bài này, Ollama đã hỗ trợ đến Llama 3.2 1B và 3B, chưa hỗ trợ bản vision 11B và 90B). Mô hình mặc định được tải xuống là mô hình có tag `latest` (thấy nó bắt đầu giống Docker rồi ha 🤗). Trên trang của từng mô hình, bạn có thể tìm thêm thông tin như kích thước và phương pháp lượng tử hóa (quantization) được sử dụng. Quantization hiểu đơn giản là sẽ cưa bớt phần thập phân của mỗi params để tốn ít bộ nhớ lưu trữ hơn và đánh đổi là độ chính xác sẽ kém đi (Do thời lượng bài viết có hạn mình không đi sâu vấn đề này). Mặc định full precision cho số thập phân là 32bits (FP32). Tuy nhiên theo trải nghiệm cá nhân mình thì các mô hình mặc định của Ollama thường được quantize về 4bit và vẫn đáp ứng tốt các tác vụ thông thường như code hoặc đọc hiểu văn bản.
 Trên thư viện của Ollama, bạn có thể xem các biển thể model và số lượng tham số của chúng để có thể lựa chọn model phù hợp với nhu cầu sử dụng
-![image.png](https://images.viblo.asia/038918e9-366a-4344-b6dd-f570e1dfbb5d.png)
+
+<div align="center">
+  <img src="https://images.viblo.asia/038918e9-366a-4344-b6dd-f570e1dfbb5d.png" alt="image.png" />
+</div>
+
 Bạn có thể chạy mô hình bằng lệnh `ollama run` để tải về và bắt đầu tương tác với mô hình trực tiếp. Tuy nhiên, bạn cũng có thể kéo (pull) mô hình về máy trước và sau đó mới chạy. Điều này tương tự như cách bạn làm việc với các Docker image.
 
 Ví dụ để tải xuống mô hình `Llama 3.1`, hãy chạy lệnh terminal để:
@@ -139,9 +143,18 @@ $ bash start.sh
 
 ## Trải nghiệm thôi nào 😎
 Sau khi cài đặt các bạn sẽ có giao diện sử dụng như sau
-![image.png](https://images.viblo.asia/d088e487-1846-428f-aa6f-724d1fb44b50.png)
+
+<div align="center">
+  <img src="https://images.viblo.asia/d088e487-1846-428f-aa6f-724d1fb44b50.png" alt="image.png" />
+</div>
+
 Customize model trả lời theo ý bạn
-![image.png](https://images.viblo.asia/b144d940-4441-4471-a33a-bb1ef221cd7f.png)
+
+<div align="center">
+  <img src="https://images.viblo.asia/b144d940-4441-4471-a33a-bb1ef221cd7f.png" alt="image.png" />
+</div>
+
+
 Ollama có thể truy cập link, tài liệu để đọc. Với một số mô hình vision có thể nhận diện được ảnh input.
 Giao diện Open WebUI có khá nhiều chức năng như quản lý model, quản lý user (nếu bạn là admin), quản lý database... Ngoài ra có cả một số tính năng nâng cao như kết nối với image generator với ComfyUI hay A1111.
 
