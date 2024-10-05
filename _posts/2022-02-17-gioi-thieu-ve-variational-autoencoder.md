@@ -2,7 +2,7 @@
 title: Giới thiệu về Variational Autoencoder
 layout: post
 post-image: "https://cloud2data.com/activation-function-sigmoid/2560px-Sigmoid-function-2.svg"
-description: Giải thích công thức toán học của Sigmoid trong Machine Learning
+description: Xin chào mọi người, trong bài viết ngày hôm này minh sẽ cùng mọi người tìm hiểu về Variational Autoencoder (VAE), một loại generative model trong deep learning.
 tags:
 - Sigmoid
 - Probability and Statistics
