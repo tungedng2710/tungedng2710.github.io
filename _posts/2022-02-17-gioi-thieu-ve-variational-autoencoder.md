@@ -39,21 +39,21 @@ Thay vì ánh xạ đầu vào $x$ thành 1 điểm duy nhất trong không gian
 
 ## Loss function
 Hàm loss của Variational autoencoder gồm 2 thành phần: reconstruction loss và regularization loss:
-\[
+<p style="text-align: center;"> \[
 L(x, \hat x) = l_{reconstruct} + \beta{KL}(z, N(0, I_d))
-\] <br>
+\] </p> <br>
 * Reconstruction loss: dùng để reconstruct lại input ban đầu. Các hàm loss thông dụng là Mean Square Error hay Mean Absolute Error. Trong trường hợp ảnh nhị phân, ta có thể sử dụng binary cross entropy
 * Regulization loss: sử dụng KL divergence (khoảng cách giữa 2 phân phối xác suất)  giữa phân phối chuẩn với trung bình $\mathbb E(z)$ và phương sai  $\mathbb V(z)$ với phân phối chuẩn chuẩn tắc $d$ chiều  $N(0, I_d)$
-\[
+<p style="text-align: center;"> \[
 {KL}(z, N(0, I_d)) = \frac{1}{2}\sum_{i=1}^d( \mathbb V(z_i) - \log \mathbb V(z_i) - 1 + \mathbb E(z_i)^2)
-\] <br>
+\] </p> <br>
 
 ## Reparameterization trick 
 Như mọi người đều biết, để huấn luyện một mô hình học sâu thì ta cần tới thuật toán gradient descent, mà muốn thực hiện gradient descent thì phải có đạo hàm. Trong Variational autoencoder, thì ta có một bước sample từ phân phối chuẩn để thu được vector ẩn $z$ để đưa qua decoder. Tuy nhiên, có 1 vấn đề nho nhỏ là làm sao ta lan truyền ngược qua module sampling này để tính đạo hàm.
 
 Thay vì trực tiếp sample từ phân phối xác suất, ta sử dụng 1 mẹo nhỏ gọi là reparameterization. Vector $z$ sẽ được tính bằng công thức 
  
-\[z = \mathbb E(z) + \epsilon \odot \sqrt{\mathbb V(z)}\] <br>
+<p style="text-align: center;"> \[z = \mathbb E(z) + \epsilon \odot \sqrt{\mathbb V(z)}\] </p> <br>
 trong đó $\epsilon \sim N(0, I_d)$. Do $\mathbb E(z)$ và $\mathbb V(z)$ là outout của encoder nên đạo hàm có thể lan truyền ngược lên.   
 
 ## Implementation
