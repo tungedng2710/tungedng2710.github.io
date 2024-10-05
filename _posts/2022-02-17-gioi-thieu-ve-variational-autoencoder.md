@@ -12,7 +12,7 @@ author-url: https://github.com/HieuBui99
 ---
 
 ## Introduction
-Xin chào mọi người, trong bài viết ngày hôm này minh sẽ cùng mọi người tìm hiểu về  Variational Autoencoder (VAE), một loại generative model trong deep learning. Trong vài năm gần đây, các mô hình generative đang thu hút được sự chú ý của các nhà nghiên cứu và đạt được một số kết quả đáng kinh ngạc trong một số ứng dụng như: super resolution, face generation, ... Một số họ mô hình generative nổi bật có thể kể đến như Generative Adversarial Network và Variational Autoencoder. 
+Xin chào mọi người, trong bài viết ngày hôm này mình sẽ cùng mọi người tìm hiểu về  Variational Autoencoder (VAE), một loại generative model trong deep learning. Trong vài năm gần đây, các mô hình generative đang thu hút được sự chú ý của các nhà nghiên cứu và đạt được một số kết quả đáng kinh ngạc trong một số ứng dụng như: super resolution, face generation, ... Một số họ mô hình generative nổi bật có thể kể đến như Generative Adversarial Network và Variational Autoencoder. 
 
 Ở bài viết này, mình sẽ giới thiệu với mọi người về kiến trúc của VAE và cách cài đặt VAE trong thư viện Pytorch. Let's get started!!!
 
@@ -155,4 +155,4 @@ def display_images(out, n=1):
 
 # References
 * [https://atcold.github.io/NYU-DLSP21/](https://atcold.github.io/NYU-DLSP21/)
-* https://viblo.asia/p/tim-hieu-ve-autoencoder-oOVlYvJv58W
+* [https://viblo.asia/p/tim-hieu-ve-autoencoder-oOVlYvJv58W](https://viblo.asia/p/tim-hieu-ve-autoencoder-oOVlYvJv58W)
