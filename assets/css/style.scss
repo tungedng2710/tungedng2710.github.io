@@ -4,7 +4,7 @@
 @import "main.scss";
 
 #navbar {
-    opacity: 0.85;
+    opacity: 0.9;
 }
 
 .is-active {
@@ -82,6 +82,9 @@ a.navbar-item.is-active {
         min-width: 25vmax;
         margin: 0.5rem;
     }
+    // background-image: url('your-image-url.jpg');
+    // background-size: cover;
+    // background-position: center;
 }
 
 #contact {
