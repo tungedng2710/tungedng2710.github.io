@@ -4,8 +4,9 @@ layout: post
 post-image: "https://images.viblo.asia/bb7f0818-b45f-4db8-8fb6-975a2fe71025.png"
 description: Xin chào mọi người, trong bài viết ngày hôm này minh sẽ cùng mọi người tìm hiểu về Variational Autoencoder (VAE), một loại generative model trong deep learning.
 tags:
-- Sigmoid
-- Probability and Statistics
+- Deep Learning
+- Computer Vision
+- Generative AI
 author-name: Hieu Bui
 author-url: https://github.com/HieuBui99
 ---
