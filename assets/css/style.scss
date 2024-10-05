@@ -48,7 +48,7 @@ a.navbar-item.is-active {
     &::before {
         filter: blur(0.0rem);
         background-image: url({{site.heroimage}});
-        background-position: fill;
+        background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
