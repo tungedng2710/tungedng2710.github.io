@@ -6,6 +6,8 @@ description: Giải thích công thức toán học của Sigmoid trong Machine 
 tags:
 - Sigmoid
 - Probability and Statistics
+author-name: Hieu Bui
+author-url: https://github.com/HieuBui99
 ---
 
 ## Introduction
