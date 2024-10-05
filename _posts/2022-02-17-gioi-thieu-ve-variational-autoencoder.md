@@ -1,7 +1,7 @@
 ---
 title: Giới thiệu về Variational Autoencoder
 layout: post
-post-image: "https://cloud2data.com/activation-function-sigmoid/2560px-Sigmoid-function-2.svg"
+post-image: "https://images.viblo.asia/bb7f0818-b45f-4db8-8fb6-975a2fe71025.png"
 description: Xin chào mọi người, trong bài viết ngày hôm này minh sẽ cùng mọi người tìm hiểu về Variational Autoencoder (VAE), một loại generative model trong deep learning.
 tags:
 - Sigmoid
@@ -39,12 +39,12 @@ Thay vì ánh xạ đầu vào $x$ thành 1 điểm duy nhất trong không gian
 ## Loss function
 Hàm loss của Variational autoencoder gồm 2 thành phần: reconstruction loss và regularization loss:
 \[
-L(x, \hat x) = l_{reconstruct} + \beta\bold{KL}(z, N(0, I_d))
+L(x, \hat x) = l_{reconstruct} + \beta{KL}(z, N(0, I_d))
 \]
 * Reconstruction loss: dùng để reconstruct lại input ban đầu. Các hàm loss thông dụng là Mean Square Error hay Mean Absolute Error. Trong trường hợp ảnh nhị phân, ta có thể sử dụng binary cross entropy
 * Regulization loss: sử dụng KL divergence (khoảng cách giữa 2 phân phối xác suất)  giữa phân phối chuẩn với trung bình $\mathbb E(z)$ và phương sai  $\mathbb V(z)$ với phân phối chuẩn chuẩn tắc $d$ chiều  $N(0, I_d)$
 \[
-\bold{KL}(z, N(0, I_d)) = \frac{1}{2}\sum_{i=1}^d( \mathbb V(z_i) - \log \mathbb V(z_i) - 1 + \mathbb E(z_i)^2)
+{KL}(z, N(0, I_d)) = \frac{1}{2}\sum_{i=1}^d( \mathbb V(z_i) - \log \mathbb V(z_i) - 1 + \mathbb E(z_i)^2)
 \]
 
 ## Reparameterization trick 
