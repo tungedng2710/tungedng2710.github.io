@@ -1,7 +1,7 @@
 ---
 title: Giới thiệu về Variational Autoencoder
 layout: post
-post-image: "https://images.viblo.asia/bb7f0818-b45f-4db8-8fb6-975a2fe71025.png"
+post-image: "https://kvfrans.com/content/images/2016/08/vae.jpg"
 description: Xin chào mọi người, trong bài viết ngày hôm này minh sẽ cùng mọi người tìm hiểu về Variational Autoencoder (VAE), một loại generative model trong deep learning.
 tags:
 - Deep Learning
