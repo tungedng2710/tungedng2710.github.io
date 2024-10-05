@@ -2,7 +2,7 @@
 title: Tạo chatbot "like ChatGPT" miễn phí với Ollama và Open WebUI
 layout: post
 post-image: "https://i.ytimg.com/vi/Ox8hhpgrUi0/maxresdefault.jpg"
-description: Hướng dẫn tạo chatbot
+description: Sự mạnh mẽ của ChatGPT đưa bạn đến với việc nghiên cứu về các mô hình ngôn ngữ lớn (LLMs) và muốn dựng một app chatbot giống như ChatGPT?
 tags:
 - Generative AI
 - Chatbot AI
