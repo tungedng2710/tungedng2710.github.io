@@ -17,7 +17,7 @@ title: Creative Space
 </head>
 <body>
 <!-- Replace "https://your-gradio-app-url" with your actual Gradio app URL -->
-<iframe src="http://116.103.227.252:7860" allow="microphone; camera"></iframe>
+<iframe src="https://116.103.227.252:7860" allow="microphone; camera"></iframe>
 
 </body>
 </html>
