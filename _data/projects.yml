@@ -6,3 +6,7 @@
   link: https://github.com/tungedng2710/TonAI-OCR
   image: https://github.com/tungedng2710/TonAI-Creative/blob/main/stuffs/logo.png?raw=true
   description: Text recognition Python package
+- name: Improved ArcFace
+  link: https://github.com/tungedng2710/Improved-ArcFace
+  image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ--nIIrBmO4iAtJjMoUXvtiL5_YZoEj8VwWQ&s
+  description: Some improvements on ArcFace model
