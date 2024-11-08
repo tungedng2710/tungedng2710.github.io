@@ -17,6 +17,6 @@ title: TonAI Creative
 <body>
 
 <!-- Replace "https://your-gradio-app-url" with your actual Gradio app URL -->
-<iframe src="https://03bc0ef29e8614e2b1.gradio.live/" allow="microphone; camera"></iframe>
+<iframe src="https://a82fce5aaac201187c.gradio.live/" allow="microphone; camera"></iframe>
 </body>
 </html>
