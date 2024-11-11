@@ -1,5 +1,5 @@
 ---
-title: TonAI OCR
+title: " "
 ---
 <script
 	type="module"
