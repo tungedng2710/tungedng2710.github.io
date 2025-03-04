@@ -15,14 +15,15 @@ author-url: https://github.com/tungedng2710
 
 Linear Regression is a fundamental supervised learning approach for modeling the relationship between one or more explanatory variables (often called features or predictors) and a continuous target variable. The goal is to find a function (usually linear) that describes this relationship as accurately as possible.
 
-The simplest form, **Simple Linear Regression**, deals with one explanatory variable \[ x \] and one response variable \[ y \], aiming to fit a line:
+The simplest form, **Simple Linear Regression**, deals with one explanatory variable \[ x \] and one response variable \[ y \], aiming to fit a line:\
+<p style="text-align: center;">
 \[
 y \approx \beta_0 + \beta_1 x.
-\]
+\] </p> <br>
 More generally, **Multiple Linear Regression** deals with multiple features/predictors:
-\[
+ <p style="text-align: center;"> \[
 \mathbf{y} \approx \mathbf{X}\boldsymbol{\beta},
-\]
+\] </p> <br>
 where
 - \[\mathbf{y} \in \mathbb{R}^n\] is the vector of responses (target values),
 - \[\mathbf{X} \in \mathbb{R}^{n \times d}\] is the design matrix (each row is a data point, each column is a feature),
@@ -87,9 +88,10 @@ If \[\mathbf{X}^T \mathbf{X}\] is invertible (i.e., \[\mathbf{X}\] has full colu
 
 ### Solving for \[\sigma^2\]
 To find the MLE for \[\sigma^2\], substitute \[\boldsymbol{\hat{\beta}}_{\text{MLE}}\] into the log-likelihood and solve. The result is:
-\[
+
+<p style="text-align: center;"> \[
 \hat{\sigma}^2 = \frac{1}{n} \sum_{i=1}^n \bigl(y_i - \mathbf{x}_i^T \boldsymbol{\hat{\beta}}_{\text{MLE}}\bigr)^2.
-\]
+\] </p> <br>
 (This could also be \[\frac{1}{n-d}\] if we use an unbiased sample estimator, but in standard MLE, we divide by \[n\].)
 
 
