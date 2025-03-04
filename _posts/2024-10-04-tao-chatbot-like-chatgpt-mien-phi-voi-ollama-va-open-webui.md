@@ -9,6 +9,8 @@ tags:
 - Large language models
 - Ollama
 - Open WebUI
+author-name: Tung Nguyen
+author-url: https://github.com/tungedng2710
 ---
 
 # Giới thiệu
