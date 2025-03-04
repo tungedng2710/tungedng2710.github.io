@@ -61,21 +61,15 @@ where \[\boldsymbol{\varepsilon}\] is the noise or error term, often assumed to 
 
 ### Log-Likelihood Function
 Maximizing the likelihood is equivalent to maximizing the **log-likelihood**:
-\[
-\ell(\boldsymbol{\beta}, \sigma^2)
-= \ln p(\mathbf{y} \mid \boldsymbol{\beta}, \sigma^2)
-= -\frac{n}{2}\ln(2\pi\sigma^2)
-  - \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i - \mathbf{x}_i^T\boldsymbol{\beta})^2.
-\]
+<p style="text-align: center;"> \[\ell(\boldsymbol{\beta}, \sigma^2) = \ln p(\mathbf{y} \mid \boldsymbol{\beta}, \sigma^2)\] </p> <br>
+<p style="text-align: center;"> \[= -\frac{n}{2}\ln(2\pi\sigma^2) - \frac{1}{2\sigma^2}\sum_{i=1}^n (y_i - \mathbf{x}_i^T\boldsymbol{\beta})^2.\] </p> <br>
 We typically maximize \[\ell\] w.r.t. \[\boldsymbol{\beta}\] (and can separately solve for \[\sigma^2\]).
 
 ### Maximizing w.r.t. \[\boldsymbol{\beta}\]
 Ignoring terms that do not depend on \[\boldsymbol{\beta}\], we want to minimize:
-\[
-\sum_{i=1}^n (y_i - \mathbf{x}_i^T\boldsymbol{\beta})^2
-= (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}).
-\]
+<p style="text-align: center;"> \[\sum_{i=1}^n (y_i - \mathbf{x}_i^T\boldsymbol{\beta})^2 = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}).\] </p> <br>
 Taking the gradient of this quantity w.r.t. \[\boldsymbol{\beta}\] and setting it to zero:
+
 \[
 \frac{\partial}{\partial \boldsymbol{\beta}}
 (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})
