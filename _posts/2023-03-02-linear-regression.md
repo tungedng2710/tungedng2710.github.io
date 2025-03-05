@@ -48,17 +48,19 @@ where \[\boldsymbol{\varepsilon}\] is the noise or error term, often assumed to 
 
 ### Model Assumptions
 - Each data point \[ y_i \] is generated from a normal distribution:
+<p style="text-align: center;">
   \[
   y_i \sim \mathcal{N}(\mathbf{x}_i^T \boldsymbol{\beta}, \sigma^2),
-  \]
-  where \[\mathbf{x}_i\] is the \[i\]-th row of \[\mathbf{X}\].
+  \] </p> <br>
+
+where \[\mathbf{x}_i\] is the \[i\]-th row of \[\mathbf{X}\].
 
 - Hence, the joint probability of \[\mathbf{y}\] given \[\boldsymbol{\beta}\] and \[\sigma^2\] is:
-  \[
+  <p style="text-align: center;"> \[
   p(\mathbf{y} \mid \boldsymbol{\beta}, \sigma^2)
   = \prod_{i=1}^n \frac{1}{\sqrt{2\pi\sigma^2}}
     \exp\left(-\frac{(y_i - \mathbf{x}_i^T\boldsymbol{\beta})^2}{2\sigma^2}\right).
-  \]
+  \] </p> <br>
 
 ### Log-Likelihood Function
 Maximizing the likelihood is equivalent to maximizing the **log-likelihood**:
@@ -71,20 +73,21 @@ Ignoring terms that do not depend on \[\boldsymbol{\beta}\], we want to minimize
 <p style="text-align: center;"> \[\sum_{i=1}^n (y_i - \mathbf{x}_i^T\boldsymbol{\beta})^2 = (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}).\] </p> <br>
 Taking the gradient of this quantity w.r.t. \[\boldsymbol{\beta}\] and setting it to zero:
 
-\[
+<p style="text-align: center;"> \[
 \frac{\partial}{\partial \boldsymbol{\beta}}
 (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta})
 = -2 \mathbf{X}^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}) = 0,
-\]
+\] </p> <br>
 which yields
-\[
+
+<p style="text-align: center;"> \[
 \mathbf{X}^T \mathbf{X} \boldsymbol{\beta} = \mathbf{X}^T \mathbf{y}.
-\]
+\] </p> <br>
 
 If \[\mathbf{X}^T \mathbf{X}\] is invertible (i.e., \[\mathbf{X}\] has full column rank), the MLE solution is:
-\[
+<p style="text-align: center;"> \[
 \boldsymbol{\hat{\beta}}_{\text{MLE}} = (\mathbf{X}^T \mathbf{X})^{-1}\mathbf{X}^T \mathbf{y}.
-\]
+\] </p> <br>
 
 ### Solving for \[\sigma^2\]
 To find the MLE for \[\sigma^2\], substitute \[\boldsymbol{\hat{\beta}}_{\text{MLE}}\] into the log-likelihood and solve. The result is:
@@ -98,16 +101,19 @@ To find the MLE for \[\sigma^2\], substitute \[\boldsymbol{\hat{\beta}}_{\text{M
 # 2. Ordinary Least Squares (OLS)
 
 The Ordinary Least Squares approach seeks to **minimize** the sum of squared errors (residuals):
+
 \[
 \min_{\boldsymbol{\beta}} \; \sum_{i=1}^n (y_i - \mathbf{x}_i^T \boldsymbol{\beta})^2
 = \min_{\boldsymbol{\beta}} \; (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}).
 \]
 
 Following exactly the same derivation (taking the derivative w.r.t. \[\boldsymbol{\beta}\] and setting to zero), we arrive at the normal equations:
+
 \[
 \mathbf{X}^T \mathbf{X} \boldsymbol{\beta} = \mathbf{X}^T \mathbf{y}.
 \]
 Thus, the solution is the same:
+
 \[
 \boldsymbol{\hat{\beta}}_{\text{OLS}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}.
 \]
