@@ -10,3 +10,11 @@
   link: https://github.com/tungedng2710/Improved-ArcFace
   image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ--nIIrBmO4iAtJjMoUXvtiL5_YZoEj8VwWQ&s
   description: Some improvements on ArcFace model
+- name: Telegram Bot
+  image: https://github.com/tungedng2710/TonAI-Creative/blob/main/stuffs/logo.png?raw=true
+  link: https://github.com/tungedng2710/TonAI-Telegram-Bot
+  description: Telegram bot with Ollama and ComfyUI
+- name: TrafficCam
+  image: https://github.com/tungedng2710/TonAI-Creative/blob/main/stuffs/logo.png?raw=true
+  link: https://github.com/tungedng2710/license-plate-recognition
+  description: Vietnamese license plate recognition
