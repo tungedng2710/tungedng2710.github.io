@@ -4,14 +4,14 @@
   description: A simple web UI for AI art creation
 - name: TonAI OCR
   link: https://github.com/tungedng2710/TonAI-OCR
-  image: https://github.com/tungedng2710/TonAI-OCR/blob/main/stuffs/ocr_plate.jpg
+  image: https://github.com/tungedng2710/TonAI-OCR/blob/main/stuffs/ocr_plate.jpg?raw=true
   description: Text recognition Python package
 - name: Telegram Bot
-  image: https://github.com/tungedng2710/TonAI-Telegram-Bot/blob/main/stuffs/telegram_logo.jpg
+  image: https://github.com/tungedng2710/TonAI-Telegram-Bot/blob/main/stuffs/telegram_logo.jpg?raw=true
   link: https://github.com/tungedng2710/TonAI-Telegram-Bot
   description: Telegram bot with Ollama and ComfyUI
 - name: TrafficCam
-  image: https://github.com/tungedng2710/license-plate-recognition/blob/main/data/demo.jpg
+  image: https://github.com/tungedng2710/license-plate-recognition/blob/main/data/demo.jpg?raw=true
   link: https://github.com/tungedng2710/license-plate-recognition
   description: Vietnamese license plate recognition
 - name: Improved ArcFace
