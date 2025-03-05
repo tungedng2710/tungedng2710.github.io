@@ -1,7 +1,7 @@
 ---
 title: Linear Regression
 layout: post
-post-image: "https://media.geeksforgeeks.org/wp-content/uploads/20231129130431/11111111.png"
+post-image: "https://datatab.net/assets/tutorial/regression/Error_Linear_Regression.png"
 description: Linear Regression is a fundamental supervised learning approach for modeling the relationship between one or more explanatory variables (often called features or predictors) and a continuous target variable. The goal is to find a function (usually linear) that describes this relationship as accurately as possible.
 tags:
 - Machine Learning
