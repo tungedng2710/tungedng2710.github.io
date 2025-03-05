@@ -101,22 +101,18 @@ To find the MLE for \[\sigma^2\], substitute \[\boldsymbol{\hat{\beta}}_{\text{M
 # 2. Ordinary Least Squares (OLS)
 
 The Ordinary Least Squares approach seeks to **minimize** the sum of squared errors (residuals):
-
-\[
+<p style="text-align: center;"> \[
 \min_{\boldsymbol{\beta}} \; \sum_{i=1}^n (y_i - \mathbf{x}_i^T \boldsymbol{\beta})^2
 = \min_{\boldsymbol{\beta}} \; (\mathbf{y} - \mathbf{X}\boldsymbol{\beta})^T(\mathbf{y} - \mathbf{X}\boldsymbol{\beta}).
-\]
-
+\] </p> <br>
 Following exactly the same derivation (taking the derivative w.r.t. \[\boldsymbol{\beta}\] and setting to zero), we arrive at the normal equations:
-
-\[
+<p style="text-align: center;"> \[
 \mathbf{X}^T \mathbf{X} \boldsymbol{\beta} = \mathbf{X}^T \mathbf{y}.
-\]
+\] </p> <br>
 Thus, the solution is the same:
-
-\[
+<p style="text-align: center;"> \[
 \boldsymbol{\hat{\beta}}_{\text{OLS}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y}.
-\]
+\] </p> <br>
 
 Therefore, **MLE (under the assumptions of normally distributed errors) and OLS** yield the same parameter estimates.
 
