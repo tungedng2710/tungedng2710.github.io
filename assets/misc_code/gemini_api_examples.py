@@ -1,6 +1,7 @@
 """
 Checkout this documents for installation: https://ai.google.dev/gemini-api/docs/quickstart?lang=python'
 Refer link https://ai.google.dev/gemini-api/docs/api-key to get your Gemini API Key
+For installation craw4ai, please checkout this link: https://docs.crawl4ai.com/core/installation/
 """
 
 import asyncio
