@@ -5,7 +5,7 @@ from io import BytesIO
 
 def ollama_stream_inference(
     prompt: str,
-    model: str = "deepseek-r1:14b",
+    model: str = "gemma3:27b",
     url: str = "http://116.103.227.252:7860/api/generate",
     image_path: str = ""
 ):

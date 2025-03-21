@@ -7,7 +7,7 @@ For installation crawl4ai, please checkout this link: https://docs.crawl4ai.com/
 import asyncio
 import ast
 from google import genai
-# from google.genai import types
+from google.genai import types
 from crawl4ai import *
 import PIL.Image
 
@@ -61,7 +61,7 @@ def check_smoking(image_url: str = None):
     assert image_url is not None, "URL is required"
     image = PIL.Image.open(image_url)
     response = CLIENT.models.generate_content(
-        model="gemini-2.0-flash",
+        model=GEMINI_MODEL_NAME,
         contents=["Is this person smoking? Confidence score?", image])
     print(response.text)
     return response.text
@@ -78,14 +78,14 @@ def check_using_mobile_phone(image_url: str = None):
     assert image_url is not None, "URL is required"
     image = PIL.Image.open(image_url)
     response = CLIENT.models.generate_content(
-        model="gemini-2.0-flash",
+        model=GEMINI_MODEL_NAME,
         contents=["Is this person using a mobile phone? Confidence score?", image])
     print(response.text)
     return response.text
     
 
 if __name__ == "__main__":
-    # asyncio.run(read_newspaper(url = "https://goal.com"))
+    asyncio.run(read_newspaper(url = "https://goal.com"))
     # check_smoking(image_url="test.jpg")
     # check_using_mobile_phone(image_url="test.jpg")
     pass
