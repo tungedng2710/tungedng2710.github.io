@@ -1,3 +1,4 @@
 ﻿_site
 pushgithub.sh
 buildlocalapp.sh
+.aider*
