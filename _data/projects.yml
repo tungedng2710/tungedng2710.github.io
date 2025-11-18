@@ -1,7 +1,7 @@
-- name: TonAI Creative
-  image: https://github.com/tungedng2710/TonAI-Creative/blob/main/stuffs/logo.png?raw=true
-  link: https://github.com/tungedng2710/TonAI-Creative
-  description: A simple web UI for AI art creation
+- name: TonAI Traffic
+  image: https://github.com/tungedng2710/license-plate-recognition/blob/main/data/demo.jpg?raw=true
+  link: https://github.com/tungedng2710/license-plate-recognition
+  description: Vietnamese license plate recognition
 - name: TonAI OCR
   link: https://github.com/tungedng2710/TonAI-OCR
   image: https://github.com/tungedng2710/TonAI-OCR/blob/main/stuffs/ocr_plate.jpg?raw=true
@@ -10,10 +10,10 @@
   image: https://github.com/tungedng2710/TonAI-Telegram-Bot/blob/main/stuffs/telegram_logo.jpg?raw=true
   link: https://github.com/tungedng2710/TonAI-Telegram-Bot
   description: Telegram bot with Ollama and ComfyUI
-- name: TrafficCam
-  image: https://github.com/tungedng2710/license-plate-recognition/blob/main/data/demo.jpg?raw=true
-  link: https://github.com/tungedng2710/license-plate-recognition
-  description: Vietnamese license plate recognition
+- name: TonAI Creative
+  image: https://github.com/tungedng2710/TonAI-Creative/blob/main/stuffs/logo.png?raw=true
+  link: https://github.com/tungedng2710/TonAI-Creative
+  description: A simple web UI for AI art creation
 - name: Improved ArcFace
   link: https://github.com/tungedng2710/Improved-ArcFace
   image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ--nIIrBmO4iAtJjMoUXvtiL5_YZoEj8VwWQ&s

@@ -17,10 +17,11 @@ layout: compress
             </div>
         </div>
         <div id="results-container"></div>
-        <!--Blog Cards Section-->
-        {% for post in site.posts %}
-            {% include blog-card.html %}
-        {% endfor %}
+        <div class="blog-wrapper">
+            {% for post in site.posts %}
+                {% include blog-card.html %}
+            {% endfor %}
+        </div>
         </div>
     </section>
     <br>
