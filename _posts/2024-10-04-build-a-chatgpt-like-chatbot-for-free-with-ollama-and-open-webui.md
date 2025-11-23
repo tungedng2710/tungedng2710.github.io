@@ -33,6 +33,18 @@ curl -fsSL https://ollama.com/install.sh | sh
 ```
 The installation usually takes a few minutes. During the process, NVIDIA/AMD GPU drivers will be auto‑detected (make sure you’ve installed the drivers). Ollama can also run on CPU if you don’t have a suitable GPU (but let’s be honest, no one wants a chatbot that takes minutes to reply to a simple message 🙃).
 
+## How to run Ollama
+After installation, Ollama installs a background service that exposes a local API on port `11434`. On Linux, the service starts automatically, but it’s good to know the manual commands:
+```
+# start the service
+ollama serve
+
+# or manage it via systemd
+sudo systemctl start ollama
+sudo systemctl status ollama
+```
+On macOS or Windows, Ollama runs from the tray app; quit and relaunch it to restart the service. If you prefer running it ad-hoc, stop the service (`sudo systemctl stop ollama`) and launch it only when needed with `ollama serve` in a terminal session. Once the service is up, the API is reachable at `http://localhost:11434` for the CLI, Python SDK, or any other client like Open WebUI.
+
 ## Pull a model and run
 Next, browse the [Ollama model library](https://ollama.com/library) to see all currently supported model families (at the time of writing, Ollama supports up to Llama 3.2 1B and 3B; the 11B and 90B vision variants aren’t supported yet). The default model pulled is the one tagged `latest` (starting to feel like Docker, right? 🤗). On each model page, you can find more information such as size and the quantization method used. Quantization, simply put, trims the decimal precision of each parameter to reduce memory usage at the cost of some accuracy (we won’t go deep into this here). Full precision is typically 32‑bit floats (FP32). From my experience, Ollama’s default models are often quantized to 4‑bit and still handle common tasks like coding or reading comprehension well.
 In the library, you can view model variants and parameter counts to choose what fits your needs.
@@ -167,4 +179,3 @@ Ollama can access links and documents to read. With certain vision models, it ca
 The Open WebUI interface offers plenty of features such as model management, user management (if you’re an admin), database management, and more. There are also advanced features like connecting to image generators such as ComfyUI or A1111.
 
 This has been a brief guide to quickly spinning up a chatbot to experiment with large language models. I hope it’s useful for your projects. I’ll try to research and publish more in‑depth posts on Generative AI in the future 😊
-
