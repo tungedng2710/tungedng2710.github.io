@@ -1,7 +1,7 @@
 ---
 title: "AI Art Tutorial: High quality image generation"
 layout: post
-post-image: "https://datatab.net/assets/tutorial/regression/Error_Linear_Regression.png"
+post-image: "https://images.rawpixel.com/editor_1024/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2ZyZmFudGFzeV9sYW5kc2NhcGVfZHJ5X21hcnMtaW1hZ2Uta3liZHNyY2suanBn.jpg"
 description: ComfyUI is a powerful and modular GUI and backend for stable diffusion models, featuring a graph/node-based interface that allows you to design and execute advanced stable diffusion workflows without any coding
 tags:
 - Generative AI
