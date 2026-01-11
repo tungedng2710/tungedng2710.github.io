@@ -1,7 +1,7 @@
 ---
 title: Hàm Sigmoid trong Deep Learning
 layout: post
-post-image: "https://cloud2data.com/activation-function-sigmoid/2560px-Sigmoid-function-2.svg"
+post-image: "/assets/images/posts/sigmoid-curve.svg"
 description: Giải thích công thức toán học của Sigmoid trong Deep Learning
 tags:
 - Sigmoid
