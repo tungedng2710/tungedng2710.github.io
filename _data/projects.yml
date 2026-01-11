@@ -1,5 +1,5 @@
 - name: TonAI Traffic
-  image: https://github.com/tungedng2710/license-plate-recognition/blob/main/data/demo.jpg?raw=true
+  image: https://github.com/tungedng2710/AI-Traffic-Analysis/blob/main/data/assets/demo.jpg?raw=true
   link: https://github.com/tungedng2710/license-plate-recognition
   description: Vietnamese license plate recognition
 - name: TonAI OCR
