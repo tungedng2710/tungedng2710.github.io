@@ -47,16 +47,6 @@
                             </a>
                         </div>
                         {% endunless %}
-                        {% unless site.email == %}
-                        <div class="column is-half-tablet is-one-third-desktop">
-                            <a href="mailto:{{site.email}}"
-                                class="button is-rounded is-medium is-fullwidth has-text-weight-normal"
-                                target="_blank">
-                                <span class="icon"><i class="fas fa-envelope"></i></span>
-                                <span>Send me an Email</span>
-                            </a>
-                        </div>
-                        {% endunless %}
                         {% unless site.twitter_username == %}
                         <div class="column is-half-tablet is-one-third-desktop">
                             <a href="https://www.twitter.com/intent/tweet?screen_name={{site.twitter_username}}"
