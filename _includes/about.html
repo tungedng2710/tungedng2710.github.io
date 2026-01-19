@@ -3,12 +3,14 @@
         <div class="container">
             <div class="columns is-vcentered">
                 <div class="column is-one-fifth-desktop is-one-fifth-tablet is-one-fifth-fullhd">
-                    <figure class="image" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);">
-                        <img class="is-rounded" src="{{site.author-image}}" alt="{{site.author-name}}" style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
-                    </figure>
+                    <div style="display: inline-block; padding: 5px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%); animation: rotate 3s linear infinite;">
+                        <figure class="image" style="margin: 0;">
+                            <img class="is-rounded" src="{{site.author-image}}" alt="{{site.author-name}}" style="border: 5px solid white; display: block;">
+                        </figure>
+                    </div>
                 </div>
                 <div class="column has-text-left-desktop has-text-left-tablet has-text-left-fullhd has-text-left-widescreen">
-                    <div style="padding: 2rem 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);">
+                    <div style="background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);">
                         <p style="text-align: justify;">{{site.author-about}}</p>
                         <br>
                         <div class="container columns is-centered">
@@ -103,3 +105,14 @@
         </div>
     </div>
 </section>
+
+<style>
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+</style>
