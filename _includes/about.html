@@ -11,6 +11,16 @@
                     <p style="text-align: justify; margin-left: 5%; margin-right: 10%;">{{site.author-about}}</p>
                     <br>
                     <div class="container columns is-centered">
+                        {% unless site.email == %}
+                        <div>
+                            <a href="mailto:{{site.email}}"
+                                class="button is-rounded is-uppercase has-text-weight-normal"
+                                target="_blank">
+                                <span class="icon"><i class="fas fa-envelope"></i></span>
+                                <span>Send me an Email</span>
+                            </a>
+                        </div>
+                        {% endunless %}
                         <div>
                             <a href="{{site.url}}{{site.baseurl}}/blog"
                                 class="button is-rounded is-uppercase has-text-weight-normal">Blog</a>
