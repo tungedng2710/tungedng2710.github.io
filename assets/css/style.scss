@@ -167,8 +167,8 @@ a.navbar-item.is-active {
 #about {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 50%, #f3f4f6 100%);
-    color: #1f2937;
+    background: linear-gradient(180deg, #fdf8f3 0%, #f5ede4 50%, #ede3d5 100%);
+    color: #3d2e1f;
 
     .hero-body {
         position: relative;
@@ -179,14 +179,14 @@ a.navbar-item.is-active {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.03), transparent 45%, rgba(14, 165, 233, 0.02));
+        background: linear-gradient(135deg, rgba(160, 110, 70, 0.03), transparent 45%, rgba(140, 90, 50, 0.02));
         opacity: 0.6;
         z-index: 0;
         pointer-events: none;
     }
 
     .title, .subtitle, p, .content {
-        color: #1f2937 !important;
+        color: #3d2e1f !important;
     }
 
     .image {
