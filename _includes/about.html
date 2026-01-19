@@ -1,39 +1,31 @@
 <section class="hero is-fullheight has-text-centered has-text-white" id="about">
     <div class="hero-body">
         <div class="container">
-            <!-- Modern Avatar and Bio Card -->
-            <div class="columns is-centered">
-                <div class="column is-10-tablet is-8-desktop">
-                    <div class="box" style="background: rgba(255, 255, 255, 0.95); border-radius: 20px; padding: 3rem; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);">
-                        <div class="columns is-vcentered">
-                            <div class="column is-narrow">
-                                <figure class="image is-128x128" style="margin: 0 auto;">
-                                    <img class="is-rounded" src="{{site.author-image}}" alt="{{site.author-name}}" 
-                                         style="box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); border: 4px solid white;">
-                                </figure>
-                            </div>
-                            <div class="column">
-                                <div class="content has-text-dark has-text-left" style="padding: 0 1rem;">
-                                    <p style="line-height: 1.8; font-size: 1.05rem;">{{site.author-about}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="buttons is-centered" style="margin-top: 2rem; gap: 1rem;">
+            <div class="columns is-vcentered">
+                <div class="column is-one-fifth-desktop is-one-fifth-tablet is-one-fifth-fullhd">
+                    <figure class="image" style="padding: 1.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);">
+                        <img class="is-rounded" src="{{site.author-image}}" alt="{{site.author-name}}" style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);">
+                    </figure>
+                </div>
+                <div class="column has-text-left-desktop has-text-left-tablet has-text-left-fullhd has-text-left-widescreen">
+                    <div style="padding: 2rem 2.5rem; background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px); border-radius: 20px; box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);">
+                        <p style="text-align: justify;">{{site.author-about}}</p>
+                        <br>
+                        <div class="container columns is-centered">
                             {% unless site.email == %}
-                            <a href="mailto:{{site.email}}"
-                                class="button is-rounded is-medium has-text-weight-normal is-link"
-                                target="_blank"
-                                style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                                <span class="icon"><i class="fas fa-envelope"></i></span>
-                                <span>Send me an Email</span>
-                            </a>
+                            <div>
+                                <a href="mailto:{{site.email}}"
+                                    class="button is-rounded is-uppercase has-text-weight-normal"
+                                    target="_blank">
+                                    <span class="icon"><i class="fas fa-envelope"></i></span>
+                                    <span>Send me an Email</span>
+                                </a>
+                            </div>
                             {% endunless %}
-                            <a href="{{site.url}}{{site.baseurl}}/blog"
-                                class="button is-rounded is-medium has-text-weight-normal is-info"
-                                style="box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);">
-                                <span class="icon"><i class="fas fa-blog"></i></span>
-                                <span>Blog</span>
-                            </a>
+                            <div>
+                                <a href="{{site.url}}{{site.baseurl}}/blog"
+                                    class="button is-rounded is-uppercase has-text-weight-normal">Blog</a>
+                            </div>
                         </div>
                     </div>
                 </div>
