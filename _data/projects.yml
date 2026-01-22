@@ -2,6 +2,10 @@
   image: https://github.com/tungedng2710/AI-Traffic-Analysis/blob/main/data/assets/demo.jpg?raw=true
   link: https://github.com/tungedng2710/license-plate-recognition
   description: Vietnamese license plate recognition
+- name: DMOM Chatbot
+  image: https://github.com/tungedng2710/tungedng2710.github.io/blob/main/assets/images/logo.png?raw=true
+  link: https://github.com/tungedng2710/DMOM-RAG
+  description: Medical chatbot for dMOM Project
 - name: TonAI OCR
   link: https://github.com/tungedng2710/TonAI-OCR
   image: https://github.com/tungedng2710/TonAI-OCR/blob/main/stuffs/ocr_plate.jpg?raw=true
