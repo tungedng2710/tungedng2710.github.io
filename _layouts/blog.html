@@ -3,25 +3,24 @@ layout: compress
 ---
 
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
 
 {% include head.html %}
 
 <body>
     {% include navbar.html %}
 
-    <section class="hero is-fullheight" id="blog">
+    <section class="hero" id="blog">
         <div class="hero-body">
             <div class="container">
             </div>
         </div>
-        <div class="blog-wrapper">
-            {% for post in site.posts %}
-                {% include blog-card.html %}
-            {% endfor %}
-        </div>
-        </div>
-    </section>
+	        <div class="blog-wrapper">
+	            {% for post in site.posts %}
+	                {% include blog-card.html %}
+	            {% endfor %}
+	        </div>
+	    </section>
     <br>
     <!--Footer begins here-->
     {% include footer.html %}

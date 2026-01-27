@@ -3,7 +3,7 @@ layout: compress
 ---
 
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
 
 <head>
   {% include head.html %}
@@ -12,11 +12,11 @@ layout: compress
 <body>
   {% include navbar.html %}
 
-  <section class="hero is-fullheight has-text-centered" id="post">
+  <section class="hero" id="post">
     <div class="hero-body">
       <div class="container">
         <a href="{{page.url | relative_url}}" class="has-text-black" id="title">
-          <h1 class="title has-text-centered is-2 has-text-weight-semibold ">{{page.title}}</h1>
+          <h1 class="title is-2 has-text-weight-semibold ">{{page.title}}</h1>
         </a>
         <hr class="has-background-black">
         <div class="columns is-variable is-5">
@@ -58,8 +58,8 @@ layout: compress
             {%- endunless -%}
           </div>
         </div>
-        <div class="content has-text-justified-desktop has-text-justified-fullhd has-text-justified has-text-justified-tablet has-text-left-mobile">
-          <p>{{ content }}</p>
+        <div class="post-content content">
+          {{ content }}
         </div>
         {% unless site.disqus-shortname == "" %}
         <!-- <div class="disqus-comments" id="disqus_thread"></div> -->
