@@ -153,6 +153,8 @@ a.navbar-item.is-active {
     font-weight: 900 !important;
     letter-spacing: 0.3rem;
     color: #00d4ff;
+    font-size: clamp(3.25rem, 7vw, 5.5rem) !important;
+    line-height: 1.05;
 }
 
 .subtitle {
