@@ -1,8 +1,8 @@
 ---
-title: Hàm Sigmoid trong Deep Learning
+title: Hàm sigmoid dưới góc nhìn xác suất
 layout: post
 post-image: "/assets/images/posts/sigmoid-curve.svg"
-description: Giải thích công thức toán học của Sigmoid trong Deep Learning
+description: Giải thích hàm sigmoid qua log-odds, phân phối Bernoulli, maximum likelihood và định lý Bayes.
 tags:
 - Sigmoid
 - Probability and Statistics
@@ -10,72 +10,295 @@ author-name: Tung Nguyen
 author-url: https://github.com/tungedng2710
 ---
 
-Trong các bài toán phân lớp (classification) sử dụng Deep Learning, phần không thể thiếu cho đầu ra chính là hàm sigmoid (cho 2 classes) hay softmax (biến thể của sigmoid cho nhiều classes). Mục đích của hàm sigmoid là cho ra output là một vector, trong đó tổng các phần tử bằng 1, biểu thị xác suất khả năng mà sample đang xét rơi vào từng class. Vậy tại sao sigmoid lại có thể biểu diễn xác suất, chúng ta cùng làm rõ trong bài viết này 😄.
+Trong bài toán phân loại nhị phân, mô hình thường tạo ra một điểm số thực
+$z \in \mathbb{R}$. Tuy nhiên, một số thực bất kỳ chưa thể được diễn giải trực
+tiếp như xác suất. Hàm sigmoid giải quyết vấn đề này bằng cách ánh xạ $z$ vào
+khoảng $(0, 1)$:
 
-## 1. Xác suất có điều kiện và Bayes 
-Xác suất có điều kiện (Conditional probability) là xác suất của một sự kiện A nào đó, biết rằng một sự kiện B đã xảy ra và được ký hiệu là $P(A|B)$. Trong Deep Learning, cụ thể là bài toán classification, ta cần phải đi tìm xác suất rơi vào một class nào đó với điều kiện đã biết là vector đặc trưng của đầu vào. Mô tả rõ hơn thì với bài toán cần phân loại n classes $C_1, C_2,\dots, C_n$, mô hình nhận đầu vào (ảnh, text, âm thanh), các layers trong network sẽ trích xuất các đặc trưng của đầu vào và cho ra một vector embedding $x$. Vector embedding này sẽ điều kiện để tính xác suất rơi vào class nào. Với $c_i$ là class thứ $i$, ta có thể ký hiệu mô hình xác suất này là $P(C_i|x)$.
+\[
+\sigma(z) = \frac{1}{1 + e^{-z}}.
+\]
 
-Quay lại về phần lý thuyết xác suất, ta cần nhắc lại công thức Bayes, đây là một lý thuyết quan trọng trong machine learning. Trước hết ta cần định nghĩa một nhóm đầy đủ như sau: Nhóm các sự kiện $A_1, A_2,\dots,A_n$ trong đó $n\geq2$ tạo thành một nhóm đầy đủ nếu
-* $A_i$ và $A_j$ xung khắc từng đôi $\forall i\neq j$ hay ký hiệu là $A_iA_j=V$ với $V$ là sự kiện bất khả
-* $A_1 +  A_2 + \dots + A_n = U$ (Với $U$ là sự kiện tất yếu)
+Nếu đặt
 
-Ví dụ về một nhóm đầy đủ là gieo một con xúc sắc, thì 6 sự kiện ứng với mỗi sự xuất hiện của 1 mặt trên tổng số 6 mặt tạo thành một nhóm đầy đủ. Và dễ thấy tổng xác suất mỗi sự kiện xảy ra độc lập trong một nhóm đầy đủ bằng 1. Đối chiếu với bài toán classification, với $C_i$ là sự kiện mô hình dự đoán đầu vào là class $i$, ta có $C_1, C_2,\dots, C_n$ tạo thành một nhóm đầy đủ. Với nhóm đầy đủ và H là một sự kiện nào đó, ta có công thức xác suất đầy đủ như sau:
-<p style="text-align: center;"> \[P(H) = \sum_{i=i}^nP(A_i)P(H|A_i)\] </p> <br>
+\[
+P(y=1 \mid x) = \sigma(z),
+\]
 
-Từ công thức trên và công thức nhân xác suất ta có công thức Bayes:
-<p style="text-align: center;"> \[P(A_i|H) = \frac{P(A_i)P(H|A_i)}{\sum_{i=1}^n P(A_i)P(H|A_i)}\] </p> <br>
+thì xác suất của lớp còn lại là
 
-## 2. Ước lượng hợp lý cực đại
-Bài toán ước lượng tham số có thể phát biểu như sau: Cho biến ngẫu nhiên $X$ có luật phân phối xác suất đã biết nhưng chưa biết tham số $\theta$ nào đó, ta phải xác định giá trị của $\theta$ dựa trên các thông tin thu được từ mẫu quan sát $x_1, x_2,\dots, x_n$ của $X$. Quá trình đi xác định một tham số $\theta$ chưa biết được gọi là quá trình ước lượng tham số .
-Ước lượng hợp lý cực đại (Tiếng Anh: Maximum likelihood estimation, viết tắt: MLE) là một phương pháp ước tính các tham số của phân phối xác suất giả định, dựa trên một số dữ liệu quan sát. Điều này đạt được bằng cách tối đa hóa hàm hợp lý (likelihood) sao cho, theo mô hình thống kê giả định, dữ liệu quan sát là có xác suất xảy ra lớn nhất. Nguyên lý hợp lý nhất là tìm giá trị của $\theta$ là hàm của quan sát $(x_1,\dots,x_n)$ sao cho bảo đảm xác suất thu được quan sát đó là lớn nhất. Giả sử biến gốc $X$ có hàm mật độ $f(x, \theta)$, khi đó hàm hợp lý (likelihood) được định nghĩa như sau:
-<p style="text-align: center;"> \[L(x, \theta) = \prod_{i=1}^nf(x, \theta)\] </p> <br>
+\[
+P(y=0 \mid x) = 1 - \sigma(z).
+\]
 
-Nếu hàm likelihood đảm bảo điều kiện khả vi 2 lần , ta có điều kiện cần để có cực trị:
-<p style="text-align: center;"> \[\frac{\partial L(x, \theta)}{\partial\theta}=0\] </p> <br>
-tương đương với
-<p style="text-align: center;"> \[\frac{\partial\ln L(x, \theta)}{\partial\theta}=0\] </p> <br>
-Phương trình trên cũng được gọi là phương trình hợp lý nhất. 
+Khác với softmax, sigmoid trong phân loại nhị phân chỉ cần trả về **một giá trị
+vô hướng**. Hai xác suất có tổng bằng $1$ là $\sigma(z)$ và $1-\sigma(z)$, chứ
+không phải các phần tử trong đầu ra của riêng hàm sigmoid.
 
-*Note: Thực tế việc tìm ước lượng hợp lý nhất rất khó khăn do hàm likelihood không phải lúc nào cũng lồi và thường phi tuyến. Trong phạm vi bài viết mình sẽ không đề cập quá sâu phần này, các bạn có thể tìm hiểu thêm*
+Bài viết này sẽ giải thích vì sao sigmoid xuất hiện tự nhiên trong mô hình xác
+suất, thay vì chỉ xem nó như một công thức dùng để ép đầu ra vào khoảng từ $0$
+đến $1$.
 
-## 3. Mô hình hồi quy tuyến tính dưới góc nhìn xác suất
-Lý do đề cập đến hồi quy tuyến tính ở đây là để xem cách chúng ta có thể xem nó như một mô hình xác suất của dữ liệu và liệu chúng ta có thể áp dụng các ý tưởng tương tự vào việc phân loại hay không. Giả sử ta có mô hình tuyến tính sau
-<p style="text-align: center;"> \[y^{(i)}=\theta^Tx^{(i)}+\epsilon^{(i)}\] </p> <br>
-Trong đó $\epsilon$ là nhiễu và độc lập với $x$. Theo Định lý giới hạn trung tâm (Định lý này là kết quả về sự hội tụ yếu của một dãy các biến ngẫu nhiên, theo đó tổng của các biến ngẫu nhiên độc lập và phân phối đồng nhất theo cùng một phân phối xác suất, sẽ hội tụ về một biến ngẫu nhiên nào đó) thì $\epsilon$ tuân theo phân phối chuẩn. Ở đây $\epsilon$ được dùng để biểu thị sự sai lệch giữa target và kết quả dự đoán của mô hình, và nó có hàm phân phối
-<p style="text-align: center;"> \[P(\epsilon^{(i)})=\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(\epsilon^{(i)})^2}{2\sigma^2})\] </p> <br>
-<p style="text-align: center;"> \[P(y^{(i)}|x^{(i)}; \theta)=\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})\] </p> <br>
-Ta gọi đây là xác suất xảy ra $y^{(i)}$ với điều kiện $x^{(i)}$ được tham số hóa bởi $\theta$. Ở đây bộ trọng số $\theta$ là biến ngẫu nhiên và được tối ưu trong quá trình mô hình học. Một cách tự nhiên, mục đích của quá trình học là tìm bộ tham số $\theta$ sao cho với đặc trưng quan sát $x^{(i)}$, khả năng nó rơi vào target $y^{(i)}$ là lớn nhất (Đến đây chúng ta đã thấy sự liên quan tới lý thuyết MLE ở bên trên rồi ha 😅). Tiếp theo ta định nghĩa hàm likelihood của $\theta$
-<p style="text-align: center;"> \[L(\theta)=L(\theta; X, \hat{y}) = P(\hat{y}|X; \theta)\] </p> <br>
-Theo phương trình hợp lý nhất ở phần trên, ta có
-<p style="text-align: center;"> \[L(\theta)=\prod_{i=1}^nP(y^{(i)}|x^{(i)}; \theta)\] </p> <br>
-<p style="text-align: center;"> \[L(\theta)=\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})\] </p> <br>
-Để dễ dàng hơn cho việc tối ưu, ta lấy logarithm hai vế (việc này okela vì hàm log là đơn điệu) để biến việc tối ưu hàm mũ thành tối ưu hàm đa thức. Do đó quá trình tối ưu MLE sử dụng hàm có tên gọi là log-likelihood.
-<p style="text-align: center;"> \[l(\theta) = \log L(\theta)\] </p> <br>
-<p style="text-align: center;"> \[= \log\prod_{i=1}^n\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})\] </p> <br>
-<p style="text-align: center;"> \[= \prod_{i=1}^n\log\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(y^{(i)}-\theta^Tx^{(i)})^2}{2\sigma^2})\] </p> <br>
-<p style="text-align: center;"> \[= n\log\frac{1}{\sqrt{2\pi}\sigma}-\frac{1}{\sigma^2}\cdot\frac{1}{2}\sum_{i=1}^{n}(y^{(i)}-\theta^Tx^{(i)})^2\] </p> <br>
-Cực đại hóa biểu thức trên tương đương với cực tiểu hóa biểu thức sau (để ý đây chính là công thức least-square)
-<p style="text-align: center;"> \[\frac{1}{2}\sum_{i=1}^{n}(y^{(i)}-\theta^Tx^{(i)})^2\] </p> <br>
-## 4. Xây dựng công thức cho sigmoid
-Ở phần 3. đã map một bộ dự đoán tuyến tính với nhiễu Gauss tới biến mục tiêu. Đối với bài toán binary classification, sẽ thật tuyệt nếu chúng ta có thể làm điều gì đó tương tự, tức là map một bộ dự đoán tuyến tính với một thứ gì đó tới xác suất thuộc một trong hai lớp và sử dụng MLE để giải thích cho thiết kế mô hình bằng việc nó tối đa hóa xác suất cho việc rơi vào 1 class nào đó của 1 đặc trưng quan sát.
+## 1. Từ odds đến hàm sigmoid
 
-Xét mô hình tuyến tính $y=\theta^Tx^{(i)}+\epsilon^{(i)}$, một tập các điểm dữ liệu thuộc 2 classes $C_1$ và $C_2$ tuân theo hai phân phối chuẩn có kỳ vọng $\mu_1$ và $\mu_2$, độ lệch chuẩn cùng bằng 1 (Ở đây mình chọn 1 cho thuận tiện việc biến đổi biểu thức, vì thực ra chọn $\sigma$ bất kỳ thì kết quả cuối cùng vẫn ra một đa thức nhưng nhìn nó sẽ rối mắt không cần thiết). Ta cần phân loại xem với với vector đặc trưng $x$, nó sẽ rơi vào class nào trong 2 classes $C_1$ và $C_2$. Theo công thức Bayes, ta có
-<p style="text-align: center;"> \[P(C_1|x) = \frac{P(x|C_1)P(C_1)}{P(x|C_1)P(C_1)+P(x|C_2)P(C_2)}\] </p> <br>
-Chia cả tử và mẫu cho $P(x|C_1)P(C_1)$ ta có: 
-<p style="text-align: center;"> \[P(C_1|x) = \frac{1}{1+\frac{P(x|C_2)P(C_2)}{P(x|C_1)P(C_1)}}\] </p> <br>
-MÌnh sẽ để lại nó một chút, quay lại về các điểm dữ liệu tuân theo hai phân phối chuẩn vừa đề cập bên trên, kết hợp sử dụng ước lượng hợp lý cực đại, ta có
-<p style="text-align: center;"> \[P(x|C_1) = N(\mu_1|1) \sim \exp(-\frac{(x-\mu_1)^2}{2})\] </p> <br>
-<p style="text-align: center;"> \[P(x|C_2) = N(\mu_2|1) \sim \exp(-\frac{(x-\mu_2)^2}{2})\] </p> <br>
-Chia $P(X|C_2)$ cho $P(X|C_1)$ ta được:
-<p style="text-align: center;"> \[ \frac{P(X|C_2)}{P(X|C_1)}=\exp(\frac{(x-\mu_1)^2-(x-\mu_2)^2}{2})\] </p> <br>
-<p style="text-align: center;"> \[=\exp((\mu_2-\mu_1)x-\frac{1}{2}(\mu_2^2-\mu_1^2))\] </p> <br>
-Đặt $(\mu_2-\mu_1)x-\frac{1}{2}(\mu_2^2-\mu_1^2)=-\alpha(x)$, ta thu được
-<p style="text-align: center;"> \[P(C_1|x) = \frac{1}{1+\exp(-\alpha(x))} = \sigma\circ\alpha(x) \] </p> <br>
-Trong đó $\sigma: R\to (0,1)$ được gọi là hàm sigmoid và $\alpha: R^d\to R$ được cho bởi công thức
-<p style="text-align: center;"> \[\alpha(x)=\log\frac{P(x|C_1)P(C_1)}{P(x|C_2)P(C_2)}=\log\frac{P(C_1, x)}{P(C_2, x)}\] </p> <br>
-Vậy là công thức hàm sigmoid đã xuất hiện =))). Trong trường hợp tổng quát cho nhiều class $C_1,\dots, C_n$, ta có
-<p style="text-align: center;"> \[P(C_k|x)=\frac{P(x|C_k)P(C_k)}{\sum_{j=1}^{n}P(x|C_j)P(C_j)}=\frac{\exp(\alpha_k(x))}{\sum_{j=1}^{n}\exp(\alpha_j(x))}\] </p> <br>
-Đây chính là công thức của hàm softmax!
+Gọi
+
+\[
+p(x) = P(y=1 \mid x).
+\]
+
+**Odds** của lớp $1$ so với lớp $0$ được định nghĩa là
+
+\[
+\frac{p(x)}{1-p(x)}.
+\]
+
+Odds thuộc khoảng $(0, +\infty)$ nên vẫn chưa thuận tiện để mô hình hóa bằng
+một hàm tuyến tính. Lấy logarithm, ta thu được **log-odds**, còn gọi là
+**logit**:
+
+\[
+\operatorname{logit}(p(x))
+= \log\frac{p(x)}{1-p(x)}.
+\]
+
+Logit nhận giá trị trên toàn bộ trục số thực. Logistic regression giả sử
+log-odds là một hàm tuyến tính của vector đặc trưng:
+
+\[
+\log\frac{p(x)}{1-p(x)} = w^Tx+b.
+\]
+
+Đặt $z=w^Tx+b$ rồi giải phương trình theo $p(x)$:
+
+\[
+\frac{p(x)}{1-p(x)}=e^z,
+\]
+
+\[
+p(x)=e^z(1-p(x)),
+\]
+
+\[
+p(x)(1+e^z)=e^z,
+\]
+
+\[
+p(x)=\frac{e^z}{1+e^z}
+=\frac{1}{1+e^{-z}}
+=\sigma(z).
+\]
+
+Như vậy, sigmoid chính là **hàm ngược của logit**. Nó xuất hiện khi ta giả sử
+log-odds của xác suất thuộc lớp $1$ thay đổi tuyến tính theo đặc trưng đầu vào.
+
+Một vài tính chất quan trọng:
+
+- $\sigma(z) \in (0,1)$ với mọi $z \in \mathbb{R}$;
+- $\sigma(0)=0.5$;
+- $\sigma(-z)=1-\sigma(z)$;
+- $\sigma'(z)=\sigma(z)(1-\sigma(z))$.
+
+## 2. Maximum likelihood và binary cross-entropy
+
+Xét tập dữ liệu
+
+\[
+\mathcal{D}=\{(x^{(i)},y^{(i)})\}_{i=1}^n,
+\qquad y^{(i)}\in\{0,1\}.
+\]
+
+Với mỗi quan sát, đặt
+
+\[
+p_i=P(y^{(i)}=1\mid x^{(i)};w,b)
+=\sigma(w^Tx^{(i)}+b).
+\]
+
+Vì $y^{(i)}$ là biến nhị phân, ta mô hình hóa nó bằng phân phối Bernoulli:
+
+\[
+P(y^{(i)}\mid x^{(i)};w,b)
+=p_i^{y^{(i)}}(1-p_i)^{1-y^{(i)}}.
+\]
+
+Giả sử các quan sát độc lập có điều kiện khi biết đầu vào, likelihood của toàn
+bộ tập dữ liệu là
+
+\[
+L(w,b)
+=\prod_{i=1}^n
+p_i^{y^{(i)}}(1-p_i)^{1-y^{(i)}}.
+\]
+
+Trong maximum likelihood estimation (MLE), $w$ và $b$ là các tham số cố định
+nhưng chưa biết. Ta chọn giá trị của chúng sao cho dữ liệu quan sát có
+likelihood lớn nhất. Lấy logarithm:
+
+\[
+\ell(w,b)
+=\log L(w,b)
+=\sum_{i=1}^n
+\left[
+y^{(i)}\log p_i
++(1-y^{(i)})\log(1-p_i)
+\right].
+\]
+
+Cực đại hóa log-likelihood tương đương với cực tiểu hóa negative
+log-likelihood:
+
+\[
+\mathcal{L}(w,b)
+=-\sum_{i=1}^n
+\left[
+y^{(i)}\log p_i
++(1-y^{(i)})\log(1-p_i)
+\right].
+\]
+
+Đây chính là **binary cross-entropy loss** thường dùng để huấn luyện mô hình
+phân loại nhị phân. Vì vậy, sigmoid và binary cross-entropy không phải hai lựa
+chọn rời rạc: chúng tạo thành mô hình xác suất Bernoulli được ước lượng bằng
+MLE.
+
+## 3. Suy ra sigmoid từ định lý Bayes
+
+Ta cũng có thể thấy sigmoid xuất hiện trong một mô hình sinh
+(*generative model*).
+
+Xét hai lớp $C_0$ và $C_1$ với xác suất tiên nghiệm
+
+\[
+P(C_0)=\pi_0,\qquad P(C_1)=\pi_1,
+\qquad \pi_0+\pi_1=1.
+\]
+
+Giả sử phân phối của dữ liệu trong mỗi lớp là Gaussian và hai lớp dùng chung
+ma trận hiệp phương sai $\Sigma$:
+
+\[
+x\mid C_0 \sim \mathcal{N}(\mu_0,\Sigma),
+\]
+
+\[
+x\mid C_1 \sim \mathcal{N}(\mu_1,\Sigma).
+\]
+
+Theo định lý Bayes, posterior odds là
+
+\[
+\frac{P(C_1\mid x)}{P(C_0\mid x)}
+=\frac{p(x\mid C_1)\pi_1}{p(x\mid C_0)\pi_0}.
+\]
+
+Lấy logarithm hai vế:
+
+\[
+\log\frac{P(C_1\mid x)}{P(C_0\mid x)}
+=
+\log\frac{p(x\mid C_1)\pi_1}
+{p(x\mid C_0)\pi_0}.
+\]
+
+Thay mật độ Gaussian vào biểu thức trên. Vì hai lớp có cùng $\Sigma$, các
+thành phần bậc hai theo $x$ triệt tiêu, để lại
+
+\[
+\log\frac{P(C_1\mid x)}{P(C_0\mid x)}
+=w^Tx+b,
+\]
+
+trong đó
+
+\[
+w=\Sigma^{-1}(\mu_1-\mu_0)
+\]
+
+và
+
+\[
+b=
+-\frac{1}{2}\mu_1^T\Sigma^{-1}\mu_1
++\frac{1}{2}\mu_0^T\Sigma^{-1}\mu_0
++\log\frac{\pi_1}{\pi_0}.
+\]
+
+Đặt $p(x)=P(C_1\mid x)$. Vì $P(C_0\mid x)=1-p(x)$, ta có
+
+\[
+\log\frac{p(x)}{1-p(x)}=w^Tx+b.
+\]
+
+Theo kết quả ở phần 1:
+
+\[
+P(C_1\mid x)=\sigma(w^Tx+b).
+\]
+
+Đây là mối liên hệ giữa Gaussian discriminant analysis và logistic
+regression: nếu hai mật độ Gaussian theo lớp có chung ma trận hiệp phương sai,
+posterior có dạng sigmoid của một hàm tuyến tính.
+
+Điều kiện dùng chung $\Sigma$ rất quan trọng. Nếu mỗi lớp có một ma trận hiệp
+phương sai khác nhau, log-odds nói chung là một hàm bậc hai theo $x$, và biên
+quyết định không còn tuyến tính.
+
+## 4. Mở rộng sang nhiều lớp: softmax
+
+Với $K$ lớp loại trừ lẫn nhau, mô hình tạo ra $K$ điểm số
+$z_1,\dots,z_K$. Softmax chuyển chúng thành một phân phối xác suất:
+
+\[
+P(y=k\mid x)
+=\frac{e^{z_k}}
+{\sum_{j=1}^{K}e^{z_j}}.
+\]
+
+Các đầu ra của softmax đều thuộc $(0,1)$ và có tổng bằng $1$. Softmax có thể
+được xem là sự mở rộng của logistic regression sang nhiều lớp, nhưng không nên
+gọi đơn giản là “sigmoid cho nhiều lớp”.
+
+Trong trường hợp hai lớp:
+
+\[
+P(y=1\mid x)
+=\frac{e^{z_1}}{e^{z_0}+e^{z_1}}
+=\frac{1}{1+e^{-(z_1-z_0)}}
+=\sigma(z_1-z_0).
+\]
+
+Do đó, softmax hai lớp tương đương với sigmoid áp dụng lên hiệu của hai
+logit.
+
+## 5. Một lưu ý về cách hiểu xác suất
+
+Sigmoid bảo đảm đầu ra nằm trong khoảng $(0,1)$ và cho phép xây dựng một mô
+hình xác suất nhất quán. Tuy nhiên, điều đó không bảo đảm xác suất dự đoán luôn
+được **hiệu chỉnh tốt** (*well-calibrated*).
+
+Ví dụ, nếu mô hình dự đoán $0.8$ cho nhiều quan sát tương tự, một mô hình được
+hiệu chỉnh tốt cần có khoảng $80\%$ số quan sát đó thực sự thuộc lớp $1$. Chất
+lượng hiệu chỉnh còn phụ thuộc vào dữ liệu, giả định mô hình, regularization và
+quy trình huấn luyện.
+
+## Kết luận
+
+Hàm sigmoid xuất hiện tự nhiên trong phân loại nhị phân vì ba lý do liên hệ
+chặt chẽ với nhau:
+
+1. Sigmoid là hàm ngược của logit, nên biến một log-odds bất kỳ thành xác suất.
+2. Kết hợp sigmoid với phân phối Bernoulli và MLE dẫn đến binary
+   cross-entropy.
+3. Theo Bayes, hai phân phối Gaussian theo lớp có chung ma trận hiệp phương sai
+   tạo ra posterior là sigmoid của một hàm tuyến tính.
+
+Nói ngắn gọn, logistic regression mô hình hóa tuyến tính trên **log-odds**, chứ
+không mô hình hóa tuyến tính trực tiếp trên xác suất.
+
 ## Tài liệu tham khảo
-1. Tống Đình Quỳ. *Giáo trình xác suất thống kê*. NXB Bách Khoa Hà Nội
-2. C. M. Bishop. *Pattern recognition and machine learning*. Springer, 2006.
+
+1. C. M. Bishop. *Pattern Recognition and Machine Learning*. Springer, 2006.
+2. Stanford CS229. [Machine Learning Lecture Notes](https://cs229.stanford.edu/main_notes.pdf).
+3. scikit-learn. [Log loss](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html).
+4. Tống Đình Quỳ. *Giáo trình Xác suất thống kê*. NXB Bách Khoa Hà Nội.
