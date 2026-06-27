@@ -970,6 +970,14 @@ img {
   margin-bottom: 1.4rem;
 }
 
+.post-content .katex-display {
+  max-width: 100%;
+  margin: 1.75rem 0;
+  padding: 0.2rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
 .post-content a {
   color: var(--blue);
   text-decoration: underline;
