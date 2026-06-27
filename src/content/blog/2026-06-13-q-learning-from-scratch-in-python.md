@@ -64,15 +64,13 @@ Q-learning is a **model-free, off-policy** reinforcement-learning algorithm.
 
 The algorithm learns a function called the **action-value function**:
 
-<p style="text-align: center;">
-\[
+$$
 Q(s, a)
-\]
-</p>
+$$
 
-This value estimates the total discounted reward the agent can obtain by taking action \(a\) in state \(s\), then behaving optimally afterward.
+This value estimates the total discounted reward the agent can obtain by taking action $a$ in state $s$, then behaving optimally afterward.
 
-In a small environment, we can store these estimates in a table. Our grid contains 16 states and 4 actions, so the Q-table has \(16 \times 4 = 64\) values:
+In a small environment, we can store these estimates in a table. Our grid contains 16 states and 4 actions, so the Q-table has $16 \times 4 = 64$ values:
 
 | State | Up | Down | Left | Right |
 | --- | ---: | ---: | ---: | ---: |
@@ -86,28 +84,24 @@ All entries begin at zero. They improve as the agent collects experience.
 
 After taking an action, the agent observes a transition:
 
-<p style="text-align: center;">
-\[
+$$
 (s, a, r, s')
-\]
-</p>
+$$
 
-Here, \(s\) is the current state, \(a\) is the selected action, \(r\) is the reward, and \(s'\) is the next state. Q-learning updates the selected table entry with:
+Here, $s$ is the current state, $a$ is the selected action, $r$ is the reward, and $s'$ is the next state. Q-learning updates the selected table entry with:
 
-<p style="text-align: center;">
-\[
+$$
 Q(s,a) \leftarrow Q(s,a) +
 \alpha \left[
 r + \gamma \max_{a'} Q(s',a') - Q(s,a)
 \right].
-\]
-</p>
+$$
 
 The terms are:
 
-- \(\alpha\), the **learning rate**, controls how strongly new information replaces an old estimate.
-- \(\gamma\), the **discount factor**, controls how much future rewards matter.
-- \(\max_{a'} Q(s',a')\) is the best estimated value available from the next state.
+- $\alpha$, the **learning rate**, controls how strongly new information replaces an old estimate.
+- $\gamma$, the **discount factor**, controls how much future rewards matter.
+- $\max_{a'} Q(s',a')$ is the best estimated value available from the next state.
 - The expression inside the brackets is the **temporal-difference error**.
 
 For a terminal state, there is no future reward to estimate, so the next-state value is zero.
@@ -118,10 +112,10 @@ If the agent always selects the action with the largest current Q-value, it may 
 
 We will use an **epsilon-greedy** policy:
 
-- With probability \(\epsilon\), select a random action.
+- With probability $\epsilon$, select a random action.
 - Otherwise, select an action with the highest Q-value.
 
-Training begins with \(\epsilon = 1.0\), meaning the agent explores heavily. After each episode, epsilon decays until it reaches `0.05`. The agent therefore becomes more consistent while retaining a small amount of exploration.
+Training begins with $\epsilon = 1.0$, meaning the agent explores heavily. After each episode, epsilon decays until it reaches `0.05`. The agent therefore becomes more consistent while retaining a small amount of exploration.
 
 # Implementing the environment
 
@@ -341,11 +335,9 @@ Greedy path: [(0, 0), (1, 0), (2, 0), (3, 0),
 
 The greedy path takes six moves. It travels down the left edge and then across the bottom row, avoiding both the wall and the trap. Its undiscounted return is:
 
-<p style="text-align: center;">
-\[
+$$
 5(-1) + 20 = 15.
-\]
-</p>
+$$
 
 The final-100-episode average can be lower than 15 because training deliberately keeps a 5% exploration rate. Evaluation with the greedy policy disables that random exploration.
 

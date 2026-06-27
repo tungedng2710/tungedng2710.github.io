@@ -18,11 +18,9 @@ Deterministic pipelines often fall apart when the data distribution shifts or th
 ## Bayes' rule refresher
 In its most common form, Bayes' rule relates the posterior distribution of a parameter $\theta$ after observing data $\mathcal{D}$:
 
-<p style="text-align: center;">
-\[
+$$
  p(\theta \mid \mathcal{D}) = \frac{p(\mathcal{D} \mid \theta)\,p(\theta)}{p(\mathcal{D})} \propto p(\mathcal{D} \mid \theta)\,p(\theta).
-\]
-</p>
+$$
 
 - **Prior** $p(\theta)$: beliefs before seeing data.
 - **Likelihood** $p(\mathcal{D} \mid \theta)$: data-generating model.
@@ -57,11 +55,9 @@ Suppose you are monitoring a click-through rate. You start with a neutral Beta p
 
 The posterior parameters are $\alpha' = 1 + 14 = 15$ and $\beta' = 1 + 40 - 14 = 27$, so
 
-<p style="text-align: center;">
-\[
+$$
  p(p \mid \mathcal{D}) = \text{Beta}(15, 27).
-\]
-</p>
+$$
 
 From this posterior we can compute:
 

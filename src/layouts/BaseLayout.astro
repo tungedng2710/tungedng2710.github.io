@@ -63,22 +63,6 @@ const socialImage = new URL(image, Astro.site);
       referrerpolicy="no-referrer"
     />
     <link rel="icon" href={withBase("/assets/images/logo.png")} type="image/png" />
-    <script is:inline>
-      window.MathJax = {
-        tex: {
-          inlineMath: [["\\(", "\\)"]],
-          displayMath: [["\\[", "\\]"]],
-        },
-        options: {
-          skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"],
-        },
-      };
-    </script>
-    <script
-      is:inline
-      async
-      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-    ></script>
     <script
       is:inline
       async
