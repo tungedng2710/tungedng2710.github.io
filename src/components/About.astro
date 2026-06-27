@@ -33,23 +33,19 @@ const authorImage = site.author.image.startsWith("/")
           <div class="about-card">
             <p class="about-label">Tung Nguyen · AI researcher & engineer</p>
             <p>{site.author.about}</p>
-            <div class="container columns is-centered">
-              <div>
-                <a
-                  href={`mailto:${site.email}`}
-                  class="button is-rounded is-uppercase has-text-weight-normal"
-                >
-                  Email
-                </a>
-              </div>
-              <div>
-                <a
-                  href={withBase("/project")}
-                  class="button is-rounded is-uppercase has-text-weight-normal"
-                >
-                  Projects
-                </a>
-              </div>
+            <div class="about-actions">
+              <a
+                href={`mailto:${site.email}`}
+                class="button is-rounded is-uppercase has-text-weight-normal"
+              >
+                Email
+              </a>
+              <a
+                href={withBase("/project")}
+                class="button is-rounded is-uppercase has-text-weight-normal"
+              >
+                Projects
+              </a>
             </div>
           </div>
         </div>
@@ -125,6 +121,14 @@ const authorImage = site.author.image.startsWith("/")
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+  }
+
+  .about-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin-top: 1.7rem;
   }
 
   .profile-caption {
