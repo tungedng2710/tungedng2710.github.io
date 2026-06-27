@@ -104,7 +104,7 @@ const socialImage = new URL(image, Astro.site);
               observer.unobserve(entry.target);
             });
           },
-          { threshold: 0.12, rootMargin: "0px 0px -40px" },
+          { threshold: 0, rootMargin: "0px 0px -40px" },
         );
 
         reveals.forEach((element) => observer.observe(element));
