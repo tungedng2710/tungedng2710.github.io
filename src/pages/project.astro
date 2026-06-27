@@ -1,0 +1,57 @@
+---
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import { withBase } from "../config";
+import { projects } from "../data/projects";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Projects" description="Selected AI and software projects by Tung Nguyen.">
+  <Navbar active="project" />
+  <main>
+    <section class="hero is-fullheight" id="project">
+      <div class="hero-body">
+        <div class="has-text-centered project-wrapper">
+          <div class="project-heading" data-reveal>
+            <p class="section-kicker">Selected work</p>
+            <h1>Ideas turned into useful systems.</h1>
+            <p>
+              Open-source experiments and production-minded tools across computer vision,
+              generative AI, and applied machine learning.
+            </p>
+          </div>
+          <div class="project-grid">
+            {
+              projects.map((project, index) => {
+                const image = project.image.startsWith("/")
+                  ? withBase(project.image)
+                  : project.image;
+                return (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noreferrer"
+                    class="project-card"
+                    data-reveal
+                    style={`--reveal-delay: ${Math.min(index * 70, 350)}ms;`}
+                  >
+                    <div
+                      class="project-card__thumb"
+                      style={`background-image: url("${image}");`}
+                    />
+                    <div class="project-card__body">
+                      <h2 class="project-card__title">{project.name}</h2>
+                      <p class="project-card__description">{project.description}</p>
+                      <span class="project-card__cta">View project →</span>
+                    </div>
+                  </a>
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

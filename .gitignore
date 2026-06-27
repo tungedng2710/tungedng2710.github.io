@@ -1,8 +1,10 @@
-_site
+dist/
+node_modules/
+.astro/
+_site/
 .jekyll-cache/
 .sass-cache/
 vendor/
 .DS_Store
 pushgithub.sh
-buildlocalapp.sh
 .aider*

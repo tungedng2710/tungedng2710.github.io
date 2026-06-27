@@ -1,0 +1,92 @@
+---
+import { getCollection, render, type CollectionEntry } from "astro:content";
+import Footer from "../../components/Footer.astro";
+import Navbar from "../../components/Navbar.astro";
+import { site, withBase } from "../../config";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatDate, postSlug, readTime } from "../../utils/posts";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: postSlug(post) },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post.data.image;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  image={image}
+  lang={post.data.lang}
+  type="article"
+>
+  <Navbar active="blog" />
+  <main>
+    <article class="hero" id="post">
+      <div class="hero-body">
+        <div class="container">
+          <header data-reveal>
+            <h1 class="title is-2 has-text-weight-semibold">{post.data.title}</h1>
+            <hr class="has-background-black" />
+            <div class="columns is-variable is-5">
+              <div class="column is-6">
+                <figure class="image is-16by9 has-shadow">
+                  <img src={image} alt={post.data.title} id="post-image" />
+                </figure>
+              </div>
+              <div
+                class="subtitle column is-5 has-text-left-desktop has-text-left-tablet has-text-center-mobile"
+              >
+                <p id="description" class="content is-small has-text-weight-medium is-uppercase">
+                  {post.data.description}
+                </p>
+                <p class="subtitle is-6 is-uppercase has-text-weight-normal has-text-black-ter">
+                  Published on <b>{formatDate(post.data.pubDate)}</b> by{" "}
+                  <a href={post.data.authorUrl} target="_blank" rel="noreferrer">
+                    <b class="has-text-link"><u>{post.data.authorName}</u></b>
+                  </a>
+                </p>
+                {
+                  post.data.tags.length > 0 && (
+                    <p class="subtitle is-uppercase">
+                      <i class="fas fa-tags" />{" "}
+                      {post.data.tags.map((tag) => <span class="tag is-link">{tag}</span>)}
+                    </p>
+                  )
+                }
+                <p class="subtitle is-uppercase">
+                  <i class="fas fa-clock"></i>{" "}
+                  <b class="has-text-link">{readTime(post.body)} min</b> read
+                </p>
+              </div>
+            </div>
+          </header>
+          <div class="post-content content" data-reveal>
+            <Content />
+          </div>
+          <div id="disqus_thread"></div>
+          <noscript>
+            Please enable JavaScript to view the comments powered by Disqus.
+          </noscript>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+  <script is:inline define:vars={{ shortname: site.disqusShortname }}>
+    const script = document.createElement("script");
+    script.src = `https://${shortname}.disqus.com/embed.js`;
+    script.setAttribute("data-timestamp", String(Date.now()));
+    (document.head || document.body).appendChild(script);
+  </script>
+</BaseLayout>

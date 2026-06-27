@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import BlogCard from "../components/BlogCard.astro";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout title="Blog" description="Research notes and engineering essays on AI, mathematics, and software systems.">
+  <Navbar active="blog" />
+  <main>
+    <section class="hero" id="blog">
+      <div class="hero-body">
+        <div class="container">
+          <div class="blog-hero" data-reveal>
+            <p class="blog-kicker">Research notes and engineering essays</p>
+            <h1 class="blog-heading">Ideas on AI, mathematics, and software systems.</h1>
+            <p class="blog-intro">
+              Practical write-ups, experiments, and technical notes from Tung Nguyen.
+            </p>
+            <div class="blog-stats" aria-label="Blog statistics">
+              <span>{posts.length} articles</span>
+              <span>AI and mathematics</span>
+              <span>Long-form technical writing</span>
+            </div>
+          </div>
+          <div class="field has-addons" id="search" data-reveal style="--reveal-delay: 100ms;">
+            <p class="control is-expanded">
+              <input
+                id="search-input"
+                class="input is-shadowless"
+                type="search"
+                placeholder="Search articles"
+                aria-label="Search articles"
+              />
+            </p>
+            <p class="control">
+              <button class="button" type="button" aria-label="Search">
+                <i class="fas fa-search has-text-grey"></i>
+              </button>
+            </p>
+          </div>
+          <p class="blog-empty-state" id="search-empty" hidden>
+            No results found. Try a broader AI or mathematics keyword.
+          </p>
+        </div>
+      </div>
+      <div class="blog-wrapper" id="blog-list">
+        {posts.map((post, index) => <BlogCard post={post} index={index} />)}
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <script>
+    const input = document.querySelector<HTMLInputElement>("#search-input");
+    const cards = [...document.querySelectorAll<HTMLElement>(".blog-card")];
+    const empty = document.querySelector<HTMLElement>("#search-empty");
+
+    input?.addEventListener("input", () => {
+      const query = input.value.trim().toLowerCase();
+      let visible = 0;
+
+      cards.forEach((card) => {
+        const matches = !query || card.dataset.search?.includes(query);
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      });
+
+      if (empty) empty.hidden = visible > 0;
+    });
+  </script>
+</BaseLayout>

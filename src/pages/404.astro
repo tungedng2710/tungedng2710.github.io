@@ -1,0 +1,26 @@
+---
+import { withBase } from "../config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="404" description="The requested page could not be found.">
+  <main>
+    <section class="hero is-fullheight has-text-centered" id="not-found">
+      <div class="hero-body">
+        <div class="container" data-reveal>
+          <h1 class="title is-1 is-uppercase has-text-weight-bold has-text-white">404</h1>
+          <p class="is-uppercase has-text-weight-medium has-text-grey-light">
+            The page you’re trying to load was not found.
+          </p>
+          <hr />
+          <a
+            href={withBase("/")}
+            class="button is-white is-rounded is-outlined is-uppercase has-text-weight-normal"
+          >
+            Home
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

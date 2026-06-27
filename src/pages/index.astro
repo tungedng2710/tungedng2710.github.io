@@ -1,0 +1,41 @@
+---
+import About from "../components/About.astro";
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import { site, withBase } from "../config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <Navbar active="home" />
+  <main>
+    <section class="hero is-fullheight-with-navbar has-text-centered" id="hero">
+      <div class="hero-glow hero-glow--one"></div>
+      <div class="hero-glow hero-glow--two"></div>
+      <div class="hero-body">
+        <div class="container hero-content" data-reveal>
+          <p class="hero-eyebrow"><span></span>{site.title} · AI RESEARCH & ENGINEERING</p>
+          <h1 class="hero-title">
+            Building intelligent systems.<br />
+            <span>Explaining how they work.</span>
+          </h1>
+          <p class="hero-summary">
+            Practical research, engineering notes, and open-source work at the intersection
+            of generative AI, computer vision, and mathematics.
+          </p>
+          <div class="hero-actions">
+            <a href={withBase("/blog")} class="button button-primary">Explore writing</a>
+            <a href={withBase("/#about")} class="button button-secondary">About me</a>
+          </div>
+          <div class="hero-proof" aria-label="Areas of focus">
+            <span><strong>01</strong> Generative AI</span>
+            <span><strong>02</strong> Computer vision</span>
+            <span><strong>03</strong> Applied research</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <About />
+  </main>
+  <Footer />
+</BaseLayout>
