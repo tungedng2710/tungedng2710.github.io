@@ -16,7 +16,6 @@ export const site = {
     youtube: "https://www.youtube.com/channel/UCfdJlJUx5UKzM9EYqh9faxQ",
   },
   analyticsId: "UA-163806439-1",
-  disqusShortname: "disqus_7FVBbmOIVx",
 };
 
 export function withBase(path: string) {

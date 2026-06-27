@@ -2,7 +2,7 @@
 import { getCollection, render, type CollectionEntry } from "astro:content";
 import Footer from "../../components/Footer.astro";
 import Navbar from "../../components/Navbar.astro";
-import { site, withBase } from "../../config";
+import { withBase } from "../../config";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { formatDate, postSlug, readTime } from "../../utils/posts";
 
@@ -74,19 +74,9 @@ const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post
           <div class="post-content content">
             <Content />
           </div>
-          <div id="disqus_thread"></div>
-          <noscript>
-            Please enable JavaScript to view the comments powered by Disqus.
-          </noscript>
         </div>
       </div>
     </article>
   </main>
   <Footer />
-  <script is:inline define:vars={{ shortname: site.disqusShortname }}>
-    const script = document.createElement("script");
-    script.src = `https://${shortname}.disqus.com/embed.js`;
-    script.setAttribute("data-timestamp", String(Date.now()));
-    (document.head || document.body).appendChild(script);
-  </script>
 </BaseLayout>
