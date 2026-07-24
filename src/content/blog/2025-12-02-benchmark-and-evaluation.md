@@ -16,15 +16,6 @@ authorUrl: https://github.com/tungedng2710
 
 Document AI has exploded in capability over the past two years, but reproducing published claims still hinges on solid evaluation practices. I condensed my benchmark research notes into this guide so it’s easier to see which datasets cover which scenarios, what metrics they report, and how to interpret their numbers. Use it as a reference when you build or compare OCR, table, or layout systems.
 
-## Table of Contents
-
-1. [OmniDocBench](#omnidocbench)
-2. [PubTabNet](#pubtabnet)
-3. [CISOL](#cisol)
-4. [TabRecSet](#tabrecset)
-5. [Proposal Benchmark Playbook](#proposal-benchmark-playbook)
-6. [References](#references)
-
 ## OmniDocBench
 
 OmniDocBench is the most comprehensive public benchmark I’ve found for modern PDF parsing. It evaluates everything from layout recovery to formula recognition with detailed attribute tags for slicing performance.

@@ -1,6 +1,7 @@
 import type { CollectionEntry } from "astro:content";
 
 export type BlogPost = CollectionEntry<"blog">;
+export const POSTS_PER_PAGE = 12;
 
 export function postSlug(post: BlogPost) {
   return post.id.replace(/^\d{4}-\d{2}-\d{2}-/, "");

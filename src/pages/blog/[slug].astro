@@ -27,9 +27,18 @@ interface Props {
 }
 
 const { post, translations } = Astro.props;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
 const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post.data.image;
 const isVietnamese = post.data.lang === "vi";
+const tableOfContents = headings.filter(
+  (heading) =>
+    heading.depth <= 3 &&
+    !["table of contents", "mục lục"].includes(heading.text.trim().toLocaleLowerCase()),
+);
+const tocItems =
+  tableOfContents.length > 0
+    ? tableOfContents
+    : [{ depth: 1, slug: "post", text: post.data.title }];
 const languageNames: Record<string, { code: string; name: string }> = {
   en: { code: "EN", name: "English" },
   vi: { code: "VI", name: "Tiếng Việt" },
@@ -40,12 +49,14 @@ const copy = isVietnamese
       published: "Đăng ngày",
       by: "bởi",
       read: "phút đọc",
+      contents: "Trong bài viết",
     }
   : {
       language: "Language",
       published: "Published on",
       by: "by",
       read: "min read",
+      contents: "On this page",
     };
 const alternates = translations.map((translation) => ({
   lang: translation.data.lang,
@@ -66,13 +77,16 @@ const alternates = translations.map((translation) => ({
     <article class="hero" id="post">
       <div class="hero-body">
         <div class="container">
-          <header data-reveal>
+          <header
+            class:list={["post-header", { "has-translations": translations.length > 1 }]}
+            data-reveal
+          >
             {
               translations.length > 1 && (
                 <nav class="language-switcher" aria-label={copy.language}>
                   <span class="language-switcher__label">
                     <i class="fas fa-globe" aria-hidden="true" />
-                    {copy.language}
+                    <span>{copy.language}</span>
                   </span>
                   <div class="language-switcher__options">
                     {translations.map((translation) => {
@@ -87,7 +101,7 @@ const alternates = translations.map((translation) => ({
                       return translation.id === post.id ? (
                         <span class={className} aria-current="page">
                           <strong>{language.code}</strong>
-                          <span>{language.name}</span>
+                          <span class="is-sr-only">{language.name}</span>
                         </span>
                       ) : (
                         <a
@@ -95,9 +109,11 @@ const alternates = translations.map((translation) => ({
                           href={withBase(postUrl(translation))}
                           hreflang={translation.data.lang}
                           lang={translation.data.lang}
+                          aria-label={`${copy.language}: ${language.name}`}
+                          title={language.name}
                         >
                           <strong>{language.code}</strong>
-                          <span>{language.name}</span>
+                          <span class="is-sr-only">{language.name}</span>
                         </a>
                       );
                     })}
@@ -108,14 +124,12 @@ const alternates = translations.map((translation) => ({
             <h1 class="title is-2 has-text-weight-semibold">{post.data.title}</h1>
             <hr class="has-background-black" />
             <div class="columns is-variable is-5">
-              <div class="column is-6">
+              <div class="column is-5">
                 <figure class="image is-16by9 has-shadow">
                   <img src={image} alt={post.data.title} id="post-image" />
                 </figure>
               </div>
-              <div
-                class="subtitle column is-5 has-text-left-desktop has-text-left-tablet has-text-center-mobile"
-              >
+              <div class="subtitle column is-6 has-text-left-desktop has-text-left-tablet has-text-center-mobile">
                 <p id="description" class="content is-small has-text-weight-medium is-uppercase">
                   {post.data.description}
                 </p>
@@ -142,12 +156,74 @@ const alternates = translations.map((translation) => ({
               </div>
             </div>
           </header>
-          <div class="post-content content">
-            <Content />
+          <div class="post-layout">
+            <div class="post-content content">
+              <Content />
+            </div>
+            <aside class="post-toc" aria-label={copy.contents}>
+              <div class="post-toc__inner">
+                <p class="post-toc__title">
+                  <i class="fas fa-list-ul" aria-hidden="true" />
+                  {copy.contents}
+                </p>
+                <nav class="post-toc__nav">
+                  {
+                    tocItems.map((heading) => (
+                      <a
+                        class={`post-toc__link is-depth-${heading.depth}`}
+                        href={`#${heading.slug}`}
+                        data-toc-link={heading.slug}
+                      >
+                        {heading.text}
+                      </a>
+                    ))
+                  }
+                </nav>
+              </div>
+            </aside>
           </div>
         </div>
       </div>
     </article>
   </main>
   <Footer />
+  <script>
+    const tocLinks = [
+      ...document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"),
+    ];
+    const observedHeadings = tocLinks
+      .map((link) => document.getElementById(link.dataset.tocLink ?? ""))
+      .filter((heading): heading is HTMLElement => Boolean(heading));
+
+    if (tocLinks.length > 0 && observedHeadings.length > 0 && "IntersectionObserver" in window) {
+      const activateLink = (id: string) => {
+        tocLinks.forEach((link) => {
+          const isActive = link.dataset.tocLink === id;
+          link.classList.toggle("is-active", isActive);
+          if (isActive) link.setAttribute("aria-current", "location");
+          else link.removeAttribute("aria-current");
+        });
+      };
+
+      const visibleHeadings = new Map<string, number>();
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              visibleHeadings.set(entry.target.id, entry.boundingClientRect.top);
+            } else {
+              visibleHeadings.delete(entry.target.id);
+            }
+          });
+
+          const active = [...visibleHeadings.entries()].sort((a, b) => a[1] - b[1])[0];
+          if (active) activateLink(active[0]);
+        },
+        { rootMargin: "-90px 0px -72% 0px" },
+      );
+
+      observedHeadings.forEach((heading) => observer.observe(heading));
+      activateLink(observedHeadings[0].id);
+    }
+  </script>
 </BaseLayout>
