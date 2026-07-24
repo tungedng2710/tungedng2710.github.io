@@ -8,6 +8,7 @@ tags:
 - Probability and Statistics
 authorName: Tung Nguyen
 authorUrl: https://github.com/tungedng2710
+lang: vi
 ---
 
 Trong bài toán phân loại nhị phân, mô hình thường tạo ra một điểm số thực

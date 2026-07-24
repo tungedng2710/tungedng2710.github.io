@@ -13,6 +13,7 @@ const blog = defineCollection({
     authorName: z.string().default("Tung Nguyen"),
     authorUrl: z.url().default("https://github.com/tungedng2710"),
     lang: z.string().default("en"),
+    translationKey: z.string().optional(),
   }),
 });
 

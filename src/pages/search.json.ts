@@ -1,10 +1,12 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
-import { excerpt, formatDate, postUrl, readTime } from "../utils/posts";
+import { excerpt, formatDate, postUrl, primaryPosts, readTime } from "../utils/posts";
 
 export const GET: APIRoute = async ({ site }) => {
-  const posts = (await getCollection("blog")).sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  const posts = primaryPosts(
+    (await getCollection("blog")).sort(
+      (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    ),
   );
 
   const data = posts.map((post) => ({

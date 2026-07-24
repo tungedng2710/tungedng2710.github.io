@@ -4,23 +4,53 @@ import Footer from "../../components/Footer.astro";
 import Navbar from "../../components/Navbar.astro";
 import { withBase } from "../../config";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { formatDate, postSlug, readTime } from "../../utils/posts";
+import { formatDate, postSlug, postUrl, readTime } from "../../utils/posts";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { slug: postSlug(post) },
-    props: { post },
+    props: {
+      post,
+      translations: post.data.translationKey
+        ? posts
+            .filter((candidate) => candidate.data.translationKey === post.data.translationKey)
+            .sort((a, b) => a.data.lang.localeCompare(b.data.lang))
+        : [post],
+    },
   }));
 }
 
 interface Props {
   post: CollectionEntry<"blog">;
+  translations: CollectionEntry<"blog">[];
 }
 
-const { post } = Astro.props;
+const { post, translations } = Astro.props;
 const { Content } = await render(post);
 const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post.data.image;
+const isVietnamese = post.data.lang === "vi";
+const languageNames: Record<string, { code: string; name: string }> = {
+  en: { code: "EN", name: "English" },
+  vi: { code: "VI", name: "Tiếng Việt" },
+};
+const copy = isVietnamese
+  ? {
+      language: "Ngôn ngữ",
+      published: "Đăng ngày",
+      by: "bởi",
+      read: "phút đọc",
+    }
+  : {
+      language: "Language",
+      published: "Published on",
+      by: "by",
+      read: "min read",
+    };
+const alternates = translations.map((translation) => ({
+  lang: translation.data.lang,
+  href: withBase(postUrl(translation)),
+}));
 ---
 
 <BaseLayout
@@ -29,6 +59,7 @@ const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post
   image={image}
   lang={post.data.lang}
   type="article"
+  alternates={translations.length > 1 ? alternates : []}
 >
   <Navbar active="blog" />
   <main>
@@ -36,6 +67,44 @@ const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post
       <div class="hero-body">
         <div class="container">
           <header data-reveal>
+            {
+              translations.length > 1 && (
+                <nav class="language-switcher" aria-label={copy.language}>
+                  <span class="language-switcher__label">
+                    <i class="fas fa-globe" aria-hidden="true" />
+                    {copy.language}
+                  </span>
+                  <div class="language-switcher__options">
+                    {translations.map((translation) => {
+                      const language = languageNames[translation.data.lang] ?? {
+                        code: translation.data.lang.toUpperCase(),
+                        name: translation.data.lang,
+                      };
+                      const className = `language-switcher__option${
+                        translation.id === post.id ? " is-active" : ""
+                      }`;
+
+                      return translation.id === post.id ? (
+                        <span class={className} aria-current="page">
+                          <strong>{language.code}</strong>
+                          <span>{language.name}</span>
+                        </span>
+                      ) : (
+                        <a
+                          class={className}
+                          href={withBase(postUrl(translation))}
+                          hreflang={translation.data.lang}
+                          lang={translation.data.lang}
+                        >
+                          <strong>{language.code}</strong>
+                          <span>{language.name}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </nav>
+              )
+            }
             <h1 class="title is-2 has-text-weight-semibold">{post.data.title}</h1>
             <hr class="has-background-black" />
             <div class="columns is-variable is-5">
@@ -51,7 +120,9 @@ const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post
                   {post.data.description}
                 </p>
                 <p class="subtitle is-6 is-uppercase has-text-weight-normal has-text-black-ter">
-                  Published on <b>{formatDate(post.data.pubDate)}</b> by{" "}
+                  {copy.published}{" "}
+                  <b>{formatDate(post.data.pubDate, isVietnamese ? "vi-VN" : "en-US")}</b>{" "}
+                  {copy.by}{" "}
                   <a href={post.data.authorUrl} target="_blank" rel="noreferrer">
                     <b class="has-text-link"><u>{post.data.authorName}</u></b>
                   </a>
@@ -66,7 +137,7 @@ const image = post.data.image.startsWith("/") ? withBase(post.data.image) : post
                 }
                 <p class="subtitle is-uppercase">
                   <i class="fas fa-clock"></i>{" "}
-                  <b class="has-text-link">{readTime(post.body)} min</b> read
+                  <b class="has-text-link">{readTime(post.body)}</b> {copy.read}
                 </p>
               </div>
             </div>

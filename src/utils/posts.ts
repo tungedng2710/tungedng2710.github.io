@@ -10,13 +10,28 @@ export function postUrl(post: BlogPost) {
   return `/blog/${postSlug(post)}`;
 }
 
-export function formatDate(date: Date) {
-  return new Intl.DateTimeFormat("en-US", {
+export function formatDate(date: Date, locale = "en-US") {
+  return new Intl.DateTimeFormat(locale, {
     month: "long",
     day: "numeric",
     year: "numeric",
     timeZone: "UTC",
   }).format(date);
+}
+
+export function primaryPosts(posts: BlogPost[]) {
+  const primaryIds = new Map<string, string>();
+
+  posts.forEach((post) => {
+    const key = post.data.translationKey;
+    if (!key) return;
+    const current = primaryIds.get(key);
+    if (!current || post.data.lang === "en") primaryIds.set(key, post.id);
+  });
+
+  return posts.filter(
+    (post) => !post.data.translationKey || primaryIds.get(post.data.translationKey) === post.id,
+  );
 }
 
 export function readTime(body = "") {

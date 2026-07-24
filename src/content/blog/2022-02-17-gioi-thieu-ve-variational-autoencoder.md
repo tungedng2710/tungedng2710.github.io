@@ -9,6 +9,7 @@ tags:
 - Generative AI
 authorName: Hieu Bui
 authorUrl: https://github.com/HieuBui99
+lang: vi
 ---
 
 ## Introduction

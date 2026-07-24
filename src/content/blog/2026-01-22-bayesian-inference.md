@@ -10,6 +10,7 @@ tags:
 authorName: Tung Nguyen
 authorUrl: https://github.com/tungedng2710
 lang: en
+translationKey: bayesian-inference
 ---
 
 # Why Bayesian inference matters
