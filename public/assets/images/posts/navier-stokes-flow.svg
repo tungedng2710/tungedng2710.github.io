@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Navier–Stokes equations</title>
+  <desc id="desc">Warm editorial illustration of fluid streamlines flowing around a cylinder</desc>
+  <rect width="1200" height="630" fill="#f0eee6"/>
+  <path d="M0 70H1200M0 560H1200" stroke="#cccbc8" stroke-width="2"/>
+  <g fill="none" stroke="#3d3d3a" stroke-width="4" stroke-linecap="round">
+    <path d="M-30 145C230 145 312 145 390 184C474 226 533 222 618 164C727 90 878 118 1230 118"/>
+    <path d="M-30 220C226 220 317 212 392 244C450 269 478 266 527 224C636 130 747 185 1230 188"/>
+    <path d="M-30 315H386C448 315 462 315 498 315C700 315 884 315 1230 315"/>
+    <path d="M-30 410C226 410 317 418 392 386C450 361 478 364 527 406C636 500 747 445 1230 442"/>
+    <path d="M-30 485C230 485 312 485 390 446C474 404 533 408 618 466C727 540 878 512 1230 512"/>
+  </g>
+  <g fill="#d97757">
+    <path d="m1090 107 42 12-42 12 12-12z"/>
+    <path d="m1090 177 42 12-42 12 12-12z"/>
+    <path d="m1090 303 42 12-42 12 12-12z"/>
+    <path d="m1090 430 42 12-42 12 12-12z"/>
+    <path d="m1090 500 42 12-42 12 12-12z"/>
+  </g>
+  <circle cx="485" cy="315" r="98" fill="#141413" stroke="#faf9f5" stroke-width="8"/>
+  <circle cx="485" cy="315" r="42" fill="#e3dacc"/>
+  <text x="70" y="95" fill="#87867f" font-family="Arial, sans-serif" font-size="22" letter-spacing="3">FLUID MECHANICS / 01</text>
+  <text x="70" y="590" fill="#141413" font-family="Georgia, serif" font-size="54">Navier–Stokes equations</text>
+  <text x="760" y="570" fill="#3d3d3a" font-family="monospace" font-size="21">∂u/∂t + (u·∇)u = −∇p/ρ + ν∇²u</text>
+</svg>
