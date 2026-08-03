@@ -230,6 +230,63 @@ const alternates = translations.map((translation) => ({
     const copyLabel = isVietnamesePost ? "Sao chép" : "Copy";
     const copiedLabel = isVietnamesePost ? "Đã sao chép" : "Copied";
 
+    const mermaidCodeBlocks = [
+      ...document.querySelectorAll<HTMLElement>(
+        '.post-content pre[data-language="mermaid"] code',
+      ),
+    ];
+
+    if (mermaidCodeBlocks.length > 0) {
+      const renderMermaidDiagrams = async () => {
+        const mermaidModuleUrl =
+          "https://cdn.jsdelivr.net/npm/mermaid@11.16.0/dist/mermaid.esm.min.mjs";
+        const mermaidModule = await import(/* @vite-ignore */ mermaidModuleUrl);
+        const mermaid = mermaidModule.default;
+
+        const mermaidDiagrams = mermaidCodeBlocks.flatMap((codeBlock) => {
+          const pre = codeBlock.closest("pre");
+          if (!pre) return [];
+
+          const diagram = document.createElement("div");
+          diagram.className = "mermaid mermaid-diagram";
+          diagram.textContent = codeBlock.textContent ?? "";
+          diagram.setAttribute("role", "img");
+          diagram.setAttribute(
+            "aria-label",
+            isVietnamesePost ? "Sơ đồ kiến trúc tham chiếu" : "Reference architecture diagram",
+          );
+          pre.replaceWith(diagram);
+          return [diagram];
+        });
+
+        mermaid.initialize({
+          startOnLoad: false,
+          securityLevel: "strict",
+          theme: "base",
+          flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: "basis",
+          },
+          themeVariables: {
+            background: "#f0eee6",
+            primaryColor: "#f5e3c7",
+            primaryTextColor: "#141413",
+            primaryBorderColor: "#87867f",
+            secondaryColor: "#e3dacc",
+            tertiaryColor: "#faf9f5",
+            lineColor: "#3d3d3a",
+            fontFamily: "Inter, system-ui, sans-serif",
+            fontSize: "15px",
+          },
+        });
+
+        await mermaid.run({ nodes: mermaidDiagrams });
+      };
+
+      void renderMermaidDiagrams();
+    }
+
     const writeToClipboard = async (text: string) => {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(text);
@@ -251,6 +308,8 @@ const alternates = translations.map((translation) => ({
     };
 
     document.querySelectorAll<HTMLPreElement>(".post-content pre").forEach((pre) => {
+      if (pre.dataset.language === "mermaid") return;
+
       const wrapper = document.createElement("div");
       wrapper.className = "code-block";
 

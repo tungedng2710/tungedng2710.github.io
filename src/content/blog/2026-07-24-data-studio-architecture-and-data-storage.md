@@ -82,7 +82,29 @@ strength:
 
 ## 2. Reference architecture
 
-![Data Studio reference architecture](/assets/images/posts/data-studio-architecture.svg)
+```mermaid
+flowchart TB
+    HFRepo["HF-compatible repo"]
+    HFHub["Hugging Face Hub"]
+    Ingestion["Repository ingestion"]
+    Parser["HF format parser"]
+    PostgreSQL["PostgreSQL metadata"]
+    GitDVC["Git + DVC revision"]
+    RustFS["RustFS objects"]
+    ArrowIndex["Arrow/Parquet index"]
+    Viewer["Dataset Viewer"]
+
+    HFRepo --> Ingestion
+    HFHub --> Ingestion
+    Ingestion --> Parser
+
+    Parser --> PostgreSQL
+    Parser --> GitDVC
+    Parser --> ArrowIndex
+
+    GitDVC --> RustFS
+    ArrowIndex --> Viewer
+```
 
 The reference flow is:
 
