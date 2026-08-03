@@ -225,5 +225,63 @@ const alternates = translations.map((translation) => ({
       observedHeadings.forEach((heading) => observer.observe(heading));
       activateLink(observedHeadings[0].id);
     }
+
+    const isVietnamesePost = document.documentElement.lang === "vi";
+    const copyLabel = isVietnamesePost ? "Sao chép" : "Copy";
+    const copiedLabel = isVietnamesePost ? "Đã sao chép" : "Copied";
+
+    const writeToClipboard = async (text: string) => {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+        return;
+      }
+
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const legacyDocument = document as unknown as {
+        execCommand: (command: string) => boolean;
+      };
+      legacyDocument.execCommand("copy");
+      textarea.remove();
+    };
+
+    document.querySelectorAll<HTMLPreElement>(".post-content pre").forEach((pre) => {
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block";
+
+      const button = document.createElement("button");
+      button.className = "code-copy-button";
+      button.type = "button";
+      button.textContent = copyLabel;
+      button.setAttribute("aria-label", `${copyLabel} code`);
+      button.setAttribute("aria-live", "polite");
+
+      pre.parentNode?.insertBefore(wrapper, pre);
+      wrapper.append(pre, button);
+
+      button.addEventListener("click", async () => {
+        const code = pre.querySelector("code")?.innerText ?? pre.innerText;
+
+        try {
+          await writeToClipboard(code);
+          button.textContent = copiedLabel;
+          button.classList.add("is-copied");
+          button.setAttribute("aria-label", copiedLabel);
+
+          window.setTimeout(() => {
+            button.textContent = copyLabel;
+            button.classList.remove("is-copied");
+            button.setAttribute("aria-label", `${copyLabel} code`);
+          }, 1800);
+        } catch {
+          button.textContent = copyLabel;
+        }
+      });
+    });
   </script>
 </BaseLayout>

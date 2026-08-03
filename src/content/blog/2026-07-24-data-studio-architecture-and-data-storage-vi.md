@@ -20,7 +20,7 @@ xây dựng một quy trình hoàn chỉnh, có thể tái lập, từ repositor
 revision bất biến, metadata có transaction, lưu trữ content-addressed, index dạng cột và khả năng
 phục vụ dữ liệu theo từng revision.
 
-[![Truy cập TonAI Data Studio](https://img.shields.io/badge/Live_Demo-TonAI_Data_Studio-16A34A?style=for-the-badge)](https://3000--main--frontier--idp-lab.coder.vts-ai.space/)
+<a class="post-live-demo" href="https://3000--main--frontier--idp-lab.coder.vts-ai.space/" target="_blank" rel="noreferrer"><span>Demo trực tiếp</span> TonAI Data Studio ↗</a>
 
 [Xem tài liệu nguồn trên GitHub](https://github.com/tungedng2710/cognidoc/blob/main/src/data_studio/docs/DOCUMENTATION_vi.md).
 

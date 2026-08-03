@@ -12,7 +12,7 @@ const { active } = Astro.props;
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href={withBase("/")}>
-        <span class="brand-mark" aria-hidden="true">T</span>
+        <img class="brand-logo" src={withBase("/assets/images/logo.png")} alt={`${site.title} logo`} />
         <strong>{site.title}</strong><span class="brand-dot">/ Journal</span>
       </a>
       <button

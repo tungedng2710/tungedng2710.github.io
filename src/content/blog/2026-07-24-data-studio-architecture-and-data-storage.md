@@ -19,7 +19,7 @@ Production AI data platforms need more than a file upload endpoint. This specifi
 complete, reproducible path from Hugging Face-compatible repositories to immutable revisions,
 transactional metadata, content-addressed storage, columnar indexes, and revision-scoped serving.
 
-[![TonAI Data Studio live demo](https://img.shields.io/badge/Live_Demo-TonAI_Data_Studio-16A34A?style=for-the-badge)](https://3000--main--frontier--idp-lab.coder.vts-ai.space/)
+<a class="post-live-demo" href="https://3000--main--frontier--idp-lab.coder.vts-ai.space/" target="_blank" rel="noreferrer"><span>Live demo</span> TonAI Data Studio ↗</a>
 
 [View the source documentation on GitHub](https://github.com/tungedng2710/cognidoc/blob/main/src/data_studio/docs/DOCUMENTATION_en.md).
 
