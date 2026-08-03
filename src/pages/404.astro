@@ -8,16 +8,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     <section class="hero is-fullheight has-text-centered" id="not-found">
       <div class="hero-body">
         <div class="container" data-reveal>
-          <h1 class="title is-1 is-uppercase has-text-weight-bold has-text-white">404</h1>
-          <p class="is-uppercase has-text-weight-medium has-text-grey-light">
-            The page you’re trying to load was not found.
-          </p>
+          <p class="section-kicker">Field note missing</p>
+          <h1 class="title is-1">404</h1>
+          <p>The page you’re trying to load was not found.</p>
           <hr />
           <a
             href={withBase("/")}
-            class="button is-white is-rounded is-outlined is-uppercase has-text-weight-normal"
+            class="button button-primary"
           >
-            Home
+            Return home ↗
           </a>
         </div>
       </div>

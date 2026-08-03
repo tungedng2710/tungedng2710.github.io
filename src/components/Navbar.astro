@@ -12,12 +12,8 @@ const { active } = Astro.props;
   <div class="container">
     <div class="navbar-brand">
       <a class="navbar-item" href={withBase("/")}>
-        <img
-          src={withBase("/assets/images/logo.png")}
-          alt={`${site.title} logo`}
-          style="max-height: 40px; margin-right: 10px;"
-        />
-        <strong>{site.title}</strong>
+        <span class="brand-mark" aria-hidden="true">T</span>
+        <strong>{site.title}</strong><span class="brand-dot">/ Journal</span>
       </a>
       <button
         class="navbar-burger"
@@ -36,19 +32,19 @@ const { active } = Astro.props;
     <div class="navbar-menu" id="navbar-menu">
       <div class="navbar-end">
         <a class:list={["navbar-item", { "is-active": active === "home" }]} href={withBase("/")}>
-          HOME
+          Home
         </a>
-        <a class="navbar-item" href={withBase("/#about")}>ABOUT</a>
+        <a class="navbar-item" href={withBase("/#about")}>About</a>
         <a class:list={["navbar-item", { "is-active": active === "blog" }]} href={withBase("/blog")}>
-          BLOG
+          Writing
         </a>
         <a
           class:list={["navbar-item", { "is-active": active === "project" }]}
           href={withBase("/project")}
         >
-          PROJECTS
+          Projects
         </a>
-        <a class="navbar-contact" href={`mailto:${site.email}`}>LET’S TALK</a>
+        <a class="navbar-contact" href={`mailto:${site.email}`}>Let’s talk <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </div>

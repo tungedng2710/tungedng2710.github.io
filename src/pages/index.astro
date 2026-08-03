@@ -2,19 +2,17 @@
 import About from "../components/About.astro";
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
-import { site, withBase } from "../config";
+import { withBase } from "../config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout>
   <Navbar active="home" />
   <main>
-    <section class="hero is-fullheight-with-navbar has-text-centered" id="hero">
-      <div class="hero-glow hero-glow--one"></div>
-      <div class="hero-glow hero-glow--two"></div>
+    <section class="hero is-fullheight-with-navbar" id="hero">
       <div class="hero-body">
         <div class="container hero-content" data-reveal>
-          <p class="hero-eyebrow"><span></span>{site.title} · AI RESEARCH & ENGINEERING</p>
+          <p class="hero-eyebrow"><span>Field notes 01</span> AI research & engineering</p>
           <h1 class="hero-title">
             Building intelligent systems.<br />
             <span>Explaining how they work.</span>
@@ -24,7 +22,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
             of generative AI, computer vision, and mathematics.
           </p>
           <div class="hero-actions">
-            <a href={withBase("/blog")} class="button button-primary">Explore writing</a>
+            <a href={withBase("/blog")} class="button button-primary">Explore writing <span aria-hidden="true">↗</span></a>
             <a href={withBase("/#about")} class="button button-secondary">About me</a>
           </div>
           <div class="hero-proof" aria-label="Areas of focus">

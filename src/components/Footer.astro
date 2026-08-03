@@ -5,10 +5,10 @@ import { site, withBase } from "../config";
 <footer id="footer">
   <div class="footer-inner">
     <a class="footer-brand" href={withBase("/")}>
-      <img src={withBase("/assets/images/logo.png")} alt="" />
+      <span class="footer-mark" aria-hidden="true">T</span>
       <span>
         <strong>{site.title}</strong>
-        <small>AI research & engineering</small>
+        <small>Independent AI research journal</small>
       </span>
     </a>
     <nav aria-label="Footer navigation">
@@ -17,6 +17,6 @@ import { site, withBase } from "../config";
       <a href={site.social.github} target="_blank" rel="noreferrer">GitHub</a>
       <a href={site.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
     </nav>
-    <p>© {new Date().getFullYear()} {site.author.name}</p>
+    <p>Vietnam · © {new Date().getFullYear()} {site.author.name}</p>
   </div>
 </footer>
