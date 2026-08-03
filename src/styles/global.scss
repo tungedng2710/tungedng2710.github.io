@@ -326,10 +326,6 @@ img {
   text-transform: uppercase;
 }
 
-.hero-eyebrow span {
-  color: var(--slate-dark);
-}
-
 #hero .hero-title {
   max-width: 1100px;
   margin: 0;
@@ -374,39 +370,6 @@ img {
 .hero-actions .button-primary:hover {
   background: var(--clay-deep) !important;
   border-color: var(--clay-deep) !important;
-}
-
-.hero-proof {
-  display: grid;
-  max-width: 860px;
-  margin-top: clamp(3.5rem, 8vw, 6.5rem);
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--stone);
-  border-bottom: 1px solid var(--stone);
-}
-
-.hero-proof span {
-  padding: 1.1rem 1.2rem;
-  border-right: 1px solid var(--stone);
-  color: var(--slate-medium);
-  font-size: 0.72rem;
-  font-weight: 500;
-}
-
-.hero-proof span:first-child {
-  padding-left: 0;
-}
-
-.hero-proof span:last-child {
-  border-right: 0;
-}
-
-.hero-proof strong {
-  margin-right: 0.7rem;
-  color: var(--clay-deep);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 400;
 }
 
 /* About */
@@ -1399,21 +1362,6 @@ a.language-switcher__option:hover {
 
   .hero-actions .button {
     width: 100%;
-  }
-
-  .hero-proof {
-    grid-template-columns: 1fr;
-  }
-
-  .hero-proof span,
-  .hero-proof span:first-child {
-    padding: 0.85rem 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--stone);
-  }
-
-  .hero-proof span:last-child {
-    border-bottom: 0;
   }
 
   #about,

@@ -7,7 +7,7 @@ export const site = {
     image: "/assets/images/shanghai1.JPG",
     url: "https://github.com/tungedng2710",
     about:
-      "Researcher and engineer specializing in artificial intelligence, with a focus on generative AI and computer vision. I develop practical applications and conduct research at the intersection of deep learning and visual computing. Through this platform, I share technical insights, methodologies, and comprehensive analyses to advance understanding in the field of AI and machine learning.",
+      "AI researcher and engineer focused on generative AI and computer vision. I build practical systems and share the methods, experiments, and ideas behind them.",
   },
   email: "tungnguyen99.tn@gmail.com",
   social: {
