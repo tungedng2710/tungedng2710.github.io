@@ -43,7 +43,7 @@ html {
 body {
   min-height: 100vh;
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--ivory-medium);
   color: var(--slate-dark);
   font-family: var(--font-sans);
@@ -772,16 +772,19 @@ a.blog-pagination__page:hover {
 #post {
   min-height: 100vh;
   padding: clamp(3.5rem, 7vw, 6.5rem) 1.5rem clamp(5rem, 8vw, 8rem);
+  overflow: visible;
   background: var(--ivory-light);
 }
 
 #post .hero-body {
   padding: 0;
+  overflow: visible;
 }
 
 #post > .hero-body > .container {
   width: min(100%, 1180px);
   margin: 0 auto;
+  overflow: visible;
 }
 
 .post-header {
@@ -935,11 +938,13 @@ a.language-switcher__option:hover {
   overflow: visible;
   align-items: start;
   justify-content: center;
-  grid-template-columns: minmax(0, 760px) minmax(220px, 260px);
+  grid-template-columns: minmax(220px, 260px) minmax(0, 760px);
+  grid-template-areas: "toc content";
   gap: clamp(3rem, 6vw, 5rem);
 }
 
 .post-content {
+  grid-area: content;
   min-width: 0;
   max-width: 760px;
   margin: 0;
@@ -954,9 +959,12 @@ a.language-switcher__option:hover {
 }
 
 .post-toc {
+  position: -webkit-sticky;
   position: sticky;
   top: calc(76px + 1.5rem);
+  grid-area: toc;
   min-width: 0;
+  height: fit-content;
   align-self: start;
 }
 
@@ -1104,7 +1112,7 @@ a.language-switcher__option:hover {
   max-width: 100%;
   height: auto;
   margin: 2rem auto;
-  border-radius: 0 0 14px 14px;
+  border-radius: 14px;
 }
 
 .post-content blockquote {
@@ -1351,7 +1359,7 @@ a.language-switcher__option:hover {
     margin: 0.5rem 0 1rem;
     padding: 0.75rem;
     border: 1px solid var(--slate-dark);
-    border-radius: 0 0 16px 16px;
+    border-radius: 16px;
     background: var(--ivory-light);
   }
 
@@ -1370,23 +1378,6 @@ a.language-switcher__option:hover {
   .blog-wrapper,
   .project-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .post-layout {
-    grid-template-columns: minmax(0, 760px);
-    gap: 1.5rem;
-  }
-
-  .post-toc {
-    position: static;
-    grid-row: 1;
-  }
-
-  .post-toc__nav {
-    display: grid;
-    max-height: 260px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0.12rem 0.75rem;
   }
 
   .footer-inner {
@@ -1540,6 +1531,15 @@ a.language-switcher__option:hover {
 
   .post-layout {
     margin-top: 2.5rem;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "toc"
+      "content";
+    gap: 1.5rem;
+  }
+
+  .post-toc {
+    position: static;
   }
 
   .post-toc__nav {
