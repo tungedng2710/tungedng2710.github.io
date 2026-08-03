@@ -304,7 +304,7 @@ img {
 #hero .hero-body {
   display: flex;
   align-items: center;
-  padding: clamp(3rem, 7vh, 5.5rem) 1.5rem;
+  padding: clamp(5rem, 11vw, 9rem) 1.5rem;
 }
 
 .hero-content {
@@ -316,7 +316,7 @@ img {
 
 .hero-eyebrow {
   display: flex;
-  margin: 0 0 clamp(1.5rem, 4vh, 3rem);
+  margin: 0 0 clamp(2.5rem, 6vw, 5.5rem);
   align-items: center;
   gap: 1.1rem;
   color: var(--cloud-dark);
@@ -335,7 +335,7 @@ img {
   margin: 0;
   color: var(--slate-dark);
   font-family: var(--font-sans);
-  font-size: clamp(3.25rem, min(7.4vw, 10vh), 6.8rem);
+  font-size: clamp(3.25rem, 7.4vw, 6.8rem);
   font-weight: 600;
   letter-spacing: -0.067em;
   line-height: 0.94;
@@ -350,7 +350,7 @@ img {
 
 .hero-summary {
   max-width: 650px;
-  margin: clamp(1.25rem, 2.5vh, 2rem) 0 0;
+  margin: 2.25rem 0 0;
   color: var(--slate-medium);
   font-family: var(--font-serif);
   font-size: clamp(1.18rem, 2.15vw, 1.55rem);
@@ -362,7 +362,7 @@ img {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: 0.75rem;
-  margin-top: clamp(1.25rem, 2.5vh, 2rem);
+  margin-top: 2.25rem;
 }
 
 .hero-actions .button-primary {
@@ -379,14 +379,14 @@ img {
 .hero-proof {
   display: grid;
   max-width: 860px;
-  margin-top: clamp(2rem, 4vh, 3.5rem);
+  margin-top: clamp(3.5rem, 8vw, 6.5rem);
   grid-template-columns: repeat(3, 1fr);
   border-top: 1px solid var(--stone);
   border-bottom: 1px solid var(--stone);
 }
 
 .hero-proof span {
-  padding: 0.9rem 1.2rem;
+  padding: 1.1rem 1.2rem;
   border-right: 1px solid var(--stone);
   color: var(--slate-medium);
   font-size: 0.72rem;
@@ -1319,41 +1319,6 @@ a.language-switcher__option:hover {
   background: var(--slate-dark);
 }
 
-@media (max-height: 800px) and (min-width: 701px) {
-  #hero .hero-body {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  .hero-eyebrow {
-    margin-bottom: 1.25rem;
-  }
-
-  #hero .hero-title {
-    font-size: clamp(3.2rem, 8.5vh, 4.75rem);
-  }
-
-  .hero-summary {
-    max-width: 610px;
-    margin-top: 1rem;
-    font-size: 1.08rem;
-    line-height: 1.4;
-  }
-
-  .hero-actions {
-    margin-top: 1rem;
-  }
-
-  .hero-proof {
-    margin-top: 1.5rem;
-  }
-
-  .hero-proof span {
-    padding-top: 0.7rem;
-    padding-bottom: 0.7rem;
-  }
-}
-
 @media (max-width: 1023px) {
   #navbar .navbar-menu {
     margin: 0.5rem 0 1rem;
@@ -1409,7 +1374,7 @@ a.language-switcher__option:hover {
   }
 
   #hero .hero-body {
-    padding: 2.5rem 0.75rem 3rem;
+    padding: 3.5rem 0.75rem 4.5rem;
   }
 
   .hero-content {
@@ -1417,20 +1382,18 @@ a.language-switcher__option:hover {
   }
 
   .hero-eyebrow {
-    margin-bottom: 1.75rem;
+    margin-bottom: 2.5rem;
   }
 
   #hero .hero-title {
-    font-size: clamp(2.75rem, 13vw, 4rem);
+    font-size: clamp(3rem, 14.5vw, 4.5rem);
   }
 
   .hero-summary {
-    margin-top: 1.25rem;
-    font-size: 1.08rem;
+    font-size: 1.15rem;
   }
 
   .hero-actions {
-    margin-top: 1.25rem;
     flex-direction: column;
   }
 
@@ -1439,7 +1402,6 @@ a.language-switcher__option:hover {
   }
 
   .hero-proof {
-    margin-top: 2rem;
     grid-template-columns: 1fr;
   }
 
