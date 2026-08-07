@@ -22,7 +22,7 @@ phục vụ dữ liệu theo từng revision.
 
 <a class="post-live-demo" href="https://3000--main--frontier--idp-lab.coder.vts-ai.space/" target="_blank" rel="noreferrer"><span>Demo trực tiếp</span> TonAI Data Studio ↗</a>
 
-[Xem tài liệu nguồn trên GitHub](https://github.com/tungedng2710/cognidoc/blob/main/src/data_studio/docs/DOCUMENTATION_vi.md).
+[Xem tài liệu nguồn trên GitHub](https://github.com/tungedng2710/TonAI-DataStudio/blob/main/docs/DOCUMENTATION_vi.md).
 
 | Thuộc tính tài liệu | Giá trị |
 | --- | --- |
