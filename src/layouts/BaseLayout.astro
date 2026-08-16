@@ -65,6 +65,19 @@ const defaultAlternate = alternates.find((alternate) => alternate.lang === "en")
     <title>{pageTitle}</title>
     <script is:inline>
       document.documentElement.classList.add("js");
+      try {
+        const savedTheme = localStorage.getItem("theme");
+        const theme = savedTheme === "light" || savedTheme === "dark"
+          ? savedTheme
+          : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        document.documentElement.dataset.theme = theme;
+        document.querySelector('meta[name="theme-color"]')?.setAttribute(
+          "content",
+          theme === "dark" ? "#171816" : "#f0eee6",
+        );
+      } catch {
+        document.documentElement.dataset.theme = "light";
+      }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
