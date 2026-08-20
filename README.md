@@ -1,18 +1,34 @@
 # TONVERSE — Personal Site & Blog
 
-Source for `tungedng2710.github.io`, built as a static Astro site.
+Source code for [tungedng2710.github.io](https://tungedng2710.github.io), a personal site for writing about AI, mathematics, and software engineering.
+
+## Tech stack
+
+- [Astro 7](https://astro.build/) with TypeScript and static-site generation
+- Markdown/MDX posts managed through Astro Content Collections
+- Sass and Bulma for styling
+- KaTeX with Remark/Rehype plugins for mathematical notation
+- Mermaid for diagrams
+- GitHub Actions and GitHub Pages for deployment
 
 ## Local development
 
-- Prerequisite: Node.js 22.12 or newer.
-- Run `./buildlocalapp.sh`.
-- Open <http://localhost:4321>.
+Node.js 22.12 or newer is required.
 
-You can also use `npm install`, followed by `npm run dev`.
+```sh
+npm install
+npm run dev
+```
+
+Open <http://localhost:4321>.
 
 ## Production build
 
-Run `npm run build`. The static site is written to `dist/`.
+```sh
+npm run build
+```
+
+The generated static site is written to `dist/`.
 
 ## Structure
 
@@ -26,10 +42,8 @@ Run `npm run build`. The static site is written to `dist/`.
 
 ## GitHub Pages
 
-Pushing `main` runs `.github/workflows/deploy.yml`. In the repository’s
-**Settings → Pages**, set **Source** to **GitHub Actions**.
+Pushing to `main` runs `.github/workflows/deploy.yml` and deploys the static build to GitHub Pages.
 
-## Credits & License
+## License
 
-- Original theme: [WhatATheme](https://thedevslot.github.io/WhatATheme/).
-- License: see `LICENSE`.
+See [LICENSE](LICENSE).

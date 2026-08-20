@@ -165,23 +165,30 @@ const alternates = translations.map((translation) => ({
               <Content />
             </div>
             <aside class="post-toc" id="post-toc-sidebar" aria-label={copy.contents}>
-              <div class="post-toc__inner">
+              <button
+                class="post-toc__rail"
+                type="button"
+                data-toc-trigger
+                aria-label={copy.showContents}
+                aria-controls="post-toc-navigation"
+                aria-expanded="false"
+              >
+                {
+                  tocItems.map((heading) => (
+                    <span
+                      class={`post-toc__marker is-depth-${heading.depth}`}
+                      data-toc-marker={heading.slug}
+                      aria-hidden="true"
+                    />
+                  ))
+                }
+              </button>
+              <div class="post-toc__panel">
                 <div class="post-toc__header">
                   <p class="post-toc__title">
                     <i class="fas fa-list-ul" aria-hidden="true" />
                     {copy.contents}
                   </p>
-                  <button
-                    class="post-toc__collapse"
-                    type="button"
-                    data-toc-collapse
-                    aria-label={copy.hideContents}
-                    title={copy.hideContents}
-                    aria-controls="post-toc-navigation"
-                    aria-expanded="true"
-                  >
-                    <span aria-hidden="true">←</span>
-                  </button>
                 </div>
                 <nav class="post-toc__nav" id="post-toc-navigation">
                   {
@@ -198,18 +205,6 @@ const alternates = translations.map((translation) => ({
                 </nav>
               </div>
             </aside>
-            <button
-              class="post-toc__reopen"
-              type="button"
-              data-toc-expand
-              aria-label={copy.showContents}
-              title={copy.showContents}
-              aria-controls="post-toc-sidebar"
-              aria-expanded="false"
-            >
-              <span aria-hidden="true">→</span>
-              <span>{copy.contents}</span>
-            </button>
           </div>
         </div>
       </div>
@@ -219,6 +214,9 @@ const alternates = translations.map((translation) => ({
   <script>
     const tocLinks = [
       ...document.querySelectorAll<HTMLAnchorElement>("[data-toc-link]"),
+    ];
+    const tocMarkers = [
+      ...document.querySelectorAll<HTMLElement>("[data-toc-marker]"),
     ];
     const observedHeadings = tocLinks
       .map((link) => document.getElementById(link.dataset.tocLink ?? ""))
@@ -231,6 +229,9 @@ const alternates = translations.map((translation) => ({
           link.classList.toggle("is-active", isActive);
           if (isActive) link.setAttribute("aria-current", "location");
           else link.removeAttribute("aria-current");
+        });
+        tocMarkers.forEach((marker) => {
+          marker.classList.toggle("is-active", marker.dataset.tocMarker === id);
         });
       };
 
@@ -259,44 +260,18 @@ const alternates = translations.map((translation) => ({
     const copyLabel = isVietnamesePost ? "Sao chép" : "Copy";
     const copiedLabel = isVietnamesePost ? "Đã sao chép" : "Copied";
 
-    const tocLayout = document.querySelector<HTMLElement>(".post-layout");
     const tocSidebar = document.querySelector<HTMLElement>("#post-toc-sidebar");
-    const tocCollapseButton = document.querySelector<HTMLButtonElement>("[data-toc-collapse]");
-    const tocExpandButton = document.querySelector<HTMLButtonElement>("[data-toc-expand]");
-    const tocPreferenceKey = "tonverse:toc-collapsed";
-
-    const setTocCollapsed = (collapsed: boolean, persist = true) => {
-      if (!tocLayout || !tocSidebar || !tocCollapseButton || !tocExpandButton) return;
-
-      tocLayout.classList.toggle("is-toc-collapsed", collapsed);
-      tocSidebar.inert = collapsed;
-      tocSidebar.setAttribute("aria-hidden", String(collapsed));
-      tocCollapseButton.setAttribute("aria-expanded", String(!collapsed));
-      tocExpandButton.setAttribute("aria-expanded", String(!collapsed));
-
-      if (persist) {
-        try {
-          localStorage.setItem(tocPreferenceKey, String(collapsed));
-        } catch {
-          // The layout still works when storage is unavailable.
-        }
-      }
+    const tocTrigger = document.querySelector<HTMLButtonElement>("[data-toc-trigger]");
+    const setTocExpanded = (expanded: boolean) => {
+      tocSidebar?.classList.toggle("is-open", expanded);
+      tocTrigger?.setAttribute("aria-expanded", String(expanded));
     };
 
-    try {
-      setTocCollapsed(localStorage.getItem(tocPreferenceKey) === "true", false);
-    } catch {
-      setTocCollapsed(false, false);
-    }
-
-    tocCollapseButton?.addEventListener("click", () => {
-      setTocCollapsed(true);
-      tocExpandButton?.focus();
-    });
-
-    tocExpandButton?.addEventListener("click", () => {
-      setTocCollapsed(false);
-      tocCollapseButton?.focus();
+    tocSidebar?.addEventListener("pointerenter", () => setTocExpanded(true));
+    tocSidebar?.addEventListener("pointerleave", () => setTocExpanded(false));
+    tocSidebar?.addEventListener("focusin", () => setTocExpanded(true));
+    tocSidebar?.addEventListener("focusout", (event) => {
+      if (!tocSidebar.contains(event.relatedTarget as Node | null)) setTocExpanded(false);
     });
 
     const mermaidCodeBlocks = [
@@ -351,6 +326,165 @@ const alternates = translations.map((translation) => ({
         });
 
         await mermaid.run({ nodes: mermaidDiagrams });
+
+        mermaidDiagrams.forEach((diagram) => {
+          const svg = diagram.querySelector<SVGSVGElement>("svg");
+          if (!svg) return;
+
+          const viewer = document.createElement("div");
+          viewer.className = "mermaid-viewer";
+
+          const viewport = document.createElement("div");
+          viewport.className = "mermaid-viewport";
+          viewport.tabIndex = 0;
+          viewport.setAttribute(
+            "aria-label",
+            isVietnamesePost
+              ? "Sơ đồ tương tác. Dùng các nút để thu phóng và kéo để di chuyển."
+              : "Interactive diagram. Use the controls to zoom and drag to pan.",
+          );
+
+          const controls = document.createElement("div");
+          controls.className = "mermaid-controls";
+          controls.setAttribute(
+            "aria-label",
+            isVietnamesePost ? "Điều khiển sơ đồ" : "Diagram controls",
+          );
+
+          const createControl = (action: string, label: string, symbol: string) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "mermaid-control";
+            button.dataset.mermaidAction = action;
+            button.setAttribute("aria-label", label);
+            button.title = label;
+            button.textContent = symbol;
+            controls.appendChild(button);
+            return button;
+          };
+
+          const zoomIn = createControl(
+            "zoom-in",
+            isVietnamesePost ? "Phóng to" : "Zoom in",
+            "+",
+          );
+          const zoomOut = createControl(
+            "zoom-out",
+            isVietnamesePost ? "Thu nhỏ" : "Zoom out",
+            "−",
+          );
+          const reset = createControl(
+            "reset",
+            isVietnamesePost ? "Đặt lại chế độ xem" : "Reset view",
+            "↺",
+          );
+
+          const status = document.createElement("span");
+          status.className = "is-sr-only";
+          status.setAttribute("aria-live", "polite");
+          controls.appendChild(status);
+
+          diagram.replaceWith(viewer);
+          viewport.appendChild(diagram);
+          viewer.append(viewport, controls);
+
+          const minScale = 1;
+          const maxScale = 3;
+          const scaleStep = 0.25;
+          let scale = 1;
+          let offsetX = 0;
+          let offsetY = 0;
+          let dragging = false;
+          let pointerStartX = 0;
+          let pointerStartY = 0;
+          let offsetStartX = 0;
+          let offsetStartY = 0;
+
+          const updateView = () => {
+            if (scale === 1) {
+              offsetX = 0;
+              offsetY = 0;
+            }
+            svg.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
+            viewport.classList.toggle("is-zoomed", scale > 1);
+            zoomIn.disabled = scale >= maxScale;
+            zoomOut.disabled = scale <= minScale;
+            reset.disabled = scale === 1 && offsetX === 0 && offsetY === 0;
+            status.textContent = `${Math.round(scale * 100)}%`;
+          };
+
+          const setScale = (nextScale: number) => {
+            scale = Math.min(maxScale, Math.max(minScale, nextScale));
+            updateView();
+          };
+
+          zoomIn.addEventListener("click", () => setScale(scale + scaleStep));
+          zoomOut.addEventListener("click", () => setScale(scale - scaleStep));
+          reset.addEventListener("click", () => {
+            scale = 1;
+            offsetX = 0;
+            offsetY = 0;
+            updateView();
+          });
+
+          viewport.addEventListener(
+            "wheel",
+            (event) => {
+              if (!event.ctrlKey && !event.metaKey) return;
+              event.preventDefault();
+              setScale(scale + (event.deltaY < 0 ? scaleStep : -scaleStep));
+            },
+            { passive: false },
+          );
+
+          viewport.addEventListener("pointerdown", (event) => {
+            if (scale <= 1) return;
+            dragging = true;
+            pointerStartX = event.clientX;
+            pointerStartY = event.clientY;
+            offsetStartX = offsetX;
+            offsetStartY = offsetY;
+            viewport.setPointerCapture(event.pointerId);
+            viewport.classList.add("is-dragging");
+          });
+
+          viewport.addEventListener("pointermove", (event) => {
+            if (!dragging) return;
+            offsetX = offsetStartX + event.clientX - pointerStartX;
+            offsetY = offsetStartY + event.clientY - pointerStartY;
+            updateView();
+          });
+
+          const stopDragging = (event: PointerEvent) => {
+            if (!dragging) return;
+            dragging = false;
+            viewport.releasePointerCapture(event.pointerId);
+            viewport.classList.remove("is-dragging");
+          };
+          viewport.addEventListener("pointerup", stopDragging);
+          viewport.addEventListener("pointercancel", stopDragging);
+
+          viewport.addEventListener("keydown", (event) => {
+            const panStep = 24;
+            if (event.key === "+" || event.key === "=") setScale(scale + scaleStep);
+            else if (event.key === "-") setScale(scale - scaleStep);
+            else if (event.key === "0") {
+              scale = 1;
+              offsetX = 0;
+              offsetY = 0;
+              updateView();
+            } else if (scale > 1 && event.key === "ArrowLeft") offsetX += panStep;
+            else if (scale > 1 && event.key === "ArrowRight") offsetX -= panStep;
+            else if (scale > 1 && event.key === "ArrowUp") offsetY += panStep;
+            else if (scale > 1 && event.key === "ArrowDown") offsetY -= panStep;
+            else return;
+
+            event.preventDefault();
+            updateView();
+          });
+
+          updateView();
+        });
       };
 
       void renderMermaidDiagrams();
