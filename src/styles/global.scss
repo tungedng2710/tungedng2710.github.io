@@ -1186,6 +1186,16 @@ a.language-switcher__option:hover {
   margin-bottom: 1.45rem;
 }
 
+.post-content strong,
+.post-content b {
+  color: var(--slate-dark);
+}
+
+.post-content a strong,
+.post-content a b {
+  color: inherit;
+}
+
 .post-content .katex-display {
   max-width: 100%;
   margin: 1.75rem 0;
