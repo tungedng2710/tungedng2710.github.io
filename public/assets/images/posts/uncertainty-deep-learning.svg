@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Uncertainty in deep learning</title>
+  <desc id="desc">Several model predictions diverge away from observed data, forming a widening uncertainty band.</desc>
+  <rect width="1200" height="675" fill="#e3dacc"/>
+  <rect x="62" y="62" width="1076" height="551" rx="30" fill="#faf9f5" stroke="#cccbc8" stroke-width="3"/>
+  <path d="M150 515 C280 466 346 367 456 351 C576 333 644 426 750 350 C858 272 917 177 1050 145 L1050 470 C913 447 860 429 750 446 C631 464 571 418 456 429 C342 440 268 515 150 547 Z" fill="#f5e3c7"/>
+  <path d="M150 528 C284 480 342 390 456 375 C571 360 646 420 750 382 C862 341 929 260 1050 244" fill="none" stroke="#d97757" stroke-width="8" stroke-linecap="round"/>
+  <path d="M150 520 C276 474 348 382 456 368 C574 353 647 407 750 364 C858 319 927 214 1050 174" fill="none" stroke="#141413" stroke-width="4" stroke-linecap="round" opacity=".82"/>
+  <path d="M150 536 C282 488 342 400 456 383 C574 366 646 438 750 402 C861 364 929 307 1050 322" fill="none" stroke="#3d3d3a" stroke-width="4" stroke-linecap="round" opacity=".68"/>
+  <path d="M150 526 C280 481 345 391 456 376 C574 361 646 421 750 380 C860 336 929 247 1050 247" fill="none" stroke="#87867f" stroke-width="4" stroke-linecap="round" stroke-dasharray="13 13"/>
+  <g fill="#141413" stroke="#faf9f5" stroke-width="5">
+    <circle cx="181" cy="512" r="10"/><circle cx="230" cy="491" r="10"/><circle cx="281" cy="456" r="10"/>
+    <circle cx="335" cy="412" r="10"/><circle cx="391" cy="383" r="10"/><circle cx="447" cy="376" r="10"/>
+    <circle cx="505" cy="379" r="10"/><circle cx="564" cy="395" r="10"/><circle cx="621" cy="410" r="10"/>
+  </g>
+  <text x="112" y="130" fill="#141413" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="600" letter-spacing="2">PREDICTION</text>
+  <text x="827" y="558" fill="#87867f" font-family="IBM Plex Mono, monospace" font-size="22">less data → more uncertainty</text>
+</svg>
