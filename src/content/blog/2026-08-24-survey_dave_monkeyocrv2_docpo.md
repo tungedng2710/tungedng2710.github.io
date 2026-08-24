@@ -14,9 +14,7 @@ authorUrl: https://github.com/tungedng2710
 lang: en
 ---
 
-# DAVE, MonkeyOCRv2, and DocPO for Document VLM Training
-
-## Executive summary
+# Executive summary
 
 DAVE, MonkeyOCRv2, and DocPO address different stages of a document vision-language model (VLM) lifecycle rather than competing as three interchangeable training recipes.
 
@@ -38,7 +36,7 @@ flowchart TD
 
 MonkeyOCRv2 provides an alternative or additional bridge between the first two steps: it jointly teaches visual fidelity and text generation before the encoder is connected to the final LLM. DocPO belongs at the end; it is neither an encoder pretraining method nor a substitute for alignment and SFT.
 
-## 1. Scope and terminology
+# 1. Scope and terminology
 
 A conventional document VLM contains:
 
@@ -55,17 +53,17 @@ This survey distinguishes four training phases:
 
 DAVE emphasizes phases 1 and 2. MonkeyOCRv2 combines visual reconstruction and autoregressive textual supervision before using the encoder in downstream systems. DocPO specializes phase 4.
 
-## 2. DAVE
+# 2. DAVE
 
 **Paper:** [DAVE: A VLM Vision Encoder for Document Understanding and Web Agents](https://arxiv.org/abs/2512.17221)
 
-### 2.1 Motivation
+## 2.1 Motivation
 
 General-purpose encoders such as SigLIP or DINO are largely trained on natural images. Their high-level semantic features are useful, but they are not optimized for the fine spatial structure of documents, charts, web pages, and user interfaces. DAVE therefore builds a specialist encoder while retaining access to a generalist encoder's semantic representation.
 
 The paper also identifies a practical compatibility problem: an encoder trained with one language decoder can become tightly coupled to that decoder and transfer poorly to another. DAVE explicitly trains with several decoder families and merges the resulting encoders.
 
-### 2.2 Stage 1: self-supervised document MAE
+## 2.2 Stage 1: self-supervised document MAE
 
 DAVE first trains a ViT-L/16 encoder from scratch using Masked Autoencoding. With masked patch set \(\mathcal M\), it reconstructs the raw pixel values of the hidden patches:
 
@@ -95,7 +93,7 @@ Key Stage-1 settings reported in the paper are:
 
 After this stage, the lightweight MAE decoder is discarded and the encoder is retained.
 
-### 2.3 Stage 2: supervised autoregressive pretraining
+## 2.3 Stage 2: supervised autoregressive pretraining
 
 The MAE encoder is inserted into a VLM:
 
@@ -113,7 +111,7 @@ The authors train encoder instances with three different LLMs:
 
 Supervised pretraining uses a maximum sequence length of 20K, learning rate \(3\times10^{-5}\), one epoch, and AnyRes-style 384-pixel tiling.
 
-### 2.4 Generalist feature ensemble
+## 2.4 Generalist feature ensemble
 
 DAVE concatenates features from two encoders:
 
@@ -131,7 +129,7 @@ where the generalist branch is a frozen SigLIP2 encoder and the specialist branc
 
 The trade-off is that the final visual front end depends on an external generalist encoder and produces more visual features than a single-encoder design.
 
-### 2.5 Multi-decoder weight merging
+## 2.5 Multi-decoder weight merging
 
 If \(\phi_1,\ldots,\phi_n\) are encoder instances aligned with different text decoders, DAVE constructs merged weights:
 
@@ -146,7 +144,7 @@ The original encoder parameters remain frozen while the merge coefficients are l
 
 This part is valuable when the vision encoder must later be tested with several LLMs. It is less valuable when the production model has one fixed decoder and training multiple full encoder–decoder combinations is too expensive.
 
-### 2.6 Evidence, strengths, and limitations
+## 2.6 Evidence, strengths, and limitations
 
 The paper reports that DAVE improves the average performance over SigLIP2 by 10.5% across its document/web evaluation and improves Mind2Web agent performance by about 5% over the strongest encoder baseline. Its most convincing contribution is the demonstration that domain-specific unlabeled pretraining produces visual representations that transfer beyond pure OCR.
 
@@ -166,17 +164,17 @@ Limitations:
 - Multi-decoder training and merging increase experimental cost.
 - The MAE representation still requires supervised visual-language training before it is useful in a VLM.
 
-## 3. MonkeyOCRv2
+# 3. MonkeyOCRv2
 
 **Paper:** [MonkeyOCRv2: A Visual-Text Foundation Model for Document AI](https://arxiv.org/abs/2607.11562)
 
-### 3.1 Motivation
+## 3.1 Motivation
 
 MonkeyOCRv2 argues that document encoders must preserve character-level evidence. In natural-image recognition, small variations in texture or local appearance are often irrelevant. In documents, a decimal point, stroke, superscript, or table border can change the meaning completely.
 
 Autoregressive text-only pretraining is also insufficient: a decoder can exploit language context to guess visually unclear characters. MonkeyOCRv2 combines text generation with image reconstruction so that visual tokens retain both semantic content and the underlying glyph evidence.
 
-### 3.2 Data engine
+## 3.2 Data engine
 
 MonkeyDoc v2 contains 113M samples across 17 languages, including Vietnamese:
 
@@ -195,7 +193,7 @@ Synthetic data are generated by rendering multilingual corpora, rare Unicode cha
 - Mask all detected regions; reject the page if a document VLM can still read residual text, indicating missed layout regions.
 - Concatenate content in annotated reading order and use an LLM to reject inconsistent or incorrectly ordered pages.
 
-### 3.3 Dual-objective encoder pretraining
+## 3.3 Dual-objective encoder pretraining
 
 The pretraining system contains a vision encoder \(E_v\), vision decoder \(D_v\), and autoregressive text decoder \(D_t\):
 
@@ -235,7 +233,7 @@ $$
 
 where \(\mathcal L_{\text{struct}}\) compares Sobel-derived edge maps and differentiable distance-to-edge maps. The reported coefficients are \(\alpha=0.5\), \(\beta=0.25\), and \(\lambda=1\). Most experiments use MSE-only reconstruction; the stronger edge-aware variant is evaluated in the controlled document-understanding experiment.
 
-### 3.4 Encoder family and training
+## 3.4 Encoder family and training
 
 | Variant | Backbone | Parameters | Intended role |
 |---|---|---:|---|
@@ -247,7 +245,7 @@ The encoders are trained from scratch on 64 A800 GPUs with a peak learning rate 
 
 After pretraining, both the vision decoder and the temporary text decoder are discarded. Only the vision encoder is transferred.
 
-### 3.5 Downstream VLM construction
+## 3.5 Downstream VLM construction
 
 For document parsing, the retained encoder is connected through an MLP projector to Qwen3-0.6B:
 
@@ -264,7 +262,7 @@ The parsing system first generates layout categories, bounding boxes, and readin
 
 For document-understanding experiments, the paper instead pairs frozen encoders with Qwen3-1.7B through an MLP projector.
 
-### 3.6 Evidence, strengths, and limitations
+## 3.6 Evidence, strengths, and limitations
 
 The most important ablation is the controlled comparison where the downstream LLM, data, training, and decoding remain fixed. The average document-understanding score increases from 50.7 with text-generation-only pretraining to 51.7 with MSE reconstruction and 55.9 with edge/distance-aware reconstruction for the Small encoder. The Base edge-aware model reaches 57.2.
 
@@ -289,11 +287,11 @@ Limitations:
 - Crop-then-recognize inference improves fidelity but adds latency.
 - Page-level structure receives far fewer samples than element-level recognition.
 
-## 4. DocPO
+# 4. DocPO
 
 **Paper:** [DocPO: Advancing Document Policy Optimization via Tailored Step-Aware Rewards](https://arxiv.org/abs/2608.00536)
 
-### 4.1 Motivation
+## 4.1 Motivation
 
 DocPO starts from an already SFT-trained document VLM. It addresses two problems in applying GRPO to document parsing:
 
@@ -302,7 +300,7 @@ DocPO starts from an already SFT-trained document VLM. It addresses two problems
 
 DocPO keeps the Qwen2.5-VL architecture unchanged and operates entirely at the reward and optimization level.
 
-### 4.2 Element-specific base rewards
+## 4.2 Element-specific base rewards
 
 All base rewards are normalized to \([0,1]\).
 
@@ -341,7 +339,7 @@ $$
 
 Malformed LaTeX receives zero through \(v_{\text{syn}}\). Semantic equivalence is judged zero-shot by Qwen2.5-7B-Instruct, while the structural component is normalized edit similarity.
 
-### 4.3 Step-Aware Annealing
+## 4.3 Step-Aware Annealing
 
 DocPO's central contribution is a power-law transformation of the base reward \(M\):
 
@@ -376,7 +374,7 @@ Because the transformation is monotonic, it preserves ranking. Its purpose is to
 
 A Dynamic Dispersion Controller computes the rolling coefficient of variation separately for text, table, and formula rewards. It changes the annealing time constant so that the sharpening rate adapts to recent task-specific reward dispersion.
 
-### 4.4 Training recipe
+## 4.4 Training recipe
 
 The paper uses:
 
@@ -396,7 +394,7 @@ The paper uses:
 
 Before RL, the authors remove examples for which all eight rollouts are perfect and examples for which all eight receive zero. Both groups have no useful reward variance for GRPO. Training focuses on examples where the current policy sometimes succeeds and sometimes fails.
 
-### 4.5 Evidence, strengths, and limitations
+## 4.5 Evidence, strengths, and limitations
 
 | Element | SFT baseline | Intermediate RL | Final DocPO |
 |---|---:|---:|---:|
@@ -423,7 +421,7 @@ Limitations:
 - RL is unlikely to help when all sampled answers are uniformly incorrect.
 - The self-constructed DocElemHard benchmark requires independent external validation.
 
-## 5. Direct comparison
+# 5. Direct comparison
 
 | Dimension | DAVE | MonkeyOCRv2 | DocPO |
 |---|---|---|---|
@@ -438,7 +436,7 @@ Limitations:
 | Main cost | Large MAE and multi-decoder training | Massive labeled/pseudo-labeled corpus | Multiple rollouts and reward computation |
 | Best evaluation level | Encoder transfer and VLM tasks | Encoder transfer, parsing, and understanding | Element parsing after SFT |
 
-### 5.1 DAVE versus MonkeyOCRv2
+## 5.1 DAVE versus MonkeyOCRv2
 
 These methods share the goal of building a document-native encoder, but their supervision differs:
 
@@ -455,11 +453,11 @@ DAVE-style MAE initialization
 -> final LLM alignment and structured SFT
 ```
 
-### 5.2 Encoder pretraining versus DocPO
+## 5.2 Encoder pretraining versus DocPO
 
 DocPO is complementary to both encoder methods. Better vision features reduce perceptual errors; DocPO improves how the complete autoregressive model chooses and structures its outputs. DocPO cannot recover visual details that the encoder discarded, and encoder pretraining alone cannot optimize sequence-level TEDS, LaTeX validity, or output formatting.
 
-## 6. Recommended recipe for the current project
+# 6. Recommended recipe for the current project
 
 Assumed current assets:
 
@@ -471,7 +469,7 @@ Assumed current assets:
 
 The most practical strategy is not to restart all three papers literally.
 
-### Stage A — preserve the existing MAE checkpoint
+## Stage A — preserve the existing MAE checkpoint
 
 Treat the current encoder as the DAVE Stage-1 result. Before additional training, evaluate it with frozen linear or lightweight heads on:
 
@@ -483,7 +481,7 @@ Treat the current encoder as the DAVE Stage-1 result. Before additional training
 
 Compare against the original general-purpose encoder under identical downstream training.
 
-### Stage B — add MonkeyOCRv2-style visual-text continuation
+## Stage B — add MonkeyOCRv2-style visual-text continuation
 
 Create a mixture of full pages and fine-grained crops from the 100K verified annotations and pseudo-labeled portion of the remaining corpus. Continue training the MAE encoder with:
 
@@ -499,7 +497,7 @@ $$
 
 Recommended targets include OCR transcription, table HTML, formula LaTeX, element class plus bounding box, reading order, and page Markdown. This stage should begin with a low encoder learning rate because the encoder is already pretrained; the exact schedule requires ablation because MonkeyOCRv2 trains from scratch.
 
-### Stage C — align with the final LLM
+## Stage C — align with the final LLM
 
 Use the production decoder rather than reproducing DAVE's three-decoder merge initially:
 
@@ -509,7 +507,7 @@ Use the production decoder rather than reproducing DAVE's three-decoder merge in
 
 Multi-decoder merging should be a separate research branch only if encoder portability across several LLM families is an explicit goal.
 
-### Stage D — structured SFT
+## Stage D — structured SFT
 
 Train a balanced instruction mixture covering:
 
@@ -522,7 +520,7 @@ Train a balanced instruction mixture covering:
 - Schema-based information extraction
 - General multimodal instructions to limit catastrophic forgetting
 
-### Stage E — DocPO on informative hard cases
+## Stage E — DocPO on informative hard cases
 
 After SFT produces valid outputs reliably:
 
@@ -548,7 +546,7 @@ $$
 
 This page-level extension is a proposed adaptation, not part of the original DocPO method.
 
-## 7. Minimum experiment matrix
+# 7. Minimum experiment matrix
 
 To identify which component creates the gain, avoid comparing only the final hybrid against a baseline.
 
@@ -565,7 +563,7 @@ To identify which component creates the gain, avoid comparing only the final hyb
 
 Use identical downstream data, resolution, projector, LLM, decoding, and evaluation for E0–E4. This is essential for attributing gains to the encoder rather than to changes in data or decoder capacity.
 
-## 8. Evaluation framework
+# 8. Evaluation framework
 
 | Capability | Suggested metrics |
 |---|---|
@@ -583,7 +581,7 @@ Use identical downstream data, resolution, projector, LLM, decoding, and evaluat
 
 For model selection, prioritize held-out in-domain documents and difficult out-of-domain subsets rather than optimizing only the same metrics used as RL rewards.
 
-## 9. Final assessment
+# 9. Final assessment
 
 - **DAVE** provides the best foundation when unlabeled page-scale data are abundant. Its raw-pixel MAE formulation is directly relevant to document images and has already influenced the current encoder training direction.
 - **MonkeyOCRv2** contributes the most valuable next experiment: add autoregressive textual supervision while retaining pixel/stroke reconstruction so the encoder learns meaning without discarding visual evidence.
@@ -602,7 +600,7 @@ existing DAVE-style MAE checkpoint
 
 This combines the strongest idea from each paper while avoiding the cost of reproducing all three systems from scratch.
 
-## References
+# References
 
 1. Huang, B. et al. [DAVE: A VLM Vision Encoder for Document Understanding and Web Agents](https://arxiv.org/abs/2512.17221). arXiv:2512.17221, 2025.
 2. Liu, Y. et al. [MonkeyOCRv2: A Visual-Text Foundation Model for Document AI](https://arxiv.org/abs/2607.11562). arXiv:2607.11562, 2026.
