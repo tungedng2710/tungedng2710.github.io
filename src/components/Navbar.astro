@@ -2,7 +2,7 @@
 import { site, withBase } from "../config";
 
 interface Props {
-  active?: "home" | "blog" | "project";
+  active?: "home" | "blog" | "project" | "imagine";
 }
 
 const { active } = Astro.props;
@@ -43,6 +43,12 @@ const { active } = Astro.props;
           href={withBase("/project")}
         >
           Projects
+        </a>
+        <a
+          class:list={["navbar-item", { "is-active": active === "imagine" }]}
+          href={withBase("/imagine")}
+        >
+          Imagine
         </a>
         <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
           <svg class="theme-toggle__sun" aria-hidden="true" viewBox="0 0 24 24">

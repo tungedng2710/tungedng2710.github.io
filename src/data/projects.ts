@@ -13,9 +13,9 @@ export const projects = [
     description: "Medical chatbot for dMOM Project",
   },
   {
-    name: "TonAI FreeArt",
+    name: "TonAI Imagine",
     image: "/assets/images/logo.png",
-    link: "https://github.com/tungedng2710/TonAI-FreeArt",
+    link: "https://github.com/tungedng2710/TonAI-Imagine",
     description: "A fast and efficient AI-powered image generation API",
   },
   {
