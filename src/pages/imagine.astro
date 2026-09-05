@@ -11,11 +11,7 @@ const imagineUrl = "https://7863--main--frontier--idp-lab.coder.vts-ai.space/";
 >
   <Navbar active="imagine" />
   <main class="imagine-page">
-    <div class="imagine-frame-wrap" data-imagine-frame>
-      <div class="imagine-loading" role="status">
-        <span class="imagine-loading__spinner" aria-hidden="true"></span>
-        <span>Loading Imagine…</span>
-      </div>
+    <div class="imagine-frame-wrap">
       <iframe
         class="imagine-frame"
         src={imagineUrl}
@@ -26,13 +22,6 @@ const imagineUrl = "https://7863--main--frontier--idp-lab.coder.vts-ai.space/";
     </div>
   </main>
 </BaseLayout>
-
-<script>
-  document.querySelectorAll<HTMLElement>("[data-imagine-frame]").forEach((wrapper) => {
-    const frame = wrapper.querySelector<HTMLIFrameElement>("iframe");
-    frame?.addEventListener("load", () => wrapper.classList.add("is-loaded"));
-  });
-</script>
 
 <style>
   .imagine-page {
@@ -45,55 +34,16 @@ const imagineUrl = "https://7863--main--frontier--idp-lab.coder.vts-ai.space/";
   }
 
   .imagine-frame-wrap {
-    position: relative;
     min-height: 0;
     flex: 1;
     background: var(--ivory-light);
   }
 
   .imagine-frame {
-    position: relative;
-    z-index: 1;
     display: block;
     width: 100%;
     height: 100%;
     border: 0;
     background: #fff;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
-
-  .imagine-frame-wrap.is-loaded .imagine-frame {
-    opacity: 1;
-  }
-
-  .imagine-loading {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-    color: var(--cloud-dark);
-    font-size: 0.72rem;
-  }
-
-  .imagine-loading__spinner {
-    width: 18px;
-    height: 18px;
-    border: 2px solid var(--stone);
-    border-top-color: var(--clay-deep);
-    border-radius: 50%;
-    animation: imagine-spin 0.75s linear infinite;
-  }
-
-  @keyframes imagine-spin {
-    to { transform: rotate(360deg); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .imagine-loading__spinner {
-      animation: none;
-    }
   }
 </style>
