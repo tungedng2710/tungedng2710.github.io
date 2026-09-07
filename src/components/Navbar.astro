@@ -96,12 +96,30 @@ const { active } = Astro.props;
   });
 
   document.querySelectorAll<HTMLButtonElement>(".navbar-burger").forEach((burger) => {
+    const targetId = burger.dataset.target;
+    const target = targetId ? document.getElementById(targetId) : null;
+
+    const setMenuOpen = (open: boolean) => {
+      burger.classList.toggle("is-active", open);
+      target?.classList.toggle("is-active", open);
+      burger.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("is-menu-open", open);
+    };
+
     burger.addEventListener("click", () => {
-      const targetId = burger.dataset.target;
-      const target = targetId ? document.getElementById(targetId) : null;
-      const isOpen = burger.classList.toggle("is-active");
-      target?.classList.toggle("is-active", isOpen);
-      burger.setAttribute("aria-expanded", String(isOpen));
+      setMenuOpen(burger.getAttribute("aria-expanded") !== "true");
+    });
+
+    target?.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setMenuOpen(false));
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    });
+
+    window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
+      if (event.matches) setMenuOpen(false);
     });
   });
 </script>

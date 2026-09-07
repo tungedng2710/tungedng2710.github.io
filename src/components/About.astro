@@ -209,5 +209,33 @@ const authorImage = site.author.image.startsWith("/")
     .profile-caption {
       max-width: 100%;
     }
+
+    .profile-caption {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .about-card {
+      padding: 1.5rem;
+    }
+
+    .contact-strip {
+      margin: 3.5rem 0 0 !important;
+      padding: 2rem 1.25rem;
+    }
+
+    h3 {
+      font-size: clamp(2rem, 10vw, 3rem);
+    }
+  }
+
+  @media (max-width: 380px) {
+    .about-actions {
+      flex-direction: column;
+    }
+
+    .about-actions .button {
+      width: 100%;
+    }
   }
 </style>
