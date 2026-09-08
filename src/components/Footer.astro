@@ -5,7 +5,10 @@ import { site, withBase } from "../config";
 <footer id="footer">
   <div class="footer-inner">
     <a class="footer-brand" href={withBase("/")}>
-      <img class="footer-logo" src={withBase("/assets/images/logo.png")} alt={`${site.title} logo`} />
+      <span class="theme-logo" aria-hidden="true">
+        <img class="footer-logo theme-logo__light" src={withBase("/assets/images/logo_black.png")} alt="" />
+        <img class="footer-logo theme-logo__dark" src={withBase("/assets/images/logo_white.png")} alt="" />
+      </span>
       <span>
         <strong>{site.title}</strong>
         <small>Independent AI research journal</small>

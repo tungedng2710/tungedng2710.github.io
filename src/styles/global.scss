@@ -197,6 +197,20 @@ html.has-navbar-fixed-top {
   object-fit: cover;
 }
 
+.theme-logo {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.theme-logo__dark,
+:root[data-theme="dark"] .theme-logo__light {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-logo__dark {
+  display: block;
+}
+
 .brand-dot {
   color: var(--cloud-dark);
   font-family: var(--font-serif);
