@@ -16,7 +16,7 @@ FILES
 - svg/logo-icon-white.svg      Square padded reversed icon master, transparent background
 - png/black/*                  Transparent black PNG exports from 16 to 2048 px
 - png/white/*                  Transparent white PNG exports from 16 to 2048 px
-- icons/favicon.svg            Transparent favicon vector
+- icons/favicon.svg            Rounded white favicon vector
 - icons/favicon.ico            Multi-size favicon
 - icons/favicon-*.png          Common favicon / touch icon sizes
 - icons/app-icon-slate.*       Optional white-on-slate app icon
