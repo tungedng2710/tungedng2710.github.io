@@ -74,7 +74,8 @@ html.has-navbar-fixed-top {
 }
 
 body {
-  min-height: 100vh;
+  min-height: calc(100vh - 76px);
+  min-height: calc(100dvh - 76px);
   margin: 0;
   overflow-x: clip;
   background: var(--ivory-medium);
