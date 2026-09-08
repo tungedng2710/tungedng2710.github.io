@@ -92,7 +92,23 @@ const defaultAlternate = alternates.find((alternate) => alternate.lang === "en")
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <link rel="icon" href={withBase("/assets/images/logo.png")} type="image/png" />
+    <link
+      rel="icon"
+      href={withBase("/assets/brand_assets/icons/favicon.ico")}
+      sizes="16x16 32x32 48x48 64x64"
+    />
+    <link
+      rel="icon"
+      href={withBase("/assets/brand_assets/icons/favicon.svg")}
+      type="image/svg+xml"
+      media="(prefers-color-scheme: light)"
+    />
+    <link
+      rel="icon"
+      href={withBase("/assets/brand_assets/icons/favicon-reversed.svg")}
+      type="image/svg+xml"
+      media="(prefers-color-scheme: dark)"
+    />
     <script
       is:inline
       async
