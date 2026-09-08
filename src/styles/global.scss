@@ -250,26 +250,6 @@ html.has-navbar-fixed-top {
   transform: scaleX(1);
 }
 
-#navbar .navbar-contact {
-  display: inline-flex;
-  min-height: 42px;
-  margin-left: 0.65rem;
-  padding: 0 1.05rem;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  border-radius: 8px;
-  background: var(--slate-dark);
-  color: var(--ivory-light);
-  font-size: 0.72rem;
-  font-weight: 500;
-  transition: background 0.2s ease;
-}
-
-#navbar .navbar-contact:hover {
-  background: var(--clay-deep);
-}
-
 .theme-toggle {
   display: inline-grid;
   width: 38px;
@@ -1604,11 +1584,6 @@ a.language-switcher__option:hover {
 
   #navbar a.navbar-item::after {
     display: none;
-  }
-
-  #navbar .navbar-contact {
-    min-height: 48px;
-    margin: 0.5rem 0 0;
   }
 
   #navbar .theme-toggle {
