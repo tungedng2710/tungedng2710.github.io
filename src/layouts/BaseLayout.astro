@@ -10,6 +10,7 @@ interface Props {
   lang?: string;
   type?: "website" | "article";
   alternates?: Array<{ lang: string; href: string }>;
+  bodyClass?: string;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   lang = "en",
   type = "website",
   alternates = [],
+  bodyClass,
 } = Astro.props;
 const pageTitle = title ? `${site.title} | ${title}` : site.title;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -121,7 +123,7 @@ const defaultAlternate = alternates.find((alternate) => alternate.lang === "en")
       gtag("config", analyticsId);
     </script>
   </head>
-  <body>
+  <body class={bodyClass}>
     <slot />
     <script>
       const reveals = document.querySelectorAll<HTMLElement>("[data-reveal]");

@@ -105,6 +105,7 @@ const projects = [
 <BaseLayout
   title="Curriculum Vitae"
   description="The curriculum vitae of Tung Nguyen, an AI researcher and engineer specializing in computer vision and generative AI."
+  bodyClass="resume-body"
 >
   <Navbar />
 
@@ -140,16 +141,14 @@ const projects = [
       </div>
 
       <section class="profile-statement" aria-labelledby="profile-heading" data-reveal>
-        <p class="section-number" aria-hidden="true">00</p>
-        <div>
-          <h2 id="profile-heading">Profile</h2>
-          <p>
-            AI researcher and engineer working at the intersection of computer vision,
-            generative AI, and applied mathematics. Experienced in translating research
-            into production systems, from intelligent document processing and traffic
-            analysis to retrieval-augmented generation and speech enhancement.
-          </p>
-        </div>
+        <h2 id="profile-heading">Profile</h2>
+        <p>
+          AI researcher and engineer specializing in computer vision, generative artificial
+          intelligence, and applied mathematics. Research and engineering work focuses on
+          translating rigorous computational methods into reliable, production-ready systems,
+          with experience in intelligent document processing, traffic analysis,
+          retrieval-augmented generation, and speech enhancement.
+        </p>
       </section>
 
       <div class="resume-grid">
@@ -322,7 +321,12 @@ const projects = [
   .resume-page {
     min-height: calc(100dvh - 76px);
     padding: clamp(3.5rem, 7vw, 7rem) 1.5rem clamp(4.5rem, 8vw, 7rem);
-    background: linear-gradient(90deg, transparent calc(50% - 0.5px), color-mix(in srgb, var(--stone) 35%, transparent) 50%, transparent calc(50% + 0.5px)), var(--ivory-light);
+    background: var(--ivory-light);
+  }
+
+  :global(.resume-body),
+  :global(.resume-body *) {
+    font-family: var(--font-serif);
   }
 
   .resume-document { width: min(calc(100% - 1rem), 1180px); }
@@ -339,7 +343,6 @@ const projects = [
   .resume-kicker, .section-number, .item-period, .employment-type, .project-index {
     margin: 0;
     color: var(--cloud-dark);
-    font-family: var(--font-mono);
     font-size: 0.68rem;
     font-weight: 500;
     letter-spacing: 0.06em;
@@ -352,11 +355,10 @@ const projects = [
   h1 {
     margin: 0;
     color: var(--slate-dark);
-    font-family: var(--font-sans);
     font-size: clamp(4.25rem, 10vw, 8.75rem);
-    font-weight: 600;
-    letter-spacing: -0.075em;
-    line-height: 0.77;
+    font-weight: 500;
+    letter-spacing: -0.055em;
+    line-height: 0.82;
   }
 
   h1 em { font-family: var(--font-serif); font-weight: 400; }
@@ -405,31 +407,31 @@ const projects = [
   .identity-strip a:hover { color: var(--clay-deep); }
 
   .profile-statement {
-    display: grid;
-    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.5fr);
-    gap: clamp(2rem, 6vw, 7rem);
-    padding: clamp(3.5rem, 7vw, 6.5rem) 0;
-    border-bottom: 1px solid var(--slate-dark);
+    display: block;
+    width: 100%;
+    margin: 1rem 0;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border: 1px solid var(--stone);
   }
 
-  .profile-statement > .section-number { padding-top: 0.4rem; }
-  .profile-statement h2, .section-heading h2 { margin: 0; color: var(--slate-dark); font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.045em; }
-  .profile-statement h2 { margin-bottom: 1.35rem; font-family: var(--font-serif); font-size: 1rem; font-weight: 500; letter-spacing: 0; }
+  .profile-statement h2, .section-heading h2 { margin: 0; color: var(--slate-dark); font-weight: 500; letter-spacing: -0.035em; }
+  .profile-statement h2 { margin-bottom: 0.6rem; font-size: clamp(1.4rem, 2vw, 1.75rem); line-height: 1.1; }
 
-  .profile-statement div > p {
-    max-width: 800px;
+  .profile-statement > p {
+    width: 100%;
+    max-width: 76ch;
     margin: 0;
     color: var(--slate-dark);
     font-family: var(--font-serif);
-    font-size: clamp(1.65rem, 3.3vw, 2.55rem);
-    line-height: 1.24;
+    font-size: clamp(1.05rem, 1.55vw, 1.3rem);
+    line-height: 1.55;
   }
 
-  .resume-grid { display: grid; grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.5fr); gap: clamp(2rem, 6vw, 7rem); }
-  .resume-sidebar, .resume-main { min-width: 0; }
-  .resume-section { padding: clamp(3.25rem, 6vw, 5.5rem) 0; border-bottom: 1px solid var(--stone); }
-  .resume-sidebar .resume-section:last-child, .resume-main .resume-section:last-child { border-bottom: 0; }
-  .section-heading { display: flex; margin-bottom: clamp(2rem, 4vw, 3.25rem); align-items: baseline; gap: 1rem; }
+  .resume-grid { display: grid; grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.5fr); gap: clamp(1rem, 2vw, 1.5rem); align-items: start; }
+  .resume-sidebar, .resume-main { display: grid; min-width: 0; gap: clamp(1rem, 2vw, 1.5rem); }
+  .resume-section { padding: clamp(1.5rem, 3vw, 2.5rem); border: 1px solid var(--stone); }
+  .section-heading { display: flex; margin-bottom: clamp(1.25rem, 2vw, 1.75rem); align-items: baseline; gap: 0.7rem; }
+  .section-heading .section-number { flex: 0 0 auto; color: var(--slate-medium); font-size: clamp(1.35rem, 2.2vw, 1.9rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
   .section-heading h2 { font-size: clamp(1.65rem, 2.5vw, 2.25rem); line-height: 1; }
   .sidebar-list, .compact-list, .experience-list, .project-list { display: grid; }
 
@@ -444,13 +446,13 @@ const projects = [
   .expertise-list { margin: 0; }
   .expertise-list > div { padding: 1rem 0; border-top: 1px solid var(--stone); }
   .expertise-list > div:first-child { padding-top: 0; border-top: 0; }
-  .expertise-list dt { margin-bottom: 0.45rem; color: var(--cloud-dark); font-family: var(--font-mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .expertise-list dt { margin-bottom: 0.45rem; color: var(--cloud-dark); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
   .expertise-list dd { margin: 0; color: var(--slate-medium); font-family: var(--font-serif); font-size: 1rem; line-height: 1.5; }
 
   .credential-list { margin: 0; padding: 0; list-style: none; }
   .credential-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--stone); color: var(--slate-medium); font-size: 0.78rem; line-height: 1.4; }
   .credential-list li:first-child { padding-top: 0; border-top: 0; }
-  .credential-list time { color: var(--cloud-dark); font-family: var(--font-mono); font-size: 0.65rem; }
+  .credential-list time { color: var(--cloud-dark); font-size: 0.65rem; }
 
   .experience-item { display: grid; grid-template-columns: minmax(125px, 0.36fr) minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 2.75rem); padding: 2.25rem 0; border-top: 1px solid var(--stone); }
   .experience-item:first-child { padding-top: 0; border-top: 0; }
@@ -465,7 +467,7 @@ const projects = [
   .publication-list { margin: 0; padding: 0; counter-reset: publications; list-style: none; }
   .publication-list li { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding: 1.5rem 0 1.5rem 3rem; align-items: start; border-top: 1px solid var(--stone); counter-increment: publications; }
   .publication-list li:first-child { padding-top: 0; border-top: 0; }
-  .publication-list li::before { position: absolute; top: 1.75rem; left: 0; color: var(--cloud-dark); content: "0" counter(publications); font-family: var(--font-mono); font-size: 0.65rem; }
+  .publication-list li::before { position: absolute; top: 1.75rem; left: 0; color: var(--cloud-dark); content: "0" counter(publications); font-size: 0.65rem; }
   .publication-list li:first-child::before { top: 0.25rem; }
   .publication-list h3 { font-size: 1.15rem; line-height: 1.35; }
   .publication-list p { margin: 0.45rem 0 0; color: var(--cloud-dark); font-size: 0.76rem; line-height: 1.5; }
@@ -477,16 +479,13 @@ const projects = [
   .project-item div > p { margin: 0.65rem 0 0; color: var(--slate-medium); font-size: 0.84rem; line-height: 1.65; }
   .project-item a { margin-top: 1rem; }
 
-  .resume-closing { display: flex; padding-top: 2rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--slate-dark); }
+  .resume-closing { display: flex; margin-top: clamp(1rem, 2vw, 1.5rem); padding-top: 2rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--slate-dark); }
   .resume-closing p { margin: 0; color: var(--cloud-dark); font-family: var(--font-serif); font-size: 0.95rem; font-style: italic; }
 
   @media (max-width: 900px) {
     .resume-page { background: var(--ivory-light); }
-    .profile-statement, .resume-grid { grid-template-columns: 1fr; gap: 0; }
-    .profile-statement { gap: 1rem; }
-    .resume-sidebar .resume-section:last-child { border-bottom: 1px solid var(--stone); }
-    .resume-sidebar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 3rem; }
-    .resume-sidebar .resume-section { border-bottom: 1px solid var(--stone); }
+    .resume-grid { grid-template-columns: 1fr; }
+    .resume-sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   @media (max-width: 640px) {
