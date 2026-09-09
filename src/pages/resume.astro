@@ -1,31 +1,125 @@
 ---
+import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
-import { withBase } from "../config";
+import { site, withBase } from "../config";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const resumeUrl = withBase("/resume/NguyenTung_AI_Resume.pdf");
+
+const experience = [
+  {
+    role: "AI Engineer",
+    organization: "Viettel Solutions Corporation",
+    location: "Hanoi, Vietnam",
+    period: "March 2022 — Present",
+    type: "Full-time",
+    highlights: [
+      "Conduct research in intelligent document processing, with a focus on document layout analysis, table extraction, and vision-language models.",
+      "Develop scene-change detection methods using the Segment Anything Model and large language models.",
+      "Engineer automated data-annotation workflows for computer vision projects and build reproducible MLOps pipelines.",
+      "Design and deploy a license-plate recognition pipeline with NVIDIA Triton Inference Server; develop models for traffic-violation recognition.",
+      "Research and develop speech-enhancement models for the Viettel Meeting platform.",
+    ],
+  },
+  {
+    role: "Research Consultant",
+    organization: "WorldQuant BRAIN",
+    location: "Remote",
+    period: "March 2025 — Present",
+    type: "Part-time",
+    highlights: [
+      "Research quantitative financial signals and evaluate candidate alphas through simulation on the WorldQuant BRAIN platform.",
+    ],
+  },
+  {
+    role: "AI Engineer Intern",
+    organization: "Grooo International JSC",
+    location: "Hanoi, Vietnam",
+    period: "October 2021 — March 2022",
+    type: "Part-time",
+    highlights: [
+      "Researched face-processing and object-tracking methods for a camera-monitoring system.",
+    ],
+  },
+  {
+    role: "Data Scientist Intern",
+    organization: "PIXTA Vietnam Co., Ltd.",
+    location: "Hanoi, Vietnam",
+    period: "December 2020 — June 2021",
+    type: "Part-time",
+    highlights: [
+      "Investigated facial-expression recognition, multitask learning, and face-recognition models; annotated and visualized image datasets.",
+    ],
+  },
+  {
+    role: "AI Engineer Intern",
+    organization: "Techainer JSC",
+    location: "Hanoi, Vietnam",
+    period: "August 2020 — October 2020",
+    type: "Part-time",
+    highlights: [
+      "Developed computer-vision methods for electronic know-your-customer verification using Vietnamese identity cards.",
+    ],
+  },
+];
+
+const publications = [
+  {
+    title: "VPHQA: Vietnamese Pregnancy Health Question Answering Dataset",
+    venue: "EAI INISCOM, 2025",
+    href: "https://doi.org/10.1007/978-3-032-02362-9_13",
+    label: "DOI",
+  },
+  {
+    title: "Chatbot and Reproductive Health for Minority Women",
+    venue: "AI4SDF, 2025",
+  },
+  {
+    title: "The Solution of Computer Vision for Combating COVID-19",
+    venue: "Computational Intelligence Techniques for Green Smart Cities, Springer, 2021",
+    href: "https://doi.org/10.1007/978-3-030-96429-0_9",
+    label: "DOI",
+  },
+];
+
+const projects = [
+  {
+    title: "dMOM Chatbot",
+    description:
+      "A medical question-answering system for the dMOM project, sponsored by the Department of Population, Ministry of Health. Fine-tuned a large language model, developed a retrieval-augmented generation pipeline, and built a web application.",
+  },
+  {
+    title: "AI Traffic Analysis",
+    description:
+      "An end-to-end traffic-analysis service combining vehicle detection and tracking, license-plate detection, and optical character recognition, with a web demonstration interface.",
+    href: "https://github.com/tungedng2710/AI-Traffic-Analysis",
+  },
+  {
+    title: "Vietnamese ID Card Recognition",
+    description:
+      "A document-recognition pipeline exploring object detectors for card alignment and applying trained text-detection and optical-character-recognition models.",
+  },
+];
 ---
 
 <BaseLayout
-  title="Resume"
-  description="The curriculum vitae of Tung Nguyen, AI researcher and engineer."
+  title="Curriculum Vitae"
+  description="The curriculum vitae of Tung Nguyen, an AI researcher and engineer specializing in computer vision and generative AI."
 >
   <Navbar />
+
   <main class="resume-page">
-    <section class="container resume-shell" aria-labelledby="resume-title">
-      <header class="resume-header" data-reveal>
-        <div>
-          <p class="resume-kicker">Curriculum vitae</p>
-          <h1 id="resume-title">Experience, <em>in detail.</em></h1>
-          <p class="resume-summary">
-            Education, research, and engineering work across applied mathematics,
-            computer vision, and generative AI.
-          </p>
+    <article class="container resume-document">
+      <header class="resume-masthead" data-reveal>
+        <div class="masthead-intro">
+          <p class="resume-kicker">Curriculum Vitae · 2026</p>
+          <h1>Tung <em>Nguyen</em></h1>
+          <p class="professional-title">AI Researcher &amp; Engineer</p>
         </div>
 
-        <div class="resume-actions">
+        <div class="resume-actions" aria-label="Résumé document actions">
           <a class="resume-open" href={resumeUrl} target="_blank" rel="noreferrer">
-            Open PDF <span aria-hidden="true">↗</span>
+            View PDF <span aria-hidden="true">↗</span>
           </a>
           <a
             class="button button-primary resume-download"
@@ -37,168 +131,393 @@ const resumeUrl = withBase("/resume/NguyenTung_AI_Resume.pdf");
         </div>
       </header>
 
-      <div class="resume-viewer" data-reveal style="--reveal-delay: 100ms;">
-        <object
-          data={resumeUrl}
-          type="application/pdf"
-          aria-label="Tung Nguyen's curriculum vitae"
-        >
-          <div class="resume-fallback">
-            <p>Your browser cannot display the PDF inline.</p>
-            <a href={resumeUrl} target="_blank" rel="noreferrer">Open the CV</a>
-            <span aria-hidden="true"> or </span>
-            <a href={resumeUrl} download="NguyenTung_AI_Resume.pdf">download it</a>.
-          </div>
-        </object>
+      <div class="identity-strip" data-reveal style="--reveal-delay: 60ms;">
+        <a href={`mailto:${site.email}`}>{site.email}</a>
+        <a href={site.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href={site.social.github} target="_blank" rel="noreferrer">GitHub</a>
+        <span>Hanoi, Vietnam</span>
+        <a href="tel:+84969200308">+84 969 200 308</a>
       </div>
-    </section>
+
+      <section class="profile-statement" aria-labelledby="profile-heading" data-reveal>
+        <p class="section-number" aria-hidden="true">00</p>
+        <div>
+          <h2 id="profile-heading">Profile</h2>
+          <p>
+            AI researcher and engineer working at the intersection of computer vision,
+            generative AI, and applied mathematics. Experienced in translating research
+            into production systems, from intelligent document processing and traffic
+            analysis to retrieval-augmented generation and speech enhancement.
+          </p>
+        </div>
+      </section>
+
+      <div class="resume-grid">
+        <aside class="resume-sidebar">
+          <section class="resume-section" aria-labelledby="education-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">01</p>
+              <h2 id="education-heading">Education</h2>
+            </div>
+
+            <div class="sidebar-list">
+              <article class="education-item">
+                <p class="item-period">2023 — 2025</p>
+                <h3>Master of Science</h3>
+                <p>Applied Mathematics and Informatics</p>
+                <p class="institution">Hanoi University of Science and Technology</p>
+                <p class="item-note">Excellent · CPA 3.81 / 4.00</p>
+              </article>
+
+              <article class="education-item">
+                <p class="item-period">2017 — 2022</p>
+                <h3>Engineer’s Degree</h3>
+                <p>Applied Mathematics and Informatics</p>
+                <p class="institution">Hanoi University of Science and Technology</p>
+                <p class="item-note">Very Good · CPA 3.46 / 4.00</p>
+              </article>
+
+              <article class="education-item">
+                <p class="item-period">2014 — 2017</p>
+                <h3>High School Diploma</h3>
+                <p class="institution">Chu Van An National High School</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="resume-section" aria-labelledby="expertise-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">02</p>
+              <h2 id="expertise-heading">Expertise</h2>
+            </div>
+
+            <dl class="expertise-list">
+              <div><dt>Research</dt><dd>Computer Vision, Generative AI, Reinforcement Learning</dd></div>
+              <div><dt>Languages</dt><dd>Python, C#, C/C++, MATLAB</dd></div>
+              <div><dt>Frameworks</dt><dd>PyTorch, TensorFlow, MLflow</dd></div>
+              <div><dt>Tools</dt><dd>Docker, Git, Triton, Label Studio, Roboflow, n8n, Dify, Ollama, vLLM</dd></div>
+            </dl>
+          </section>
+
+          <section class="resume-section" aria-labelledby="distinctions-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">03</p>
+              <h2 id="distinctions-heading">Distinctions</h2>
+            </div>
+
+            <div class="compact-list">
+              <article>
+                <p class="item-period">2025</p>
+                <h3>National Creative Youth Award</h3>
+                <p>Ho Chi Minh Communist Youth Union</p>
+              </article>
+              <article>
+                <p class="item-period">2020 · 2021</p>
+                <h3>Academic Scholarship</h3>
+                <p>Business partners of HUST</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="resume-section" aria-labelledby="certifications-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">04</p>
+              <h2 id="certifications-heading">Credentials</h2>
+            </div>
+
+            <ul class="credential-list">
+              <li><span>Quant Finance Explorer Program</span><time>2024</time></li>
+              <li><span>Google Advanced Data Analytics</span><time>2024</time></li>
+              <li><span>Google Project Management</span><time>2024</time></li>
+              <li><span>Google AI Essentials</span><time>2024</time></li>
+              <li><span>IELTS Academic · Overall 6.0</span><time>2023</time></li>
+            </ul>
+          </section>
+
+          <section class="resume-section" aria-labelledby="service-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">05</p>
+              <h2 id="service-heading">Academic Service</h2>
+            </div>
+
+            <div class="compact-list">
+              <article><p class="item-period">2026</p><h3>Mentor</h3><p>Viettel Digital Talent Program</p></article>
+              <article><p class="item-period">2023 — 2025</p><h3>Research Mentor</h3><p>Scientific research competitions for high-school students</p></article>
+              <article><p class="item-period">2017 — 2018</p><h3>Teaching Assistant &amp; Volunteer</h3><p>SAMI, Hanoi University of Science and Technology</p></article>
+            </div>
+          </section>
+        </aside>
+
+        <div class="resume-main">
+          <section class="resume-section" aria-labelledby="experience-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">06</p>
+              <h2 id="experience-heading">Research &amp; Experience</h2>
+            </div>
+
+            <div class="experience-list">
+              {experience.map((item) => (
+                <article class="experience-item">
+                  <div class="experience-meta"><p class="item-period">{item.period}</p><p>{item.location}</p></div>
+                  <div class="experience-copy">
+                    <p class="employment-type">{item.type}</p>
+                    <h3>{item.role}</h3>
+                    <p class="institution">{item.organization}</p>
+                    <ul>{item.highlights.map((highlight) => <li>{highlight}</li>)}</ul>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section class="resume-section" aria-labelledby="publications-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">07</p>
+              <h2 id="publications-heading">Selected Publications</h2>
+            </div>
+
+            <ol class="publication-list">
+              {publications.map((publication) => (
+                <li>
+                  <div><h3>{publication.title}</h3><p>{publication.venue}</p></div>
+                  {publication.href && <a href={publication.href} target="_blank" rel="noreferrer">{publication.label} <span aria-hidden="true">↗</span></a>}
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section class="resume-section" aria-labelledby="projects-heading" data-reveal>
+            <div class="section-heading">
+              <p class="section-number" aria-hidden="true">08</p>
+              <h2 id="projects-heading">Selected Projects</h2>
+            </div>
+
+            <div class="project-list">
+              {projects.map((project, index) => (
+                <article class="project-item">
+                  <p class="project-index">P—0{index + 1}</p>
+                  <div>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    {project.href && <a href={project.href} target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <footer class="resume-closing" data-reveal>
+        <p>Full curriculum vitae</p>
+        <a href={resumeUrl} download="NguyenTung_AI_Resume.pdf">Download PDF <span aria-hidden="true">↓</span></a>
+      </footer>
+    </article>
   </main>
+
+  <Footer />
 </BaseLayout>
 
 <style>
   .resume-page {
     min-height: calc(100dvh - 76px);
-    padding: clamp(2.5rem, 4vw, 3.5rem) 1.5rem clamp(4rem, 7vw, 6rem);
-    background: var(--ivory-light);
+    padding: clamp(3.5rem, 7vw, 7rem) 1.5rem clamp(4.5rem, 8vw, 7rem);
+    background: linear-gradient(90deg, transparent calc(50% - 0.5px), color-mix(in srgb, var(--stone) 35%, transparent) 50%, transparent calc(50% + 0.5px)), var(--ivory-light);
   }
 
-  .resume-header {
+  .resume-document { width: min(calc(100% - 1rem), 1180px); }
+
+  .resume-masthead {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 2rem;
-    padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
     align-items: end;
-    border-bottom: 1px solid var(--stone);
+    padding-bottom: clamp(2rem, 4vw, 3.5rem);
+    border-bottom: 1px solid var(--slate-dark);
   }
 
-  .resume-kicker {
-    margin: 0 0 1rem;
+  .resume-kicker, .section-number, .item-period, .employment-type, .project-index {
+    margin: 0;
     color: var(--cloud-dark);
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
     text-transform: uppercase;
   }
+
+  .resume-kicker { margin-bottom: clamp(1.5rem, 3vw, 2.75rem); }
 
   h1 {
     margin: 0;
     color: var(--slate-dark);
     font-family: var(--font-sans);
-    font-size: clamp(3rem, 5vw, 5rem);
+    font-size: clamp(4.25rem, 10vw, 8.75rem);
     font-weight: 600;
-    letter-spacing: -0.065em;
-    line-height: 0.93;
+    letter-spacing: -0.075em;
+    line-height: 0.77;
   }
 
-  h1 em {
-    font-family: var(--font-serif);
-    font-weight: 400;
-  }
+  h1 em { font-family: var(--font-serif); font-weight: 400; }
 
-  .resume-summary {
-    max-width: 650px;
-    margin: 1.5rem 0 0;
+  .professional-title {
+    margin: clamp(1.75rem, 3vw, 2.5rem) 0 0;
     color: var(--slate-medium);
     font-family: var(--font-serif);
-    font-size: clamp(1.05rem, 1.8vw, 1.25rem);
-    line-height: 1.5;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    line-height: 1.3;
   }
 
-  .resume-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-  }
+  .resume-actions { display: flex; align-items: center; gap: 1.25rem; }
 
-  .resume-open {
+  .resume-open, .resume-closing a, .publication-list a, .project-item a {
     display: inline-flex;
+    width: fit-content;
     padding-bottom: 0.25rem;
     align-items: center;
-    gap: 0.55rem;
-    border-bottom: 1px solid var(--slate-dark);
+    gap: 0.5rem;
+    border-bottom: 1px solid currentColor;
     color: var(--slate-dark);
-    font-size: 0.72rem;
+    font-size: 0.68rem;
     font-weight: 600;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.055em;
     text-decoration: none;
     text-transform: uppercase;
   }
 
-  .resume-open:hover {
-    border-color: var(--clay-deep);
-    color: var(--clay-deep);
+  .resume-open:hover, .resume-closing a:hover, .publication-list a:hover, .project-item a:hover { color: var(--clay-deep); }
+  .resume-download { gap: 1rem; }
+
+  .identity-strip {
+    display: flex;
+    padding: 1rem 0;
+    flex-wrap: wrap;
+    gap: 0.5rem 0;
+    border-bottom: 1px solid var(--stone);
+    color: var(--slate-medium);
+    font-size: 0.7rem;
+    letter-spacing: 0.01em;
   }
 
-  .resume-download {
-    gap: 1rem;
+  .identity-strip > * { display: inline-flex; align-items: center; text-decoration: none; }
+  .identity-strip > *:not(:last-child)::after { margin: 0 0.8rem; color: var(--cloud-medium); content: "·"; }
+  .identity-strip a:hover { color: var(--clay-deep); }
+
+  .profile-statement {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.72fr) minmax(0, 1.5fr);
+    gap: clamp(2rem, 6vw, 7rem);
+    padding: clamp(3.5rem, 7vw, 6.5rem) 0;
+    border-bottom: 1px solid var(--slate-dark);
   }
 
-  .resume-viewer {
-    height: clamp(620px, calc(100dvh - 250px), 980px);
-    margin-top: clamp(1.5rem, 3vw, 2rem);
-    overflow: hidden;
-    border: 1px solid var(--stone);
-    background: #525659;
-  }
+  .profile-statement > .section-number { padding-top: 0.4rem; }
+  .profile-statement h2, .section-heading h2 { margin: 0; color: var(--slate-dark); font-family: var(--font-sans); font-weight: 600; letter-spacing: -0.045em; }
+  .profile-statement h2 { margin-bottom: 1.35rem; font-family: var(--font-serif); font-size: 1rem; font-weight: 500; letter-spacing: 0; }
 
-  .resume-viewer object {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-  }
-
-  .resume-fallback {
-    padding: 3rem;
-    background: var(--ivory-medium);
+  .profile-statement div > p {
+    max-width: 800px;
+    margin: 0;
     color: var(--slate-dark);
     font-family: var(--font-serif);
-    text-align: center;
+    font-size: clamp(1.65rem, 3.3vw, 2.55rem);
+    line-height: 1.24;
   }
 
-  .resume-fallback a {
-    font-family: var(--font-sans);
-    font-weight: 600;
+  .resume-grid { display: grid; grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.5fr); gap: clamp(2rem, 6vw, 7rem); }
+  .resume-sidebar, .resume-main { min-width: 0; }
+  .resume-section { padding: clamp(3.25rem, 6vw, 5.5rem) 0; border-bottom: 1px solid var(--stone); }
+  .resume-sidebar .resume-section:last-child, .resume-main .resume-section:last-child { border-bottom: 0; }
+  .section-heading { display: flex; margin-bottom: clamp(2rem, 4vw, 3.25rem); align-items: baseline; gap: 1rem; }
+  .section-heading h2 { font-size: clamp(1.65rem, 2.5vw, 2.25rem); line-height: 1; }
+  .sidebar-list, .compact-list, .experience-list, .project-list { display: grid; }
+
+  .education-item, .compact-list article { padding: 1.5rem 0; border-top: 1px solid var(--stone); }
+  .education-item:first-child, .compact-list article:first-child { padding-top: 0; border-top: 0; }
+  .education-item h3, .compact-list h3, .experience-copy h3, .publication-list h3, .project-item h3 { margin: 0; color: var(--slate-dark); font-family: var(--font-serif); font-weight: 500; }
+  .education-item h3, .compact-list h3 { margin-top: 0.65rem; font-size: 1.15rem; line-height: 1.25; }
+  .education-item > p:not(.item-period), .compact-list article > p:not(.item-period) { margin: 0.35rem 0 0; color: var(--slate-medium); font-size: 0.82rem; line-height: 1.55; }
+  .education-item .institution, .experience-copy .institution { color: var(--slate-dark); font-weight: 500; }
+  .education-item .item-note { color: var(--cloud-dark); }
+
+  .expertise-list { margin: 0; }
+  .expertise-list > div { padding: 1rem 0; border-top: 1px solid var(--stone); }
+  .expertise-list > div:first-child { padding-top: 0; border-top: 0; }
+  .expertise-list dt { margin-bottom: 0.45rem; color: var(--cloud-dark); font-family: var(--font-mono); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
+  .expertise-list dd { margin: 0; color: var(--slate-medium); font-family: var(--font-serif); font-size: 1rem; line-height: 1.5; }
+
+  .credential-list { margin: 0; padding: 0; list-style: none; }
+  .credential-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--stone); color: var(--slate-medium); font-size: 0.78rem; line-height: 1.4; }
+  .credential-list li:first-child { padding-top: 0; border-top: 0; }
+  .credential-list time { color: var(--cloud-dark); font-family: var(--font-mono); font-size: 0.65rem; }
+
+  .experience-item { display: grid; grid-template-columns: minmax(125px, 0.36fr) minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 2.75rem); padding: 2.25rem 0; border-top: 1px solid var(--stone); }
+  .experience-item:first-child { padding-top: 0; border-top: 0; }
+  .experience-meta > p:last-child { margin: 0.45rem 0 0; color: var(--cloud-dark); font-size: 0.7rem; }
+  .employment-type { margin-bottom: 0.55rem; }
+  .experience-copy h3 { font-size: clamp(1.35rem, 2vw, 1.7rem); line-height: 1.2; }
+  .experience-copy .institution { margin: 0.25rem 0 0; font-size: 0.83rem; }
+  .experience-copy ul { display: grid; gap: 0.55rem; margin: 1.25rem 0 0; padding: 0; color: var(--slate-medium); font-size: 0.86rem; line-height: 1.65; list-style: none; }
+  .experience-copy li { position: relative; padding-left: 1.15rem; }
+  .experience-copy li::before { position: absolute; top: 0; left: 0; color: var(--clay-deep); content: "—"; }
+
+  .publication-list { margin: 0; padding: 0; counter-reset: publications; list-style: none; }
+  .publication-list li { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding: 1.5rem 0 1.5rem 3rem; align-items: start; border-top: 1px solid var(--stone); counter-increment: publications; }
+  .publication-list li:first-child { padding-top: 0; border-top: 0; }
+  .publication-list li::before { position: absolute; top: 1.75rem; left: 0; color: var(--cloud-dark); content: "0" counter(publications); font-family: var(--font-mono); font-size: 0.65rem; }
+  .publication-list li:first-child::before { top: 0.25rem; }
+  .publication-list h3 { font-size: 1.15rem; line-height: 1.35; }
+  .publication-list p { margin: 0.45rem 0 0; color: var(--cloud-dark); font-size: 0.76rem; line-height: 1.5; }
+  .publication-list a { margin-top: 0.15rem; }
+
+  .project-item { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 1.5rem; padding: 1.75rem 0; border-top: 1px solid var(--stone); }
+  .project-item:first-child { padding-top: 0; border-top: 0; }
+  .project-item h3 { font-size: 1.25rem; line-height: 1.3; }
+  .project-item div > p { margin: 0.65rem 0 0; color: var(--slate-medium); font-size: 0.84rem; line-height: 1.65; }
+  .project-item a { margin-top: 1rem; }
+
+  .resume-closing { display: flex; padding-top: 2rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--slate-dark); }
+  .resume-closing p { margin: 0; color: var(--cloud-dark); font-family: var(--font-serif); font-size: 0.95rem; font-style: italic; }
+
+  @media (max-width: 900px) {
+    .resume-page { background: var(--ivory-light); }
+    .profile-statement, .resume-grid { grid-template-columns: 1fr; gap: 0; }
+    .profile-statement { gap: 1rem; }
+    .resume-sidebar .resume-section:last-child { border-bottom: 1px solid var(--stone); }
+    .resume-sidebar { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 3rem; }
+    .resume-sidebar .resume-section { border-bottom: 1px solid var(--stone); }
   }
 
-  @media (max-width: 768px) {
-    .resume-page {
-      padding: 3rem 0.75rem 4rem;
-    }
-
-    .resume-header {
-      grid-template-columns: 1fr;
-      align-items: start;
-    }
-
-    h1 {
-      font-size: clamp(2.75rem, 13vw, 4rem);
-    }
-
-    .resume-actions {
-      width: 100%;
-      justify-content: space-between;
-    }
-
-    .resume-viewer {
-      height: 75dvh;
-      min-height: 520px;
-    }
+  @media (max-width: 640px) {
+    .resume-page { padding: 3rem 0.5rem 4rem; }
+    .resume-document { width: calc(100% - 1rem); }
+    .resume-masthead { grid-template-columns: 1fr; align-items: start; }
+    h1 { font-size: clamp(3.75rem, 21vw, 6rem); line-height: 0.84; }
+    .resume-actions { width: 100%; justify-content: space-between; }
+    .identity-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
+    .identity-strip > * { padding: 0.5rem 0; }
+    .identity-strip > *::after { display: none; }
+    .resume-sidebar { grid-template-columns: 1fr; gap: 0; }
+    .experience-item { grid-template-columns: 1fr; gap: 0.85rem; }
+    .experience-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .experience-meta > p:last-child { margin: 0; }
+    .publication-list li { grid-template-columns: 1fr; gap: 1rem; }
+    .publication-list a { margin-top: 0; }
   }
 
   @media (max-width: 380px) {
-    .resume-actions {
-      align-items: stretch;
-      flex-direction: column;
-    }
+    .resume-actions { align-items: stretch; flex-direction: column; }
+    .resume-open { align-self: flex-start; }
+    .resume-download { width: 100%; }
+    .identity-strip { grid-template-columns: 1fr; }
+    .project-item { grid-template-columns: 1fr; gap: 0.65rem; }
+  }
 
-    .resume-open {
-      align-self: flex-start;
-    }
-
-    .resume-download {
-      width: 100%;
-    }
+  @media print {
+    .resume-page { padding: 0; background: white; }
+    .resume-actions, .resume-closing { display: none; }
+    .resume-masthead { grid-template-columns: 1fr; }
+    .resume-section, .experience-item, .project-item, .publication-list li { break-inside: avoid; }
   }
 </style>
