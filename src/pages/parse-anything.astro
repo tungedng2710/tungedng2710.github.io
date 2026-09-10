@@ -1,0 +1,19 @@
+---
+import Navbar from "../components/Navbar.astro";
+import PlaygroundFrame from "../components/PlaygroundFrame.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const parseAnythingUrl = "https://7864--main--frontier--idp-lab.coder.vts-ai.space/";
+---
+
+<BaseLayout
+  title="ParseAnything"
+  description="Explore and interact with ParseAnything, directly from TONVERSE."
+>
+  <Navbar active="playground" playgroundApp="parse-anything" />
+  <PlaygroundFrame
+    name="ParseAnything"
+    url={parseAnythingUrl}
+    description="Document parsing playground"
+  />
+</BaseLayout>

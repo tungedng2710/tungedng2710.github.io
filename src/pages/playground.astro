@@ -1,0 +1,118 @@
+---
+import Footer from "../components/Footer.astro";
+import Navbar from "../components/Navbar.astro";
+import { withBase } from "../config";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const apps = [
+  {
+    name: "Imagine",
+    eyebrow: "Generate",
+    href: "/imagine",
+    description: "Turn ideas into images with an interactive AI generation workspace.",
+    mark: "IM",
+  },
+  {
+    name: "ParseAnything",
+    eyebrow: "Understand",
+    href: "/parse-anything",
+    description: "Explore an interactive workspace for parsing and understanding documents.",
+    mark: "PA",
+  },
+] as const;
+---
+
+<BaseLayout title="Playground" description="Interactive AI experiments and tools from TONVERSE.">
+  <Navbar active="playground" />
+  <main>
+    <section class="hero" id="project">
+      <div class="hero-body">
+        <div class="container">
+          <div class="project-heading" data-reveal>
+            <p class="project-kicker">Interactive tools</p>
+            <h1>
+              Explore, experiment,<br class="project-heading__break" />
+              and make things.
+            </h1>
+            <p>
+              A collection of hands-on AI applications. Choose a tool and start exploring
+              directly in your browser.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="project-grid playground-grid">
+        {
+          apps.map((app, index) => (
+            <a
+              href={withBase(app.href)}
+              class="project-card playground-card"
+              data-reveal
+              style={`--reveal-delay: ${index * 70}ms;`}
+            >
+              <div class="project-card__thumb playground-card__thumb">
+                <span>{app.mark}</span>
+                <small>{app.eyebrow}</small>
+              </div>
+              <div class="project-card__body">
+                <h2 class="project-card__title">{app.name}</h2>
+                <p class="project-card__description">{app.description}</p>
+                <span class="project-card__cta">Launch app →</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .playground-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .playground-card__thumb {
+    display: flex;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    align-items: flex-end;
+    justify-content: space-between;
+    background:
+      radial-gradient(circle at 78% 22%, color-mix(in srgb, var(--clay) 70%, transparent), transparent 28%),
+      linear-gradient(135deg, var(--oat-warm), var(--manilla));
+  }
+
+  .playground-card:nth-child(2) .playground-card__thumb {
+    background:
+      radial-gradient(circle at 25% 28%, color-mix(in srgb, var(--cloud-medium) 58%, transparent), transparent 30%),
+      linear-gradient(145deg, var(--ivory-medium), var(--oat-warm));
+  }
+
+  .playground-card__thumb::after {
+    display: none;
+  }
+
+  .playground-card__thumb span {
+    color: var(--slate-dark);
+    font-family: var(--font-serif);
+    font-size: clamp(3.5rem, 9vw, 7.5rem);
+    font-weight: 400;
+    letter-spacing: -0.08em;
+    line-height: 0.75;
+  }
+
+  .playground-card__thumb small {
+    color: var(--slate-medium);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 700px) {
+    .playground-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

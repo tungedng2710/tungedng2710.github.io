@@ -1,0 +1,112 @@
+---
+interface Props {
+  name: string;
+  url: string;
+  description: string;
+  permissions?: string;
+}
+
+const { name, url, description, permissions = "clipboard-read; clipboard-write; fullscreen" } =
+  Astro.props;
+---
+
+<main class="playground-frame-page">
+  <div class="playground-frame-bar">
+    <div>
+      <strong>{name}</strong>
+      <span>{description}</span>
+    </div>
+    <a href={url} target="_blank" rel="noreferrer">
+      Open standalone
+      <span aria-hidden="true">↗</span>
+    </a>
+  </div>
+  <div class="playground-frame-wrap">
+    <iframe
+      class="playground-frame"
+      src={url}
+      title={`${name} interactive application`}
+      allow={permissions}
+      referrerpolicy="strict-origin-when-cross-origin"
+    ></iframe>
+  </div>
+</main>
+
+<style>
+  .playground-frame-page {
+    display: flex;
+    height: calc(100dvh - 76px);
+    min-height: 520px;
+    overflow: hidden;
+    flex-direction: column;
+    background: var(--ivory-medium);
+  }
+
+  .playground-frame-bar {
+    display: flex;
+    min-height: 52px;
+    padding: 0.55rem clamp(0.85rem, 2.5vw, 2.5rem);
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--stone);
+    background: var(--ivory-medium);
+  }
+
+  .playground-frame-bar > div {
+    display: flex;
+    min-width: 0;
+    align-items: baseline;
+    gap: 0.65rem;
+  }
+
+  .playground-frame-bar strong {
+    color: var(--slate-dark);
+    font-family: var(--font-serif);
+    font-size: 1rem;
+  }
+
+  .playground-frame-bar span {
+    color: var(--cloud-dark);
+    font-size: 0.7rem;
+  }
+
+  .playground-frame-bar a {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--slate-dark);
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .playground-frame-bar a:hover {
+    text-decoration: underline;
+  }
+
+  .playground-frame-wrap {
+    min-height: 0;
+    flex: 1;
+    background: var(--ivory-light);
+  }
+
+  .playground-frame {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+  }
+
+  @media (max-width: 600px) {
+    .playground-frame-bar {
+      padding: 0.55rem 0.85rem;
+    }
+
+    .playground-frame-bar > div span {
+      display: none;
+    }
+  }
+</style>

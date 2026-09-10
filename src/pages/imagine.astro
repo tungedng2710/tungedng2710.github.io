@@ -1,5 +1,6 @@
 ---
 import Navbar from "../components/Navbar.astro";
+import PlaygroundFrame from "../components/PlaygroundFrame.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const imagineUrl = "https://7863--main--frontier--idp-lab.coder.vts-ai.space/";
@@ -9,41 +10,11 @@ const imagineUrl = "https://7863--main--frontier--idp-lab.coder.vts-ai.space/";
   title="Imagine"
   description="Explore and interact with Imagine, directly from TONVERSE."
 >
-  <Navbar active="imagine" />
-  <main class="imagine-page">
-    <div class="imagine-frame-wrap">
-      <iframe
-        class="imagine-frame"
-        src={imagineUrl}
-        title="Imagine interactive application"
-        allow="camera; microphone; clipboard-read; clipboard-write; fullscreen"
-        referrerpolicy="strict-origin-when-cross-origin"
-      ></iframe>
-    </div>
-  </main>
+  <Navbar active="playground" playgroundApp="imagine" />
+  <PlaygroundFrame
+    name="Imagine"
+    url={imagineUrl}
+    description="AI image generation playground"
+    permissions="camera; microphone; clipboard-read; clipboard-write; fullscreen"
+  />
 </BaseLayout>
-
-<style>
-  .imagine-page {
-    display: flex;
-    height: calc(100dvh - 76px);
-    min-height: 520px;
-    overflow: hidden;
-    flex-direction: column;
-    background: var(--ivory-medium);
-  }
-
-  .imagine-frame-wrap {
-    min-height: 0;
-    flex: 1;
-    background: var(--ivory-light);
-  }
-
-  .imagine-frame {
-    display: block;
-    width: 100%;
-    height: 100%;
-    border: 0;
-    background: #fff;
-  }
-</style>

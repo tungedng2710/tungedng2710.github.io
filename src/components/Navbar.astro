@@ -2,10 +2,11 @@
 import { site, withBase } from "../config";
 
 interface Props {
-  active?: "home" | "blog" | "project" | "imagine";
+  active?: "home" | "blog" | "project" | "playground";
+  playgroundApp?: "imagine" | "parse-anything";
 }
 
-const { active } = Astro.props;
+const { active, playgroundApp } = Astro.props;
 ---
 
 <nav class="navbar is-fixed-top" role="navigation" aria-label="main navigation" id="navbar">
@@ -47,12 +48,40 @@ const { active } = Astro.props;
         >
           Projects
         </a>
-        <a
-          class:list={["navbar-item", { "is-active": active === "imagine" }]}
-          href={withBase("/imagine")}
-        >
-          Imagine
-        </a>
+        <div class="playground-menu">
+          <a
+            class:list={[
+              "playground-menu__trigger",
+              { "is-active": active === "playground" },
+            ]}
+            href={withBase("/playground")}
+            aria-haspopup="true"
+          >
+            Playground
+            <svg aria-hidden="true" viewBox="0 0 12 12">
+              <path d="m3 4.5 3 3 3-3"></path>
+            </svg>
+          </a>
+          <div class="playground-menu__items" aria-label="Playground apps">
+            <a
+              class:list={["playground-menu__item", { "is-active": playgroundApp === "imagine" }]}
+              href={withBase("/imagine")}
+            >
+              <span>Imagine</span>
+              <small>Image generation</small>
+            </a>
+            <a
+              class:list={[
+                "playground-menu__item",
+                { "is-active": playgroundApp === "parse-anything" },
+              ]}
+              href={withBase("/parse-anything")}
+            >
+              <span>ParseAnything</span>
+              <small>Document parsing</small>
+            </a>
+          </div>
+        </div>
         <button class="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch to dark theme">
           <svg class="theme-toggle__sun" aria-hidden="true" viewBox="0 0 24 24">
             <circle cx="12" cy="12" r="4"></circle>
