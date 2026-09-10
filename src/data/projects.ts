@@ -14,7 +14,7 @@ export const projects = [
   },
   {
     name: "TonAI Imagine",
-    image: "https://github.com/tungedng2710/TonAI-Imagine/blob/main/static/demo.png",
+    image: "https://github.com/tungedng2710/TonAI-Imagine/blob/main/static/demo.png?raw=true",
     link: "https://github.com/tungedng2710/TonAI-Imagine",
     description: "A fast and efficient AI-powered image generation API",
   },
