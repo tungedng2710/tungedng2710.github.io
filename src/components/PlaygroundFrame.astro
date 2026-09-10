@@ -4,23 +4,33 @@ interface Props {
   url: string;
   description: string;
   permissions?: string;
+  showToolbar?: boolean;
 }
 
-const { name, url, description, permissions = "clipboard-read; clipboard-write; fullscreen" } =
-  Astro.props;
+const {
+  name,
+  url,
+  description,
+  permissions = "clipboard-read; clipboard-write; fullscreen",
+  showToolbar = true,
+} = Astro.props;
 ---
 
 <main class="playground-frame-page">
-  <div class="playground-frame-bar">
-    <div>
-      <strong>{name}</strong>
-      <span>{description}</span>
-    </div>
-    <a href={url} target="_blank" rel="noreferrer">
-      Open standalone
-      <span aria-hidden="true">↗</span>
-    </a>
-  </div>
+  {
+    showToolbar && (
+      <div class="playground-frame-bar">
+        <div>
+          <strong>{name}</strong>
+          <span>{description}</span>
+        </div>
+        <a href={url} target="_blank" rel="noreferrer">
+          Open standalone
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    )
+  }
   <div class="playground-frame-wrap">
     <iframe
       class="playground-frame"
