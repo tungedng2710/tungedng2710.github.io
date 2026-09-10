@@ -49,20 +49,33 @@ const { active, playgroundApp } = Astro.props;
           Projects
         </a>
         <div class="playground-menu">
-          <a
-            class:list={[
-              "playground-menu__trigger",
-              { "is-active": active === "playground" },
-            ]}
-            href={withBase("/playground")}
-            aria-haspopup="true"
+          <div class="playground-menu__heading">
+            <a
+              class:list={[
+                "playground-menu__trigger",
+                { "is-active": active === "playground" },
+              ]}
+              href={withBase("/playground")}
+            >
+              Playground
+            </a>
+            <button
+              class="playground-menu__toggle"
+              type="button"
+              aria-label="Toggle Playground apps"
+              aria-expanded="false"
+              aria-controls="playground-menu-items"
+            >
+              <svg aria-hidden="true" viewBox="0 0 12 12">
+                <path d="m3 4.5 3 3 3-3"></path>
+              </svg>
+            </button>
+          </div>
+          <div
+            class="playground-menu__items"
+            id="playground-menu-items"
+            aria-label="Playground apps"
           >
-            Playground
-            <svg aria-hidden="true" viewBox="0 0 12 12">
-              <path d="m3 4.5 3 3 3-3"></path>
-            </svg>
-          </a>
-          <div class="playground-menu__items" aria-label="Playground apps">
             <a
               class:list={["playground-menu__item", { "is-active": playgroundApp === "imagine" }]}
               href={withBase("/imagine")}
@@ -135,6 +148,15 @@ const { active, playgroundApp } = Astro.props;
       target?.classList.toggle("is-active", open);
       burger.setAttribute("aria-expanded", String(open));
       document.body.classList.toggle("is-menu-open", open);
+
+      if (!open) {
+        target?.querySelectorAll<HTMLElement>(".playground-menu").forEach((menu) => {
+          menu.classList.remove("is-open");
+        });
+        target?.querySelectorAll<HTMLButtonElement>(".playground-menu__toggle").forEach((toggle) => {
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      }
     };
 
     burger.addEventListener("click", () => {
@@ -151,6 +173,16 @@ const { active, playgroundApp } = Astro.props;
 
     window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
       if (event.matches) setMenuOpen(false);
+    });
+  });
+
+  document.querySelectorAll<HTMLButtonElement>(".playground-menu__toggle").forEach((toggle) => {
+    const menu = toggle.closest<HTMLElement>(".playground-menu");
+
+    toggle.addEventListener("click", () => {
+      const open = !menu?.classList.contains("is-open");
+      menu?.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", String(open));
     });
   });
 </script>
