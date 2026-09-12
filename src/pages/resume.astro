@@ -14,10 +14,12 @@ const experience = [
     period: "March 2022 — Present",
     type: "Full-time",
     highlights: [
-      "Conduct research in intelligent document processing, with a focus on document layout analysis, table extraction, and vision-language models.",
-      "Develop scene-change detection methods using the Segment Anything Model and large language models.",
-      "Engineer automated data-annotation workflows for computer vision projects and build reproducible MLOps pipelines.",
-      "Design and deploy a license-plate recognition pipeline with NVIDIA Triton Inference Server; develop models for traffic-violation recognition.",
+      "Research and develop intelligent document processing systems that extract structured information from forms, tables, scanned documents, and semi-structured layouts.",
+      "Fine-tune vision-language models for document information extraction, including layout understanding, key-field recognition, and structured output generation.",
+      "Develop layout-analysis and table-extraction modules that preserve reading order and support OCR, information extraction, and validation workflows.",
+      "Build end-to-end license-plate recognition pipelines spanning image preprocessing, vehicle and plate detection, OCR, post-processing, and validation.",
+      "Deploy license-plate recognition models with NVIDIA Triton Inference Server and optimize inference workflows for traffic-monitoring systems.",
+      "Develop traffic-violation recognition features by combining detection, tracking, license-plate recognition, and rule-based video analytics.",
       "Research and develop speech-enhancement models for the Viettel Meeting platform.",
     ],
   },
@@ -28,7 +30,7 @@ const experience = [
     period: "March 2025 — Present",
     type: "Part-time",
     highlights: [
-      "Research quantitative financial signals and evaluate candidate alphas through simulation on the WorldQuant BRAIN platform.",
+      "Research, design, and simulate quantitative financial alpha signals on the WorldQuant BRAIN platform using data-driven investment hypotheses.",
     ],
   },
   {
@@ -38,7 +40,10 @@ const experience = [
     period: "October 2021 — March 2022",
     type: "Part-time",
     highlights: [
-      "Researched face-processing and object-tracking methods for a camera-monitoring system.",
+      "Researched and evaluated face detection, alignment, and recognition components for real-time computer-vision applications.",
+      "Studied object-tracking algorithms under challenging conditions including occlusion, motion blur, and crowded scenes.",
+      "Prepared datasets, ran model experiments, and integrated computer-vision modules into a camera-monitoring system.",
+      "Evaluated performance and analyzed errors to improve model reliability, inference speed, and robustness.",
     ],
   },
   {
@@ -48,7 +53,10 @@ const experience = [
     period: "December 2020 — June 2021",
     type: "Part-time",
     highlights: [
-      "Investigated facial-expression recognition, multitask learning, and face-recognition models; annotated and visualized image datasets.",
+      "Researched facial-expression recognition and multitask-learning approaches for jointly learning facial attributes.",
+      "Built experiments for face recognition, including dataset preparation, model training, evaluation, and performance comparison.",
+      "Annotated, cleaned, and organized image datasets to improve training and validation data quality.",
+      "Visualized datasets, label distributions, and predictions to support error analysis and model improvement.",
     ],
   },
   {
@@ -58,7 +66,10 @@ const experience = [
     period: "August 2020 — October 2020",
     type: "Part-time",
     highlights: [
-      "Developed computer-vision methods for electronic know-your-customer verification using Vietnamese identity cards.",
+      "Researched and implemented CenterNet-based object detection to localize Vietnamese identity cards in eKYC images.",
+      "Developed card-alignment workflows to crop, rotate, and normalize identity-card images before text recognition.",
+      "Applied OCR to extract identity information from Vietnamese identity cards.",
+      "Tested the detection, alignment, and OCR pipeline across varied lighting, angles, and backgrounds.",
     ],
   },
 ];
@@ -86,18 +97,18 @@ const projects = [
   {
     title: "dMOM Chatbot",
     description:
-      "A medical question-answering system for the dMOM project, sponsored by the Department of Population, Ministry of Health. Fine-tuned a large language model, developed a retrieval-augmented generation pipeline, and built a web application.",
+      "A medical chatbot for the PHAD-sponsored dMOM project under Vietnam’s Ministry of Health. Fine-tuned large language models for Vietnamese medical question answering, built a retrieval-augmented generation pipeline grounded in trusted medical knowledge, and implemented a web application for interaction, demonstration, and evaluation.",
   },
   {
     title: "AI Traffic Analysis",
     description:
-      "An end-to-end traffic-analysis service combining vehicle detection and tracking, license-plate detection, and optical character recognition, with a web demonstration interface.",
+      "An end-to-end traffic-video analysis system combining vehicle detection and tracking, license-plate detection, and OCR. Trained and evaluated models on traffic datasets, integrated the modules into a unified backend pipeline, and built a web demo to visualize results.",
     href: "https://github.com/tungedng2710/AI-Traffic-Analysis",
   },
   {
     title: "Vietnamese ID Card Recognition",
     description:
-      "A document-recognition pipeline exploring object detectors for card alignment and applying trained text-detection and optical-character-recognition models.",
+      "An eKYC document-recognition pipeline for Vietnamese identity-card localization and alignment, with document cropping, perspective correction, image enhancement, text detection, OCR, and evaluation across varied capture conditions.",
   },
 ];
 ---
@@ -115,7 +126,7 @@ const projects = [
         <div class="masthead-intro">
           <p class="resume-kicker">Curriculum Vitae · 2026</p>
           <h1>Tung <em>Nguyen</em></h1>
-          <p class="professional-title">AI Researcher &amp; Engineer</p>
+          <p class="professional-title">AI Engineer / Researcher</p>
         </div>
 
         <div class="resume-actions" aria-label="Résumé document actions">
@@ -191,10 +202,13 @@ const projects = [
             </div>
 
             <dl class="expertise-list">
-              <div><dt>Research</dt><dd>Computer Vision, Generative AI, Reinforcement Learning</dd></div>
-              <div><dt>Languages</dt><dd>Python, C#, C/C++, MATLAB</dd></div>
-              <div><dt>Frameworks</dt><dd>PyTorch, TensorFlow, MLflow</dd></div>
-              <div><dt>Tools</dt><dd>Docker, Git, Triton, Label Studio, Roboflow, n8n, Dify, Ollama, vLLM</dd></div>
+              <div><dt>Research Areas</dt><dd>Computer Vision, Intelligent Document Processing, Generative AI, Reinforcement Learning</dd></div>
+              <div><dt>Programming</dt><dd>Python, C#, C/C++, MATLAB</dd></div>
+              <div><dt>AI/ML Frameworks</dt><dd>PyTorch, TensorFlow, MLflow, vLLM</dd></div>
+              <div><dt>Computer Vision</dt><dd>Object Detection, OCR, Image Classification, Tracking, Segmentation, Layout Analysis</dd></div>
+              <div><dt>Generative AI</dt><dd>Large Language Models, Vision-Language Models, RAG, Prompt Engineering, Model Fine-tuning</dd></div>
+              <div><dt>MLOps &amp; Tools</dt><dd>Docker, Git, Triton Inference Server, Label Studio, Roboflow, Dify, Ollama, n8n</dd></div>
+              <div><dt>Professional Skills</dt><dd>Research, Technical Presentation, Teamwork, Leadership, Scrum</dd></div>
             </dl>
           </section>
 
@@ -207,7 +221,7 @@ const projects = [
             <div class="compact-list">
               <article>
                 <p class="item-period">2025</p>
-                <h3>National Creative Youth Award</h3>
+                <h3>Tuổi trẻ sáng tạo toàn quốc</h3>
                 <p>Ho Chi Minh Communist Youth Union</p>
               </article>
               <article>
@@ -225,11 +239,11 @@ const projects = [
             </div>
 
             <ul class="credential-list">
-              <li><span>Quant Finance Explorer Program</span><time>2024</time></li>
-              <li><span>Google Advanced Data Analytics</span><time>2024</time></li>
-              <li><span>Google Project Management</span><time>2024</time></li>
-              <li><span>Google AI Essentials</span><time>2024</time></li>
-              <li><span>IELTS Academic · Overall 6.0</span><time>2023</time></li>
+              <li><span>Quant Finance Explorer Program ’24 · WorldQuant</span><time>Nov 2024</time></li>
+              <li><span>Google Advanced Data Analytics · Google</span><time>Aug 2024</time></li>
+              <li><span>Google Project Management · Google</span><time>Aug 2024</time></li>
+              <li><span>Google AI Essentials · Google</span><time>Aug 2024</time></li>
+              <li><span>IELTS Academic · British Council · Overall 6.0</span><time>May 2023</time></li>
             </ul>
           </section>
 
@@ -242,7 +256,8 @@ const projects = [
             <div class="compact-list">
               <article><p class="item-period">2026</p><h3>Mentor</h3><p>Viettel Digital Talent Program</p></article>
               <article><p class="item-period">2023 — 2025</p><h3>Research Mentor</h3><p>Scientific research competitions for high-school students</p></article>
-              <article><p class="item-period">2017 — 2018</p><h3>Teaching Assistant &amp; Volunteer</h3><p>SAMI, Hanoi University of Science and Technology</p></article>
+              <article><p class="item-period">Jan 2018 — Aug 2018</p><h3>Extra-class Assistant</h3><p>SAMI study support club, Hanoi University of Science and Technology</p></article>
+              <article><p class="item-period">Oct 2017 — Aug 2018</p><h3>Volunteer</h3><p>SAMI Volunteer organization, Hanoi University of Science and Technology</p></article>
             </div>
           </section>
         </aside>
