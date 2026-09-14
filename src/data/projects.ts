@@ -32,12 +32,12 @@ export const projects = [
     link: "https://github.com/tungedng2710/TonAI-Telegram-Bot",
     description: "Telegram bot with Ollama and ComfyUI",
   },
-  {
-    name: "TonAI Creative",
-    image: "/assets/images/logo.png",
-    link: "https://github.com/tungedng2710/TonAI-Creative",
-    description: "A simple web UI for AI art creation",
-  },
+  // {
+  //   name: "TonAI Creative",
+  //   image: "/assets/images/logo.png",
+  //   link: "https://github.com/tungedng2710/TonAI-Creative",
+  //   description: "A simple web UI for AI art creation",
+  // },
   {
     name: "Improved ArcFace",
     image:
