@@ -8,7 +8,7 @@ export const projects = [
   },
   {
     name: "DMOM Chatbot",
-    image: "/assets/images/logo.png",
+    image: "https://github.com/tungedng2710/DMOM-RAG/blob/main/assets/demo_dmom.png?raw=true",
     link: "https://github.com/tungedng2710/DMOM-RAG",
     description: "Medical chatbot for dMOM Project",
   },
