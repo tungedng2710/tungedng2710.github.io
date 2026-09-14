@@ -442,8 +442,9 @@ const projects = [
     line-height: 1.55;
   }
 
-  .resume-grid { display: grid; grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.5fr); gap: clamp(1rem, 2vw, 1.5rem); align-items: start; }
+  .resume-grid { display: grid; grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.5fr); gap: clamp(1rem, 2vw, 1.5rem); align-items: stretch; }
   .resume-sidebar, .resume-main { display: grid; min-width: 0; gap: clamp(1rem, 2vw, 1.5rem); }
+  .resume-sidebar { grid-template-rows: auto auto auto auto 1fr; }
   .resume-section { padding: clamp(1.5rem, 3vw, 2.5rem); border: 1px solid var(--stone); }
   .section-heading { display: flex; margin-bottom: clamp(1.25rem, 2vw, 1.75rem); align-items: baseline; gap: 0.7rem; }
   .section-heading .section-number { flex: 0 0 auto; color: var(--slate-medium); font-size: clamp(1.35rem, 2.2vw, 1.9rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
@@ -500,7 +501,7 @@ const projects = [
   @media (max-width: 900px) {
     .resume-page { background: var(--ivory-light); }
     .resume-grid { grid-template-columns: 1fr; }
-    .resume-sidebar { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .resume-sidebar { grid-template-rows: none; grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   @media (max-width: 640px) {
