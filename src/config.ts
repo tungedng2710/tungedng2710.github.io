@@ -4,7 +4,7 @@ export const site = {
   keywords: ["AI", "Mathematics"],
   author: {
     name: "Tung Nguyen",
-    image: "/assets/images/shanghai1.JPG",
+    image: "/assets/images/ava.JPG",
     url: "https://github.com/tungedng2710",
     about:
       "AI researcher and engineer focused on generative AI and computer vision. I build practical systems and share the methods, experiments, and ideas behind them.",
