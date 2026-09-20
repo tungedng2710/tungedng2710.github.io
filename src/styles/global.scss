@@ -446,6 +446,11 @@ html.has-navbar-fixed-top {
   margin-top: 2.25rem;
 }
 
+.hero-actions .button {
+  width: 150px;
+  justify-content: center;
+}
+
 .hero-actions .button-primary {
   background: var(--clay) !important;
   border-color: var(--clay) !important;
