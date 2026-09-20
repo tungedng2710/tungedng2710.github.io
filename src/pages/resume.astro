@@ -131,14 +131,14 @@ const projects = [
 
         <div class="resume-actions" aria-label="Résumé document actions">
           <a class="resume-open" href={resumeUrl} target="_blank" rel="noreferrer">
-            View PDF <span aria-hidden="true">↗</span>
+            View PDF
           </a>
           <a
             class="button button-primary resume-download"
             href={resumeUrl}
             download="NguyenTung_AI_Resume.pdf"
           >
-            Download CV <span aria-hidden="true">↓</span>
+            Download CV
           </a>
         </div>
       </header>
@@ -294,7 +294,7 @@ const projects = [
               {publications.map((publication) => (
                 <li>
                   <div><h3>{publication.title}</h3><p>{publication.venue}</p></div>
-                  {publication.href && <a href={publication.href} target="_blank" rel="noreferrer">{publication.label} <span aria-hidden="true">↗</span></a>}
+                  {publication.href && <a href={publication.href} target="_blank" rel="noreferrer">{publication.label}</a>}
                 </li>
               ))}
             </ol>
@@ -313,7 +313,7 @@ const projects = [
                   <div>
                     <h3>{project.title}</h3>
                     <p>{project.description}</p>
-                    {project.href && <a href={project.href} target="_blank" rel="noreferrer">View repository <span aria-hidden="true">↗</span></a>}
+                    {project.href && <a href={project.href} target="_blank" rel="noreferrer">View repository</a>}
                   </div>
                 </article>
               ))}
@@ -324,7 +324,7 @@ const projects = [
 
       <footer class="resume-closing" data-reveal>
         <p>Full curriculum vitae</p>
-        <a href={resumeUrl} download="NguyenTung_AI_Resume.pdf">Download PDF <span aria-hidden="true">↓</span></a>
+        <a href={resumeUrl} download="NguyenTung_AI_Resume.pdf">Download PDF</a>
       </footer>
     </article>
   </main>
@@ -334,7 +334,7 @@ const projects = [
 
 <style>
   .resume-page {
-    min-height: calc(100dvh - 76px);
+    min-height: calc(100dvh - var(--navbar-height));
     padding: clamp(3.5rem, 7vw, 7rem) 1.5rem clamp(4.5rem, 8vw, 7rem);
     background: var(--ivory-light);
   }
@@ -404,8 +404,6 @@ const projects = [
   }
 
   .resume-open:hover, .resume-closing a:hover, .publication-list a:hover, .project-item a:hover { color: var(--clay-deep); }
-  .resume-download { gap: 1rem; }
-
   .identity-strip {
     display: flex;
     padding: 1rem 0;

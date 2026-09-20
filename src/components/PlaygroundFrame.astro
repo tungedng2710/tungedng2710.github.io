@@ -26,7 +26,6 @@ const {
         </div>
         <a href={url} target="_blank" rel="noreferrer">
           Open standalone
-          <span aria-hidden="true">↗</span>
         </a>
       </div>
     )
@@ -45,7 +44,7 @@ const {
 <style>
   .playground-frame-page {
     display: flex;
-    height: calc(100dvh - 76px);
+    height: calc(100dvh - var(--navbar-height));
     min-height: 520px;
     overflow: hidden;
     flex-direction: column;

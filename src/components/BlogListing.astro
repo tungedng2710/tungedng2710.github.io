@@ -74,12 +74,10 @@ visiblePages.forEach((page, index) => {
       <nav class="blog-pagination" id="blog-pagination" aria-label="Blog pagination">
         {currentPage > 1 ? (
           <a class="blog-pagination__direction" href={pageHref(currentPage - 1)} rel="prev">
-            <i class="fas fa-arrow-left" aria-hidden="true" />
             Previous
           </a>
         ) : (
           <span class="blog-pagination__direction is-disabled" aria-disabled="true">
-            <i class="fas fa-arrow-left" aria-hidden="true" />
             Previous
           </span>
         )}
@@ -97,12 +95,10 @@ visiblePages.forEach((page, index) => {
         {currentPage < totalPages ? (
           <a class="blog-pagination__direction" href={pageHref(currentPage + 1)} rel="next">
             Next
-            <i class="fas fa-arrow-right" aria-hidden="true" />
           </a>
         ) : (
           <span class="blog-pagination__direction is-disabled" aria-disabled="true">
             Next
-            <i class="fas fa-arrow-right" aria-hidden="true" />
           </span>
         )}
       </nav>

@@ -17,6 +17,7 @@
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
   --content-width: 1280px;
+  --navbar-height: 60px;
 
   /* Backwards-compatible semantic aliases used by content components. */
   --ink: var(--slate-dark);
@@ -68,14 +69,13 @@ html {
 }
 
 html.has-navbar-fixed-top {
-  /* Bulma reserves 3.25rem, but this site's fixed navigation is 76px tall. */
-  padding-top: 76px;
-  scroll-padding-top: 92px;
+  padding-top: var(--navbar-height);
+  scroll-padding-top: calc(var(--navbar-height) + 16px);
 }
 
 body {
-  min-height: calc(100vh - 76px);
-  min-height: calc(100dvh - 76px);
+  min-height: calc(100vh - var(--navbar-height));
+  min-height: calc(100dvh - var(--navbar-height));
   margin: 0;
   overflow-x: clip;
   background: var(--ivory-medium);
@@ -165,11 +165,11 @@ img {
 
 /* Navigation */
 html.has-navbar-fixed-top {
-  padding-top: 76px;
+  padding-top: var(--navbar-height);
 }
 
 #navbar {
-  min-height: 76px;
+  min-height: var(--navbar-height);
   border-bottom: 1px solid var(--stone);
   background: color-mix(in srgb, var(--ivory-medium) 70%, transparent);
   box-shadow: none;
@@ -179,7 +179,7 @@ html.has-navbar-fixed-top {
 
 #navbar .container,
 #navbar .navbar-brand {
-  min-height: 76px;
+  min-height: var(--navbar-height);
 }
 
 #navbar .container {
@@ -235,7 +235,7 @@ html.has-navbar-fixed-top {
   gap: 0.25rem;
 }
 
-#navbar a.navbar-item {
+#navbar .navbar-menu a.navbar-item {
   position: relative;
   margin: 0;
   padding: 0.75rem 0.85rem;
@@ -246,7 +246,7 @@ html.has-navbar-fixed-top {
   letter-spacing: -0.005em;
 }
 
-#navbar a.navbar-item::after {
+#navbar .navbar-menu a.navbar-item::after {
   position: absolute;
   right: 0.85rem;
   bottom: 0.45rem;
@@ -260,14 +260,14 @@ html.has-navbar-fixed-top {
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-#navbar a.navbar-item:hover,
-#navbar a.navbar-item.is-active {
+#navbar .navbar-menu a.navbar-item:hover,
+#navbar .navbar-menu a.navbar-item.is-active {
   background: transparent;
   color: var(--slate-dark);
 }
 
-#navbar a.navbar-item:hover::after,
-#navbar a.navbar-item.is-active::after {
+#navbar .navbar-menu a.navbar-item:hover::after,
+#navbar .navbar-menu a.navbar-item.is-active::after {
   opacity: 1;
   transform: scaleX(1);
 }
@@ -371,7 +371,7 @@ html.has-navbar-fixed-top {
 /* Home hero */
 #hero {
   position: relative;
-  min-height: calc(100vh - 76px);
+  min-height: calc(100vh - var(--navbar-height));
   overflow: hidden;
   background: var(--ivory-medium);
 }
@@ -447,7 +447,6 @@ html.has-navbar-fixed-top {
 }
 
 .hero-actions .button-primary {
-  gap: 1rem;
   background: var(--clay) !important;
   border-color: var(--clay) !important;
 }
@@ -1573,10 +1572,10 @@ a.language-switcher__option:hover {
 
   #navbar .navbar-menu {
     position: fixed;
-    top: 76px;
+    top: var(--navbar-height);
     right: 0.75rem;
     left: 0.75rem;
-    max-height: calc(100dvh - 88px);
+    max-height: calc(100dvh - var(--navbar-height) - 12px);
     margin: 0;
     padding: 0.75rem;
     overflow-y: auto;
@@ -1590,12 +1589,12 @@ a.language-switcher__option:hover {
     align-items: stretch;
   }
 
-  #navbar a.navbar-item {
+  #navbar .navbar-menu a.navbar-item {
     min-height: 48px;
     padding: 0.85rem;
   }
 
-  #navbar a.navbar-item::after {
+  #navbar .navbar-menu a.navbar-item::after {
     display: none;
   }
 
@@ -1690,7 +1689,7 @@ a.language-switcher__option:hover {
   }
 
   #hero .hero-body {
-    min-height: calc(100dvh - 76px);
+    min-height: calc(100dvh - var(--navbar-height));
     padding: 3rem 0.75rem 4rem;
   }
 
