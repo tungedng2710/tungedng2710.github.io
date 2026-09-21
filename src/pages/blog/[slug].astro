@@ -52,6 +52,8 @@ const copy = isVietnamese
       contents: "Trong bài viết",
       hideContents: "Ẩn mục lục",
       showContents: "Hiện mục lục",
+      show: "Hiện",
+      hide: "Ẩn",
     }
   : {
       language: "Language",
@@ -61,6 +63,8 @@ const copy = isVietnamese
       contents: "On this page",
       hideContents: "Hide contents",
       showContents: "Show contents",
+      show: "Show",
+      hide: "Hide",
     };
 const alternates = translations.map((translation) => ({
   lang: translation.data.lang,
@@ -166,6 +170,20 @@ const alternates = translations.map((translation) => ({
             </div>
             <aside class="post-toc" id="post-toc-sidebar" aria-label={copy.contents}>
               <button
+                class="post-toc__mobile-trigger"
+                type="button"
+                data-toc-mobile-trigger
+                aria-controls="post-toc-navigation"
+                aria-expanded="false"
+              >
+                <span class="post-toc__mobile-title">
+                  <i class="fas fa-list-ul" aria-hidden="true" />
+                  {copy.contents}
+                </span>
+                <span class="post-toc__mobile-action post-toc__mobile-action--show">{copy.show}</span>
+                <span class="post-toc__mobile-action post-toc__mobile-action--hide">{copy.hide}</span>
+              </button>
+              <button
                 class="post-toc__rail"
                 type="button"
                 data-toc-trigger
@@ -262,17 +280,37 @@ const alternates = translations.map((translation) => ({
 
     const tocSidebar = document.querySelector<HTMLElement>("#post-toc-sidebar");
     const tocTrigger = document.querySelector<HTMLButtonElement>("[data-toc-trigger]");
+    const tocMobileTrigger = document.querySelector<HTMLButtonElement>("[data-toc-mobile-trigger]");
+    const isMobileToc = window.matchMedia("(max-width: 1023px)");
     const setTocExpanded = (expanded: boolean) => {
       tocSidebar?.classList.toggle("is-open", expanded);
       tocTrigger?.setAttribute("aria-expanded", String(expanded));
+      tocMobileTrigger?.setAttribute("aria-expanded", String(expanded));
     };
 
-    tocSidebar?.addEventListener("pointerenter", () => setTocExpanded(true));
-    tocSidebar?.addEventListener("pointerleave", () => setTocExpanded(false));
-    tocSidebar?.addEventListener("focusin", () => setTocExpanded(true));
-    tocSidebar?.addEventListener("focusout", (event) => {
-      if (!tocSidebar.contains(event.relatedTarget as Node | null)) setTocExpanded(false);
+    tocMobileTrigger?.addEventListener("click", () => {
+      setTocExpanded(tocMobileTrigger.getAttribute("aria-expanded") !== "true");
     });
+    tocLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (isMobileToc.matches) setTocExpanded(false);
+      });
+    });
+    tocSidebar?.addEventListener("pointerenter", () => {
+      if (!isMobileToc.matches) setTocExpanded(true);
+    });
+    tocSidebar?.addEventListener("pointerleave", () => {
+      if (!isMobileToc.matches) setTocExpanded(false);
+    });
+    tocSidebar?.addEventListener("focusin", () => {
+      if (!isMobileToc.matches) setTocExpanded(true);
+    });
+    tocSidebar?.addEventListener("focusout", (event) => {
+      if (!isMobileToc.matches && !tocSidebar.contains(event.relatedTarget as Node | null)) {
+        setTocExpanded(false);
+      }
+    });
+    isMobileToc.addEventListener("change", () => setTocExpanded(false));
 
     const mermaidCodeBlocks = [
       ...document.querySelectorAll<HTMLElement>(
