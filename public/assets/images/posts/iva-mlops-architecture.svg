@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title description">
+  <title id="title">Kiến trúc nền tảng MLOps nội bộ IVA</title>
+  <desc id="description">ClearML, Label Studio và Gitea kết nối với kho dữ liệu, các kho artifact nội bộ và cụm GPU hoặc CPU worker trong môi trường air-gapped.</desc>
+  <defs>
+    <linearGradient id="bg" x1="70" y1="25" x2="1130" y2="650" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071A2B"/>
+      <stop offset="0.55" stop-color="#0B2940"/>
+      <stop offset="1" stop-color="#12304A"/>
+    </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#22C55E"/>
+      <stop offset="1" stop-color="#14B8A6"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="170%">
+      <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#020617" flood-opacity="0.35"/>
+    </filter>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="7.5" refY="4.5" orient="auto">
+      <path d="M0 0L9 4.5L0 9Z" fill="#7DD3FC"/>
+    </marker>
+    <style>
+      .eyebrow { font: 700 15px Arial, sans-serif; letter-spacing: 3px; fill: #5EEAD4; }
+      .heading { font: 700 42px Arial, sans-serif; fill: #F8FAFC; }
+      .subheading { font: 400 18px Arial, sans-serif; fill: #B6C8D8; }
+      .label { font: 700 17px Arial, sans-serif; fill: #E6F5FF; }
+      .copy { font: 400 13px Arial, sans-serif; fill: #A8C0D4; }
+      .dark-label { font: 700 19px Arial, sans-serif; fill: #062033; }
+      .dark-copy { font: 600 13px Arial, sans-serif; fill: #123B43; }
+      .flow { fill: none; stroke: #7DD3FC; stroke-width: 2.3; marker-end: url(#arrow); opacity: 0.9; }
+    </style>
+  </defs>
+
+  <rect width="1200" height="675" rx="32" fill="url(#bg)"/>
+  <circle cx="1110" cy="62" r="180" fill="#0E7490" opacity="0.20"/>
+  <circle cx="75" cy="650" r="210" fill="#059669" opacity="0.12"/>
+  <path d="M0 535C230 465 355 650 600 575C850 499 965 548 1200 442V675H0Z" fill="#0F3A4D" opacity="0.45"/>
+
+  <text class="eyebrow" x="72" y="66">IVA AI PLATFORM</text>
+  <text class="heading" x="72" y="116">Internal MLOps architecture</text>
+  <text class="subheading" x="72" y="151">Reproducible data, experiments and models — without Internet access</text>
+
+  <!-- Portal opens the two primary user-facing services. -->
+  <path class="flow" d="M258 285H344"/>
+  <path class="flow" d="M258 311H282Q304 311 304 333V401Q304 423 326 423H344"/>
+
+  <!-- IAM authenticates access through the portal. -->
+  <path class="flow" d="M165 351V331"/>
+
+  <!-- ClearML dispatches jobs; Label Studio requests auto-label inference. -->
+  <path class="flow" d="M552 302H634"/>
+  <path class="flow" d="M552 414H594Q614 414 614 394V341Q614 319 634 319"/>
+
+  <!-- Source code and approved artifacts flow into workers. -->
+  <path class="flow" d="M728 377V357"/>
+  <path class="flow" d="M902 447H870Q846 447 846 423V362Q846 340 824 340H822"/>
+
+  <!-- Workers write datasets, models and artifacts to storage. -->
+  <path class="flow" d="M822 302H901"/>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="239" width="186" height="92" rx="18" fill="#10354C" stroke="#3B82A6"/>
+    <text class="label" x="98" y="278">IVA AI Portal</text>
+    <text class="copy" x="98" y="305">Unified access</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="72" y="351" width="186" height="92" rx="18" fill="#10354C" stroke="#3B82A6"/>
+    <text class="label" x="98" y="390">IAM</text>
+    <text class="copy" x="98" y="417">User · role · group · audit</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="344" y="245" width="208" height="112" rx="20" fill="url(#core)"/>
+    <text class="dark-label" x="372" y="288">ClearML</text>
+    <text class="dark-copy" x="372" y="317">Experiment · pipeline</text>
+    <text class="dark-copy" x="372" y="339">Dataset · model registry</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="344" y="377" width="208" height="92" rx="18" fill="#10354C" stroke="#2DD4BF"/>
+    <text class="label" x="372" y="416">Label Studio</text>
+    <text class="copy" x="372" y="443">Auto-label · human review</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="634" y="245" width="188" height="112" rx="20" fill="#0B2235" stroke="#38BDF8"/>
+    <text class="label" x="660" y="286">GPU / CPU workers</text>
+    <text class="copy" x="660" y="316">Train · evaluate</text>
+    <text class="copy" x="660" y="338">Inference · auto-label</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="634" y="377" width="188" height="92" rx="18" fill="#10354C" stroke="#3B82A6"/>
+    <text class="label" x="660" y="416">Gitea + CI</text>
+    <text class="copy" x="660" y="443">Source · test · build</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="901" y="245" width="226" height="111" rx="20" fill="#10354C" stroke="#38BDF8"/>
+    <text class="label" x="929" y="285">MinIO / NAS</text>
+    <text class="copy" x="929" y="315">Dataset · model · artifact</text>
+    <text class="copy" x="929" y="338">Immutable versions</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="902" y="389" width="226" height="117" rx="20" fill="#0B2235" stroke="#2DD4BF"/>
+    <text class="label" x="930" y="430">Internal supply chain</text>
+    <text class="copy" x="930" y="459">Harbor · PyPI · Model Hub</text>
+    <text class="copy" x="930" y="482">Approved artifacts only</text>
+  </g>
+
+  <rect x="72" y="557" width="1056" height="67" rx="18" fill="#071A2B" stroke="#28506A"/>
+  <circle cx="108" cy="590" r="13" fill="#14B8A6"/>
+  <path d="M103 590L108 595L116 584" fill="none" stroke="#E6FFFB" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="label" x="135" y="586">Air-gapped by design</text>
+  <text class="copy" x="135" y="607">Versioned data · traceable lineage · controlled artifact import · least-privilege execution</text>
+</svg>
