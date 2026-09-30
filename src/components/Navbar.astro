@@ -34,10 +34,10 @@ const { active } = Astro.props;
 
     <div class="navbar-menu" id="navbar-menu">
       <div class="navbar-end">
-        <a class:list={["navbar-item", { "is-active": active === "home" }]} href={withBase("/")}>
+        <a class:list={["navbar-item", { "is-active": active === "home" }]} href={withBase("/")} data-nav="home">
           Home
         </a>
-        <a class="navbar-item" href={withBase("/#about")}>About</a>
+        <a class="navbar-item" href={withBase("/#about")} data-nav="about">About</a>
         <a class:list={["navbar-item", { "is-active": active === "blog" }]} href={withBase("/blog")}>
           Writing
         </a>
@@ -68,6 +68,23 @@ const { active } = Astro.props;
 </nav>
 
 <script>
+  const homeLink = document.querySelector<HTMLAnchorElement>('#navbar [data-nav="home"]');
+  const aboutLink = document.querySelector<HTMLAnchorElement>('#navbar [data-nav="about"]');
+
+  const updateHomeNavigation = () => {
+    if (!homeLink || !aboutLink) return;
+
+    const onHomePage = window.location.pathname === new URL(homeLink.href).pathname;
+    if (!onHomePage) return;
+
+    const onAbout = window.location.hash === "#about";
+    homeLink.classList.toggle("is-active", !onAbout);
+    aboutLink.classList.toggle("is-active", onAbout);
+  };
+
+  updateHomeNavigation();
+  window.addEventListener("hashchange", updateHomeNavigation);
+
   const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
   const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
 
