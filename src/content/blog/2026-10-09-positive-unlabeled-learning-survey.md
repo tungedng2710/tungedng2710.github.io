@@ -1,7 +1,7 @@
 ---
 title: "Positive–Unlabeled Learning: A Short Survey"
 pubDate: 2026-10-09
-image: "/assets/images/heroimage.png"
+image: "/assets/images/posts/positive-unlabeled-learning.png"
 description: A practical survey of positive–unlabeled learning, covering selection assumptions, probability correction, non-negative risk estimation, graph methods, and evaluation for spam-phone detection.
 tags:
 - Machine Learning
