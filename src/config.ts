@@ -2,6 +2,7 @@ export const site = {
   title: "TONVERSE",
   description: "Craft the future",
   keywords: ["AI", "Mathematics"],
+  showPlayground: false,
   author: {
     name: "Tung Nguyen",
     image: "/assets/images/ava.JPG",
