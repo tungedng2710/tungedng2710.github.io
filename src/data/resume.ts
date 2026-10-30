@@ -2,6 +2,7 @@ export const experience = [
   {
     role: "AI Engineer",
     organization: "Viettel Solutions Corporation",
+    logo: "/assets/images/companies/viettel-solutions.png",
     location: "Hanoi, Vietnam",
     period: "March 2022 — Present",
     type: "Full-time",
@@ -18,6 +19,7 @@ export const experience = [
   {
     role: "Research Consultant",
     organization: "WorldQuant BRAIN",
+    logo: "/assets/images/companies/worldquant-brain.png",
     location: "Remote",
     period: "March 2025 — Present",
     type: "Part-time",
@@ -28,6 +30,7 @@ export const experience = [
   {
     role: "AI Engineer Intern",
     organization: "Grooo International JSC",
+    logo: "/assets/images/companies/grooo.png",
     location: "Hanoi, Vietnam",
     period: "October 2021 — March 2022",
     type: "Part-time",
@@ -41,6 +44,7 @@ export const experience = [
   {
     role: "Data Scientist Intern",
     organization: "PIXTA Vietnam Co., Ltd.",
+    logo: "/assets/images/companies/pixta.png",
     location: "Hanoi, Vietnam",
     period: "December 2020 — June 2021",
     type: "Part-time",
@@ -54,6 +58,7 @@ export const experience = [
   {
     role: "AI Engineer Intern",
     organization: "Techainer JSC",
+    logo: "/assets/images/companies/techainer.png",
     location: "Hanoi, Vietnam",
     period: "August 2020 — October 2020",
     type: "Part-time",
