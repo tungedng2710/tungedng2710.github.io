@@ -1336,16 +1336,24 @@
   gap: 22px;
   align-items: center;
 }
-.education-icon {
+.education-logo {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   place-items: center;
   flex-shrink: 0;
-  width: 58px;
-  height: 58px;
+  width: 64px;
+  height: 64px;
+  padding: 6px;
   border: 1px solid var(--dashboard-border);
-  background: var(--ivory-medium);
-  color: var(--clay-deep);
+  background: #fff;
   border-radius: 9px;
+}
+.education-logo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .education-record > div:nth-child(2) {
   flex: 1;
@@ -1653,9 +1661,9 @@
   .education-record {
     gap: 15px;
   }
-  .education-icon {
-    width: 40px;
-    height: 40px;
+  .education-logo {
+    width: 52px;
+    height: 52px;
   }
   .education-record > .record-number {
     display: none;
@@ -1980,12 +1988,13 @@
     padding: 20px;
     gap: 13px;
   }
-  .education-icon {
-    width: 33px;
-    height: 33px;
+  .education-logo {
+    width: 48px;
+    height: 48px;
+    padding: 4px;
   }
   .education-record > div:nth-child(2) {
-    flex-basis: calc(100% - 46px);
+    flex-basis: calc(100% - 61px);
   }
   .education-record h3 {
     font-size: 16px;
@@ -1994,7 +2003,7 @@
     font-size: 12px;
   }
   .cpa {
-    margin-left: 46px;
+    margin-left: 61px;
     padding: 2px 0;
     text-align: left;
     display: flex;

@@ -770,8 +770,15 @@ const careerBars = [
           <div class="education-cards">
             {education.map((item, index) => (
               <article class="dashboard-card education-record" data-record>
-                <div class="education-icon">
-                  <Icon name="education" size={26} />
+                <div class="education-logo">
+                  <img
+                    src={withBase(item.logo)}
+                    alt={`${item.institution} logo`}
+                    width="64"
+                    height="64"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </div>
                 <div>
                   <p class="publication-eyebrow">{item.period}</p>
