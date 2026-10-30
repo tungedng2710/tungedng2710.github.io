@@ -1,536 +1,908 @@
 ---
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
+import Icon from "../components/ResumeIcon.astro";
 import { site, withBase } from "../config";
+import {
+  experience,
+  publications,
+  projects,
+  education,
+  toolkits,
+  credentials,
+  service,
+} from "../data/resume";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/resume.scss";
 
 const resumeUrl = withBase("/resume/NguyenTung_AI_Resume.pdf");
-
-const experience = [
+const now = new Date();
+const yearsInAI = Math.max(0, now.getFullYear() - 2020);
+const careerYears = Array.from(
+  { length: now.getFullYear() - 2020 + 1 },
+  (_, index) => 2020 + index,
+);
+const chartStart = new Date("2020-01-01T00:00:00Z").getTime();
+const chartEnd = Date.UTC(now.getFullYear() + 1, 0, 1);
+const chartPosition = (date: string) =>
+  ((new Date(date).getTime() - chartStart) / (chartEnd - chartStart)) * 100;
+const navigation = [
+  { id: "overview", label: "Overview", icon: "grid", count: null },
   {
-    role: "AI Engineer",
-    organization: "Viettel Solutions Corporation",
-    location: "Hanoi, Vietnam",
-    period: "March 2022 — Present",
-    type: "Full-time",
-    highlights: [
-      "Research and develop intelligent document processing systems that extract structured information from forms, tables, scanned documents, and semi-structured layouts.",
-      "Fine-tune vision-language models for document information extraction, including layout understanding, key-field recognition, and structured output generation.",
-      "Develop layout-analysis and table-extraction modules that preserve reading order and support OCR, information extraction, and validation workflows.",
-      "Build end-to-end license-plate recognition pipelines spanning image preprocessing, vehicle and plate detection, OCR, post-processing, and validation.",
-      "Deploy license-plate recognition models with NVIDIA Triton Inference Server and optimize inference workflows for traffic-monitoring systems.",
-      "Develop traffic-violation recognition features by combining detection, tracking, license-plate recognition, and rule-based video analytics.",
-      "Research and develop speech-enhancement models for the Viettel Meeting platform.",
-    ],
+    id: "experience",
+    label: "Experience",
+    icon: "briefcase",
+    count: experience.length,
+  },
+  { id: "projects", label: "Projects", icon: "layers", count: projects.length },
+  {
+    id: "research",
+    label: "Research",
+    icon: "book",
+    count: publications.length,
   },
   {
-    role: "Research Consultant",
-    organization: "WorldQuant BRAIN",
-    location: "Remote",
-    period: "March 2025 — Present",
-    type: "Part-time",
-    highlights: [
-      "Research, design, and simulate quantitative financial alpha signals on the WorldQuant BRAIN platform using data-driven investment hypotheses.",
-    ],
+    id: "education",
+    label: "Education",
+    icon: "education",
+    count: education.length,
   },
-  {
-    role: "AI Engineer Intern",
-    organization: "Grooo International JSC",
-    location: "Hanoi, Vietnam",
-    period: "October 2021 — March 2022",
-    type: "Part-time",
-    highlights: [
-      "Researched and evaluated face detection, alignment, and recognition components for real-time computer-vision applications.",
-      "Studied object-tracking algorithms under challenging conditions including occlusion, motion blur, and crowded scenes.",
-      "Prepared datasets, ran model experiments, and integrated computer-vision modules into a camera-monitoring system.",
-      "Evaluated performance and analyzed errors to improve model reliability, inference speed, and robustness.",
-    ],
-  },
-  {
-    role: "Data Scientist Intern",
-    organization: "PIXTA Vietnam Co., Ltd.",
-    location: "Hanoi, Vietnam",
-    period: "December 2020 — June 2021",
-    type: "Part-time",
-    highlights: [
-      "Researched facial-expression recognition and multitask-learning approaches for jointly learning facial attributes.",
-      "Built experiments for face recognition, including dataset preparation, model training, evaluation, and performance comparison.",
-      "Annotated, cleaned, and organized image datasets to improve training and validation data quality.",
-      "Visualized datasets, label distributions, and predictions to support error analysis and model improvement.",
-    ],
-  },
-  {
-    role: "AI Engineer Intern",
-    organization: "Techainer JSC",
-    location: "Hanoi, Vietnam",
-    period: "August 2020 — October 2020",
-    type: "Part-time",
-    highlights: [
-      "Researched and implemented CenterNet-based object detection to localize Vietnamese identity cards in eKYC images.",
-      "Developed card-alignment workflows to crop, rotate, and normalize identity-card images before text recognition.",
-      "Applied OCR to extract identity information from Vietnamese identity cards.",
-      "Tested the detection, alignment, and OCR pipeline across varied lighting, angles, and backgrounds.",
-    ],
-  },
+  { id: "toolkit", label: "Skills & toolkit", icon: "code", count: null },
 ];
-
-const publications = [
-  {
-    title: "VPHQA: Vietnamese Pregnancy Health Question Answering Dataset",
-    venue: "EAI INISCOM, 2025",
-    href: "https://doi.org/10.1007/978-3-032-02362-9_13",
-    label: "DOI",
-  },
-  {
-    title: "Chatbot and Reproductive Health for Minority Women",
-    venue: "AI4SDF, 2025",
-  },
-  {
-    title: "The Solution of Computer Vision for Combating COVID-19",
-    venue: "Computational Intelligence Techniques for Green Smart Cities, Springer, 2021",
-    href: "https://doi.org/10.1007/978-3-030-96429-0_9",
-    label: "DOI",
-  },
+const projectTags = [
+  ["Generative AI", "LLMs", "RAG", "Healthcare"],
+  ["Computer Vision", "Detection", "Tracking", "OCR"],
+  ["Computer Vision", "eKYC", "OCR", "Document AI"],
 ];
-
-const projects = [
-  {
-    title: "dMOM Chatbot",
-    description:
-      "A medical chatbot for the PHAD-sponsored dMOM project under Vietnam’s Ministry of Health. Fine-tuned large language models for Vietnamese medical question answering, built a retrieval-augmented generation pipeline grounded in trusted medical knowledge, and implemented a web application for interaction, demonstration, and evaluation.",
-  },
-  {
-    title: "AI Traffic Analysis",
-    description:
-      "An end-to-end traffic-video analysis system combining vehicle detection and tracking, license-plate detection, and OCR. Trained and evaluated models on traffic datasets, integrated the modules into a unified backend pipeline, and built a web demo to visualize results.",
-    href: "https://github.com/tungedng2710/AI-Traffic-Analysis",
-  },
-  {
-    title: "Vietnamese ID Card Recognition",
-    description:
-      "An eKYC document-recognition pipeline for Vietnamese identity-card localization and alignment, with document cropping, perspective correction, image enhancement, text detection, OCR, and evaluation across varied capture conditions.",
-  },
+const projectSummaries = [
+  "Vietnamese medical knowledge, made accessible through conversation.",
+  "From raw traffic footage to structured, actionable insight.",
+  "Turning identity documents into reliable, structured information.",
 ];
+const projectCategories = [
+  "Generative AI",
+  "Computer Vision",
+  "Computer Vision",
+];
+const careerBars = [
+  { name: "Techainer", from: "2020-08-01", to: "2020-10-01", index: 4 },
+  { name: "PIXTA", from: "2020-12-01", to: "2021-06-01", index: 3 },
+  { name: "Grooo", from: "2021-10-01", to: "2022-03-01", index: 2 },
+  {
+    name: "Viettel Solutions",
+    from: "2022-03-01",
+    to: now.toISOString(),
+    index: 0,
+  },
+  { name: "WorldQuant", from: "2025-03-01", to: now.toISOString(), index: 1 },
+].map((role) => ({
+  ...role,
+  start: chartPosition(role.from),
+  width: chartPosition(role.to) - chartPosition(role.from),
+}));
 ---
 
 <BaseLayout
-  title="Curriculum Vitae"
-  description="The curriculum vitae of Tung Nguyen, an AI researcher and engineer specializing in computer vision and generative AI."
+  title="Resume · Career Dashboard"
+  description="Explore Tung Nguyen’s experience, research, projects, and toolkit in an interactive career dashboard. AI engineering, computer vision, and generative AI."
   bodyClass="resume-body"
 >
   <Navbar />
-
-  <main class="resume-page">
-    <article class="container resume-document">
-      <header class="resume-masthead" data-reveal>
-        <div class="masthead-intro">
-          <p class="resume-kicker">Curriculum Vitae · 2026</p>
-          <h1>Tung <em>Nguyen</em></h1>
-          <p class="professional-title">AI Engineer / Researcher</p>
+  <main class="career-dashboard" id="career-dashboard">
+    <aside class="dashboard-sidebar" aria-label="Resume navigation">
+      <a class="workspace-label" href={withBase("/resume")}>
+        <span class="workspace-mark">
+          <Icon name="grid" size={17} />
+        </span>{" "}
+        Career workspace <span class="workspace-version">01</span>
+      </a>
+      <div class="sidebar-profile">
+        <div class="profile-avatar">
+          <img
+            src={withBase(site.author.image)}
+            alt="Tung Nguyen"
+            width="76"
+            height="76"
+          />
+          <span class="avatar-dot" aria-hidden="true"></span>
         </div>
-
-        <div class="resume-actions" aria-label="Résumé document actions">
-          <a class="resume-open" href={resumeUrl} target="_blank" rel="noreferrer">
-            View PDF
+        <h2>
+          Tung Nguyen<span>.</span>
+        </h2>
+        <p>AI Engineer & Researcher</p>
+        <span class="location">
+          <Icon name="pin" size={13} /> Hanoi, Vietnam
+        </span>
+      </div>
+      <p class="sidebar-label">EXPLORE MY RESUME</p>
+      <nav class="dashboard-nav" aria-label="Resume sections">
+        {navigation.map((item) => (
+          <a
+            href={`#${item.id}`}
+            id={`nav-${item.id}`}
+            data-section-link={item.id}
+          >
+            <Icon name={item.icon} size={18} />
+            <span>{item.label}</span>
+            {item.count !== null && (
+              <span class="nav-count">
+                {String(item.count).padStart(2, "0")}
+              </span>
+            )}
+          </a>
+        ))}
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="sidebar-note">
+          <span class="small-orbit" aria-hidden="true">
+            ✳
+          </span>
+          <p>
+            From research
+            <br />
+            to the real world.
+          </p>
+          <span>Building AI that makes a difference.</span>
+        </div>
+        <a class="sidebar-contact" href={`mailto:${site.email}`}>
+          <Icon name="mail" size={16} /> Let’s connect{" "}
+          <Icon name="external" size={13} />
+        </a>
+        <div class="sidebar-socials">
+          <a
+            href={site.social.github}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub"
+          >
+            <Icon name="github" size={17} />
           </a>
           <a
-            class="button button-primary resume-download"
+            href={site.social.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            aria-label="LinkedIn"
+          >
+            <Icon name="linkedin" size={17} />
+          </a>
+          <a href="tel:+84969200308">+84 969 200 308</a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="dashboard-content">
+      <div class="dashboard-toolbar">
+        <div class="breadcrumb">
+          Resume <Icon name="chevron" size={12} />
+          <span id="current-section">Overview</span>
+        </div>
+        <div class="toolbar-actions">
+          <label class="resume-search">
+            <Icon name="search" size={16} />
+            <input
+              id="resume-search"
+              type="search"
+              placeholder="Search my resume…"
+              aria-label="Search experience, projects, research, education, and skills"
+              autocomplete="off"
+            />
+            <kbd aria-hidden="true">/</kbd>
+          </label>
+          <a
+            class="pdf-action"
             href={resumeUrl}
             download="NguyenTung_AI_Resume.pdf"
           >
-            Download CV
+            <Icon name="download" size={16} />
+            <span>Download CV</span>
           </a>
         </div>
-      </header>
-
-      <div class="identity-strip" data-reveal style="--reveal-delay: 60ms;">
-        <a href={`mailto:${site.email}`}>{site.email}</a>
-        <a href={site.social.linkedin} target="_blank" rel="noreferrer">LinkedIn</a>
-        <a href={site.social.github} target="_blank" rel="noreferrer">GitHub</a>
-        <span>Hanoi, Vietnam</span>
-        <a href="tel:+84969200308">+84 969 200 308</a>
       </div>
 
-      <section class="profile-statement" aria-labelledby="profile-heading" data-reveal>
-        <h2 id="profile-heading">Profile</h2>
-        <p>
-          AI researcher and engineer specializing in computer vision, generative artificial
-          intelligence, and applied mathematics. Research and engineering work focuses on
-          translating rigorous computational methods into reliable, production-ready systems,
-          with experience in intelligent document processing, traffic analysis,
-          retrieval-augmented generation, and speech enhancement.
-        </p>
-      </section>
-
-      <div class="resume-grid">
-        <aside class="resume-sidebar">
-          <section class="resume-section" aria-labelledby="education-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">01</p>
-              <h2 id="education-heading">Education</h2>
-            </div>
-
-            <div class="sidebar-list">
-              <article class="education-item">
-                <p class="item-period">2023 — 2025</p>
-                <h3>Master of Science</h3>
-                <p>Applied Mathematics and Informatics</p>
-                <p class="institution">Hanoi University of Science and Technology</p>
-                <p class="item-note">Excellent · CPA 3.81 / 4.00</p>
-              </article>
-
-              <article class="education-item">
-                <p class="item-period">2017 — 2022</p>
-                <h3>Engineer’s Degree</h3>
-                <p>Applied Mathematics and Informatics</p>
-                <p class="institution">Hanoi University of Science and Technology</p>
-                <p class="item-note">Very Good · CPA 3.46 / 4.00</p>
-              </article>
-
-              <article class="education-item">
-                <p class="item-period">2014 — 2017</p>
-                <h3>High School Diploma</h3>
-                <p class="institution">Chu Van An National High School</p>
-              </article>
-            </div>
-          </section>
-
-          <section class="resume-section" aria-labelledby="expertise-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">02</p>
-              <h2 id="expertise-heading">Expertise</h2>
-            </div>
-
-            <dl class="expertise-list">
-              <div><dt>Research Areas</dt><dd>Computer Vision, Intelligent Document Processing, Generative AI, Reinforcement Learning</dd></div>
-              <div><dt>Programming</dt><dd>Python, C#, C/C++, MATLAB</dd></div>
-              <div><dt>AI/ML Frameworks</dt><dd>PyTorch, TensorFlow, MLflow, vLLM</dd></div>
-              <div><dt>Computer Vision</dt><dd>Object Detection, OCR, Image Classification, Tracking, Segmentation, Layout Analysis</dd></div>
-              <div><dt>Generative AI</dt><dd>Large Language Models, Vision-Language Models, RAG, Prompt Engineering, Model Fine-tuning</dd></div>
-              <div><dt>MLOps &amp; Tools</dt><dd>Docker, Git, Triton Inference Server, Label Studio, Roboflow, Dify, Ollama, n8n</dd></div>
-              <div><dt>Professional Skills</dt><dd>Research, Technical Presentation, Teamwork, Leadership, Scrum</dd></div>
-            </dl>
-          </section>
-
-          <section class="resume-section" aria-labelledby="distinctions-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">03</p>
-              <h2 id="distinctions-heading">Distinctions</h2>
-            </div>
-
-            <div class="compact-list">
-              <article>
-                <p class="item-period">2025</p>
-                <h3>Tuổi trẻ sáng tạo toàn quốc</h3>
-                <p>Ho Chi Minh Communist Youth Union</p>
-              </article>
-              <article>
-                <p class="item-period">2020 · 2021</p>
-                <h3>Academic Scholarship</h3>
-                <p>Business partners of HUST</p>
-              </article>
-            </div>
-          </section>
-
-          <section class="resume-section" aria-labelledby="certifications-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">04</p>
-              <h2 id="certifications-heading">Credentials</h2>
-            </div>
-
-            <ul class="credential-list">
-              <li><span>Quant Finance Explorer Program ’24 · WorldQuant</span><time>Nov 2024</time></li>
-              <li><span>Google Advanced Data Analytics · Google</span><time>Aug 2024</time></li>
-              <li><span>Google Project Management · Google</span><time>Aug 2024</time></li>
-              <li><span>Google AI Essentials · Google</span><time>Aug 2024</time></li>
-              <li><span>IELTS Academic · British Council · Overall 6.0</span><time>May 2023</time></li>
-            </ul>
-          </section>
-
-          <section class="resume-section" aria-labelledby="service-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">05</p>
-              <h2 id="service-heading">Academic Service</h2>
-            </div>
-
-            <div class="compact-list">
-              <article><p class="item-period">2026</p><h3>Mentor</h3><p>Viettel Digital Talent Program</p></article>
-              <article><p class="item-period">2023 — 2025</p><h3>Research Mentor</h3><p>Scientific research competitions for high-school students</p></article>
-              <article><p class="item-period">Jan 2018 — Aug 2018</p><h3>Extra-class Assistant</h3><p>SAMI study support club, Hanoi University of Science and Technology</p></article>
-              <article><p class="item-period">Oct 2017 — Aug 2018</p><h3>Volunteer</h3><p>SAMI Volunteer organization, Hanoi University of Science and Technology</p></article>
-            </div>
-          </section>
-        </aside>
-
-        <div class="resume-main">
-          <section class="resume-section" aria-labelledby="experience-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">06</p>
-              <h2 id="experience-heading">Research &amp; Experience</h2>
-            </div>
-
-            <div class="experience-list">
-              {experience.map((item) => (
-                <article class="experience-item">
-                  <div class="experience-meta"><p class="item-period">{item.period}</p><p>{item.location}</p></div>
-                  <div class="experience-copy">
-                    <p class="employment-type">{item.type}</p>
-                    <h3>{item.role}</h3>
-                    <p class="institution">{item.organization}</p>
-                    <ul>{item.highlights.map((highlight) => <li>{highlight}</li>)}</ul>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section class="resume-section" aria-labelledby="publications-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">07</p>
-              <h2 id="publications-heading">Selected Publications</h2>
-            </div>
-
-            <ol class="publication-list">
-              {publications.map((publication) => (
-                <li>
-                  <div><h3>{publication.title}</h3><p>{publication.venue}</p></div>
-                  {publication.href && <a href={publication.href} target="_blank" rel="noreferrer">{publication.label}</a>}
-                </li>
-              ))}
-            </ol>
-          </section>
-
-          <section class="resume-section" aria-labelledby="projects-heading" data-reveal>
-            <div class="section-heading">
-              <p class="section-number" aria-hidden="true">08</p>
-              <h2 id="projects-heading">Selected Projects</h2>
-            </div>
-
-            <div class="project-list">
-              {projects.map((project, index) => (
-                <article class="project-item">
-                  <p class="project-index">P—0{index + 1}</p>
-                  <div>
-                    <h3>{project.title}</h3>
-                    <p>{project.description}</p>
-                    {project.href && <a href={project.href} target="_blank" rel="noreferrer">View repository</a>}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
+      <div class="dashboard-inner">
+        <div class="search-feedback" id="search-feedback" hidden>
+          <p role="status" id="search-status"></p>
+          <button type="button" id="clear-search">
+            Clear search <span aria-hidden="true">×</span>
+          </button>
         </div>
+
+        <section
+          class="dashboard-panel"
+          id="overview"
+          aria-labelledby="heading-overview"
+          data-panel="overview"
+        >
+          <header class="dashboard-heading">
+            <div>
+              <p class="eyebrow">
+                <span></span> THE PERSON BEHIND THE WORK
+              </p>
+              <h1 id="heading-overview">
+                A little context.
+                <br />A lot of <em>possibility.</em>
+              </h1>
+              <p class="heading-description">
+                I’m Tung, an AI engineer turning research into things that work.
+                <br class="desktop-break" /> Here’s a closer look at my journey
+                so far.
+              </p>
+            </div>
+            <div class="hero-orbit" aria-hidden="true">
+              <span class="orbit-label">RESEARCH × ENGINEERING</span>
+              <svg viewBox="0 0 160 160" fill="none">
+                <circle cx="80" cy="80" r="58" />
+                <ellipse
+                  cx="80"
+                  cy="80"
+                  rx="25"
+                  ry="58"
+                  transform="rotate(45 80 80)"
+                />
+                <ellipse
+                  cx="80"
+                  cy="80"
+                  rx="25"
+                  ry="58"
+                  transform="rotate(-45 80 80)"
+                />
+                <path d="M22 80h116M80 22v116" />
+                <circle class="orbit-center" cx="80" cy="80" r="8" />
+                <circle class="orbit-planet" cx="122" cy="40" r="6" />
+              </svg>
+              <span class="orbit-coordinate">21.0285° N · 105.8542° E</span>
+            </div>
+          </header>
+
+          <div class="metric-grid">
+            <a class="metric-card" href="#experience" data-go="experience">
+              <div class="metric-top">
+                <span>IN THE FIELD</span>
+                <Icon name="briefcase" size={17} />
+              </div>
+              <p class="metric-value">
+                {yearsInAI}
+                <span> years</span>
+              </p>
+              <p class="metric-caption">
+                Building in AI since 2020 <Icon name="arrow" size={15} />
+              </p>
+            </a>
+            <a class="metric-card" href="#projects" data-go="projects">
+              <div class="metric-top">
+                <span>SELECTED WORK</span>
+                <Icon name="layers" size={17} />
+              </div>
+              <p class="metric-value">
+                0{projects.length}
+                <span> projects</span>
+              </p>
+              <p class="metric-caption">
+                Ideas put into practice <Icon name="arrow" size={15} />
+              </p>
+            </a>
+            <a class="metric-card" href="#research" data-go="research">
+              <div class="metric-top">
+                <span>RESEARCH OUTPUT</span>
+                <Icon name="book" size={17} />
+              </div>
+              <p class="metric-value">
+                0{publications.length}
+                <span> publications</span>
+              </p>
+              <p class="metric-caption">
+                Contributing to the conversation <Icon name="arrow" size={15} />
+              </p>
+            </a>
+            <a
+              class="metric-card metric-highlight"
+              href="#education"
+              data-go="education"
+            >
+              <div class="metric-top">
+                <span>ACADEMIC FOUNDATION</span>
+                <Icon name="education" size={17} />
+              </div>
+              <p class="metric-value">
+                3.81<span> / 4.00</span>
+              </p>
+              <p class="metric-caption">
+                MSc · Applied Mathematics <Icon name="arrow" size={15} />
+              </p>
+            </a>
+          </div>
+
+          <div class="overview-grid">
+            <article class="dashboard-card current-focus">
+              <div class="card-heading">
+                <h2>
+                  <span class="status-dot"></span> Where I am now
+                </h2>
+                <span class="subtle-tag">FULL-TIME</span>
+              </div>
+              <div class="current-role">
+                <span class="company-monogram">
+                  V<span>↗</span>
+                </span>
+                <div>
+                  <h3>AI Engineer</h3>
+                  <p>Viettel Solutions Corporation</p>
+                </div>
+                <span class="current-since">2022 — PRESENT</span>
+              </div>
+              <p class="focus-description">
+                Bringing computer vision and generative AI into production. My
+                work spans intelligent document processing, vision-language
+                models, traffic analysis, and speech enhancement.
+              </p>
+              <div class="tag-list">
+                <span>Document AI</span>
+                <span>Computer Vision</span>
+                <span>Generative AI</span>
+              </div>
+              <div class="card-bottom">
+                <span>
+                  <Icon name="pin" size={13} /> Hanoi, Vietnam
+                </span>
+                <a href="#experience" data-go="experience" data-role="0">
+                  Explore my experience <Icon name="arrow" size={15} />
+                </a>
+              </div>
+            </article>
+            <article class="dashboard-card interests-card">
+              <div class="card-heading">
+                <h2>What I think about</h2>
+                <Icon name="spark" size={18} />
+              </div>
+              <p class="card-description">The areas that keep me curious.</p>
+              <div class="interest-links">
+                {[
+                  {
+                    title: "Computer Vision",
+                    note: "Making sense of the visual world",
+                    icon: "grid",
+                  },
+                  {
+                    title: "Generative AI",
+                    note: "Language, vision & new possibilities",
+                    icon: "spark",
+                  },
+                  {
+                    title: "Research",
+                    note: "Applied mathematics & learning",
+                    icon: "code",
+                  },
+                ].map((item) => (
+                  <a
+                    href="#toolkit"
+                    data-go="toolkit"
+                    data-toolkit={item.title}
+                  >
+                    <span class="interest-icon">
+                      <Icon name={item.icon} size={19} />
+                    </span>
+                    <span>
+                      <strong>
+                        {item.title === "Research"
+                          ? "Applied Mathematics"
+                          : item.title}
+                      </strong>
+                      <small>{item.note}</small>
+                    </span>
+                    <Icon name="chevron" size={14} />
+                  </a>
+                ))}
+              </div>
+            </article>
+          </div>
+
+          <article class="dashboard-card career-map">
+            <div class="card-heading">
+              <div>
+                <h2>A journey in the making</h2>
+                <p class="card-description">
+                  From my first experiments to production systems.
+                </p>
+              </div>
+              <a class="text-link" href="#experience" data-go="experience">
+                View timeline <Icon name="arrow" size={15} />
+              </a>
+            </div>
+            <div
+              class="career-chart"
+              style={`--chart-years: ${careerYears.length};`}
+            >
+              <div class="chart-axis">
+                {careerYears.map((year) => (
+                  <span>{year}</span>
+                ))}
+              </div>
+              <div class="chart-tracks">
+                {careerBars.map((bar) => (
+                  <a
+                    class:list={[
+                      "career-track",
+                      { "track-current": bar.index < 2 },
+                    ]}
+                    href="#experience"
+                    data-go="experience"
+                    data-role={bar.index}
+                    aria-label={`${experience[bar.index].role} at ${experience[bar.index].organization}, ${experience[bar.index].period}`}
+                  >
+                    <span class="track-label">{bar.name}</span>
+                    <span class="track-lane">
+                      <span
+                        class="track-bar"
+                        style={`--bar-start: ${bar.start}%; --bar-width: ${bar.width}%;`}
+                      >
+                        <span>{bar.index < 2 ? "Present" : ""}</span>
+                      </span>
+                    </span>
+                    <Icon name="external" size={12} />
+                  </a>
+                ))}
+              </div>
+            </div>
+            <div class="chart-footnote">
+              <span>
+                <i></i> Current role
+              </span>
+              <span>
+                <i></i> Previous experience
+              </span>
+              <p>
+                Select a role to explore <Icon name="arrow" size={13} />
+              </p>
+            </div>
+          </article>
+
+          <div class="overview-bottom">
+            <article class="dashboard-card research-preview">
+              <div class="card-heading">
+                <h2>On the research side</h2>
+                <span class="subtle-tag">LATEST PUBLICATION</span>
+              </div>
+              <p class="publication-eyebrow">EAI INISCOM · 2025</p>
+              <h3>{publications[0].title}</h3>
+              <a class="text-link" href="#research" data-go="research">
+                Explore publications <Icon name="arrow" size={15} />
+              </a>
+            </article>
+            <article class="contact-card">
+              <Icon name="spark" size={25} />
+              <h2>
+                Good work starts
+                <br />
+                with a conversation.
+              </h2>
+              <div>
+                <a href={`mailto:${site.email}`}>
+                  Say hello <Icon name="external" size={15} />
+                </a>
+                <button
+                  type="button"
+                  class="copy-email"
+                  data-email={site.email}
+                  aria-label="Copy email address"
+                  title="Copy email address"
+                >
+                  <Icon name="copy" size={16} />
+                </button>
+              </div>
+              <span id="copy-status" role="status" aria-live="polite"></span>
+            </article>
+          </div>
+        </section>
+
+        <section
+          class="dashboard-panel"
+          id="experience"
+          aria-labelledby="heading-experience"
+          data-panel="experience"
+        >
+          <header class="dashboard-section-heading">
+            <p class="eyebrow">THE JOURNEY SO FAR</p>
+            <h2 id="heading-experience">
+              Research & <em>experience.</em>
+            </h2>
+            <p>
+              Learning by building. From early computer vision experiments to AI
+              in production.
+            </p>
+          </header>
+          <div
+            class="panel-tools"
+            data-filter-group="experience"
+            aria-label="Filter experience"
+          >
+            <button type="button" data-filter="All" aria-pressed="true">
+              All roles <span>{experience.length}</span>
+            </button>
+            <button type="button" data-filter="Full-time" aria-pressed="false">
+              Full-time
+            </button>
+            <button type="button" data-filter="Part-time" aria-pressed="false">
+              Part-time
+            </button>
+            <span class="tools-note">Select a role to see the details</span>
+          </div>
+          <div class="experience-timeline">
+            {experience.map((item, index) => (
+              <article
+                class="experience-record"
+                data-record
+                data-category={item.type}
+              >
+                <div class="timeline-marker" aria-hidden="true">
+                  <span></span>
+                </div>
+                <div class="experience-date">
+                  <span>{item.period}</span>
+                  <small>{item.location}</small>
+                  {index < 2 && (
+                    <span class="present-badge">
+                      <i></i> Current
+                    </span>
+                  )}
+                </div>
+                <details
+                  class="dashboard-card experience-detail"
+                  id={`role-${index}`}
+                  open={index === 0}
+                >
+                  <summary>
+                    <div>
+                      <span class="subtle-tag">{item.type}</span>
+                      <h3>{item.role}</h3>
+                      <p>{item.organization}</p>
+                    </div>
+                    <span class="expand-icon">
+                      <Icon name="chevron" size={18} />
+                    </span>
+                  </summary>
+                  <div class="experience-highlights">
+                    <p class="detail-label">WORK & CONTRIBUTIONS</p>
+                    <ul>
+                      {item.highlights.map((highlight) => (
+                        <li>{highlight}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </details>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          class="dashboard-panel"
+          id="projects"
+          aria-labelledby="heading-projects"
+          data-panel="projects"
+        >
+          <header class="dashboard-section-heading">
+            <p class="eyebrow">RESEARCH, MEET REALITY</p>
+            <h2 id="heading-projects">
+              Ideas in <em>practice.</em>
+            </h2>
+            <p>
+              A selection of applied AI projects. Explore the problems,
+              approaches, and systems behind the work.
+            </p>
+          </header>
+          <div
+            class="panel-tools"
+            data-filter-group="projects"
+            aria-label="Filter projects"
+          >
+            {["All", "Computer Vision", "Generative AI"].map((category) => (
+              <button
+                type="button"
+                data-filter={category}
+                aria-pressed={category === "All"}
+              >
+                {category === "All" ? "All projects" : category}
+              </button>
+            ))}
+          </div>
+          <div class="project-cards">
+            {projects.map((project, index) => (
+              <article
+                class="dashboard-card project-record"
+                data-record
+                data-category={projectCategories[index]}
+              >
+                <div
+                  class:list={["project-art", `project-art-${index}`]}
+                  aria-hidden="true"
+                >
+                  <span class="project-art-label">
+                    APPLIED AI / 0{index + 1}
+                  </span>
+                  {index === 0 ? (
+                    <div class="conversation-art">
+                      <span>
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                      </span>
+                      <span>
+                        <i></i>
+                        <i></i>
+                      </span>
+                      <span>
+                        <Icon name="spark" size={20} /> dMOM
+                      </span>
+                    </div>
+                  ) : index === 1 ? (
+                    <div class="traffic-art">
+                      <span class="road-line"></span>
+                      <span class="road-line"></span>
+                      <span class="detection-box">
+                        VEHICLE <i></i>
+                      </span>
+                      <span class="detection-box">
+                        OCR <i></i>
+                      </span>
+                    </div>
+                  ) : (
+                    <div class="document-art">
+                      <span class="document-avatar"></span>
+                      <span class="document-line"></span>
+                      <span class="document-line"></span>
+                      <span class="document-line"></span>
+                      <span class="document-scan"></span>
+                      <span class="document-check">
+                        <Icon name="check" size={15} />
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div class="project-copy">
+                  <p class="publication-eyebrow">{projectCategories[index]}</p>
+                  <h3>{project.title}</h3>
+                  <p>{projectSummaries[index]}</p>
+                  <div class="tag-list">
+                    {projectTags[index].slice(1).map((tag) => (
+                      <span>{tag}</span>
+                    ))}
+                  </div>
+                  <details class="project-description">
+                    <summary>
+                      Explore project <Icon name="chevron" size={15} />
+                    </summary>
+                    <p>{project.description}</p>
+                  </details>
+                  {project.href && (
+                    <a
+                      class="text-link repository-link"
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Icon name="github" size={15} /> View repository{" "}
+                      <Icon name="external" size={13} />
+                    </a>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          class="dashboard-panel"
+          id="research"
+          aria-labelledby="heading-research"
+          data-panel="research"
+        >
+          <header class="dashboard-section-heading">
+            <p class="eyebrow">QUESTIONS WORTH EXPLORING</p>
+            <h2 id="heading-research">
+              A curious <em>mind.</em>
+            </h2>
+            <p>
+              Selected publications, academic service, and contributions to the
+              research community.
+            </p>
+          </header>
+          <div class="section-caption">
+            <h3>Selected publications</h3>
+            <span>0{publications.length} PAPERS</span>
+          </div>
+          <div class="publication-cards">
+            {publications.map((publication, index) => (
+              <article class="dashboard-card publication-record" data-record>
+                <span class="record-number">0{index + 1}</span>
+                <div>
+                  <p class="publication-eyebrow">{publication.venue}</p>
+                  <h3>{publication.title}</h3>
+                  {publication.href ? (
+                    <a
+                      class="text-link"
+                      href={publication.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Read publication <Icon name="external" size={13} />
+                    </a>
+                  ) : (
+                    <span class="publication-note">
+                      Conference contribution
+                    </span>
+                  )}
+                </div>
+                <Icon name="book" size={23} />
+              </article>
+            ))}
+          </div>
+          <div class="section-caption">
+            <h3>Academic service</h3>
+            <span>SHARING WHAT I LEARN</span>
+          </div>
+          <div class="service-grid">
+            {service.map((item) => (
+              <article class="dashboard-card service-record" data-record>
+                <span class="publication-eyebrow">{item.period}</span>
+                <h3>{item.role}</h3>
+                <p>{item.organization}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section
+          class="dashboard-panel"
+          id="education"
+          aria-labelledby="heading-education"
+          data-panel="education"
+        >
+          <header class="dashboard-section-heading">
+            <p class="eyebrow">THE FOUNDATIONS</p>
+            <h2 id="heading-education">
+              Always <em>learning.</em>
+            </h2>
+            <p>
+              A background in applied mathematics, a habit of asking questions,
+              and a commitment to keep growing.
+            </p>
+          </header>
+          <div class="education-cards">
+            {education.map((item, index) => (
+              <article class="dashboard-card education-record" data-record>
+                <div class="education-icon">
+                  <Icon name="education" size={26} />
+                </div>
+                <div>
+                  <p class="publication-eyebrow">{item.period}</p>
+                  <h3>{item.degree}</h3>
+                  {item.field && <p class="degree-field">{item.field}</p>}
+                  <p>{item.institution}</p>
+                  {item.result && <span class="subtle-tag">{item.result}</span>}
+                </div>
+                {item.cpa && (
+                  <div class="cpa">
+                    <strong>{item.cpa}</strong>
+                    <span>/ {item.maximum} CPA</span>
+                  </div>
+                )}
+                <span class="record-number">0{index + 1}</span>
+              </article>
+            ))}
+          </div>
+          <div class="section-caption">
+            <h3>Credentials</h3>
+            <span>CONTINUING EDUCATION</span>
+          </div>
+          <div class="credential-cards">
+            {credentials.map((item) => (
+              <article class="dashboard-card credential-record" data-record>
+                <Icon name="check" size={18} />
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.issuer}</p>
+                </div>
+                <time>{item.date}</time>
+              </article>
+            ))}
+          </div>
+          <div class="section-caption">
+            <h3>Distinctions</h3>
+            <span>A FEW MILESTONES</span>
+          </div>
+          <div class="service-grid">
+            <article class="dashboard-card service-record" data-record>
+              <p class="publication-eyebrow">2025</p>
+              <h3>Tuổi trẻ sáng tạo toàn quốc</h3>
+              <p>Ho Chi Minh Communist Youth Union</p>
+            </article>
+            <article class="dashboard-card service-record" data-record>
+              <p class="publication-eyebrow">2020 · 2021</p>
+              <h3>Academic Scholarship</h3>
+              <p>Business partners of HUST</p>
+            </article>
+          </div>
+        </section>
+
+        <section
+          class="dashboard-panel"
+          id="toolkit"
+          aria-labelledby="heading-toolkit"
+          data-panel="toolkit"
+        >
+          <header class="dashboard-section-heading">
+            <p class="eyebrow">HOW THE WORK GETS DONE</p>
+            <h2 id="heading-toolkit">
+              The working <em>toolkit.</em>
+            </h2>
+            <p>
+              Methods, languages, and tools I use to move from a research
+              question to a working system.
+            </p>
+          </header>
+          <div
+            class="panel-tools"
+            data-filter-group="toolkit"
+            aria-label="Filter skills"
+          >
+            {[
+              "All",
+              "Computer Vision",
+              "Generative AI",
+              "Engineering",
+              "Research",
+            ].map((category) => (
+              <button
+                type="button"
+                data-filter={category}
+                aria-pressed={category === "All"}
+              >
+                {category === "All" ? "All skills" : category}
+              </button>
+            ))}
+          </div>
+          <div class="toolkit-cards">
+            {toolkits.map((toolkit) => (
+              <article
+                class="dashboard-card toolkit-record"
+                data-record
+                data-category={toolkit.category}
+              >
+                <span class="toolkit-icon">
+                  <Icon name={toolkit.icon} size={22} />
+                </span>
+                <p class="publication-eyebrow">{toolkit.category}</p>
+                <h3>{toolkit.title}</h3>
+                <div class="tag-list">
+                  {toolkit.items.map((item) => (
+                    <span>{item}</span>
+                  ))}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <div class="empty-search" id="empty-search" hidden>
+          <Icon name="search" size={30} />
+          <h2>No matches yet.</h2>
+          <p>Try a skill, company, project, or research topic.</p>
+          <button type="button" data-reset-search>
+            Show the full resume <Icon name="arrow" size={16} />
+          </button>
+        </div>
+        <footer class="dashboard-footer">
+          <span>A work in progress. Always.</span>
+          <a href={resumeUrl} target="_blank" rel="noreferrer">
+            Prefer the document? View PDF <Icon name="external" size={12} />
+          </a>
+        </footer>
       </div>
-
-      <footer class="resume-closing" data-reveal>
-        <p>Full curriculum vitae</p>
-        <a href={resumeUrl} download="NguyenTung_AI_Resume.pdf">Download PDF</a>
-      </footer>
-    </article>
+    </div>
   </main>
-
   <Footer />
 </BaseLayout>
 
-<style>
-  .resume-page {
-    min-height: calc(100dvh - var(--navbar-height));
-    padding: clamp(3.5rem, 7vw, 7rem) 1.5rem clamp(4.5rem, 8vw, 7rem);
-    background: var(--ivory-light);
-  }
-
-  :global(.resume-body),
-  :global(.resume-body *) {
-    font-family: var(--font-serif);
-  }
-
-  .resume-document { width: min(calc(100% - 1rem), 1180px); }
-
-  .resume-masthead {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 2rem;
-    align-items: end;
-    padding-bottom: clamp(2rem, 4vw, 3.5rem);
-    border-bottom: 1px solid var(--slate-dark);
-  }
-
-  .resume-kicker, .section-number, .item-period, .employment-type, .project-index {
-    margin: 0;
-    color: var(--cloud-dark);
-    font-size: 0.68rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    line-height: 1.5;
-    text-transform: uppercase;
-  }
-
-  .resume-kicker { margin-bottom: clamp(1.5rem, 3vw, 2.75rem); }
-
-  h1 {
-    margin: 0;
-    color: var(--slate-dark);
-    font-size: clamp(4.25rem, 10vw, 8.75rem);
-    font-weight: 500;
-    letter-spacing: -0.055em;
-    line-height: 0.82;
-  }
-
-  h1 em { font-family: var(--font-serif); font-weight: 400; }
-
-  .professional-title {
-    margin: clamp(1.75rem, 3vw, 2.5rem) 0 0;
-    color: var(--slate-medium);
-    font-family: var(--font-serif);
-    font-size: clamp(1.15rem, 2vw, 1.5rem);
-    line-height: 1.3;
-  }
-
-  .resume-actions { display: flex; align-items: center; gap: 1.25rem; }
-
-  .resume-open, .resume-closing a, .publication-list a, .project-item a {
-    display: inline-flex;
-    width: fit-content;
-    padding-bottom: 0.25rem;
-    align-items: center;
-    gap: 0.5rem;
-    border-bottom: 1px solid currentColor;
-    color: var(--slate-dark);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.055em;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
-
-  .resume-open:hover, .resume-closing a:hover, .publication-list a:hover, .project-item a:hover { color: var(--clay-deep); }
-  .identity-strip {
-    display: flex;
-    padding: 1rem 0;
-    flex-wrap: wrap;
-    gap: 0.5rem 0;
-    border-bottom: 1px solid var(--stone);
-    color: var(--slate-medium);
-    font-size: 0.7rem;
-    letter-spacing: 0.01em;
-  }
-
-  .identity-strip > * { display: inline-flex; align-items: center; text-decoration: none; }
-  .identity-strip > *:not(:last-child)::after { margin: 0 0.8rem; color: var(--cloud-medium); content: "·"; }
-  .identity-strip a:hover { color: var(--clay-deep); }
-
-  .profile-statement {
-    display: block;
-    width: 100%;
-    margin: 1rem 0;
-    padding: clamp(1.5rem, 3vw, 2.5rem);
-    border: 1px solid var(--stone);
-  }
-
-  .profile-statement h2, .section-heading h2 { margin: 0; color: var(--slate-dark); font-weight: 500; letter-spacing: -0.035em; }
-  .profile-statement h2 { margin-bottom: 0.6rem; font-size: clamp(1.4rem, 2vw, 1.75rem); line-height: 1.1; }
-
-  .profile-statement > p {
-    width: 100%;
-    max-width: 76ch;
-    margin: 0;
-    color: var(--slate-dark);
-    font-family: var(--font-serif);
-    font-size: clamp(1.05rem, 1.55vw, 1.3rem);
-    line-height: 1.55;
-  }
-
-  .resume-grid { display: grid; grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.5fr); gap: clamp(1rem, 2vw, 1.5rem); align-items: stretch; }
-  .resume-sidebar, .resume-main { display: grid; min-width: 0; gap: clamp(1rem, 2vw, 1.5rem); }
-  .resume-sidebar { grid-template-rows: auto auto auto auto 1fr; }
-  .resume-section { padding: clamp(1.5rem, 3vw, 2.5rem); border: 1px solid var(--stone); }
-  .section-heading { display: flex; margin-bottom: clamp(1.25rem, 2vw, 1.75rem); align-items: baseline; gap: 0.7rem; }
-  .section-heading .section-number { flex: 0 0 auto; color: var(--slate-medium); font-size: clamp(1.35rem, 2.2vw, 1.9rem); font-weight: 500; letter-spacing: -0.025em; line-height: 1; }
-  .section-heading h2 { font-size: clamp(1.5rem, 2vw, 1.9rem); line-height: 1; white-space: nowrap; }
-  .sidebar-list, .compact-list, .experience-list, .project-list { display: grid; }
-
-  .education-item, .compact-list article { padding: 1.5rem 0; border-top: 1px solid var(--stone); }
-  .education-item:first-child, .compact-list article:first-child { padding-top: 0; border-top: 0; }
-  .education-item h3, .compact-list h3, .experience-copy h3, .publication-list h3, .project-item h3 { margin: 0; color: var(--slate-dark); font-family: var(--font-serif); font-weight: 500; }
-  .education-item h3, .compact-list h3 { margin-top: 0.65rem; font-size: 1.15rem; line-height: 1.25; }
-  .education-item > p:not(.item-period), .compact-list article > p:not(.item-period) { margin: 0.35rem 0 0; color: var(--slate-medium); font-size: 0.82rem; line-height: 1.55; }
-  .education-item .institution, .experience-copy .institution { color: var(--slate-dark); font-weight: 500; }
-  .education-item .item-note { color: var(--cloud-dark); }
-
-  .expertise-list { margin: 0; }
-  .expertise-list > div { padding: 1rem 0; border-top: 1px solid var(--stone); }
-  .expertise-list > div:first-child { padding-top: 0; border-top: 0; }
-  .expertise-list dt { margin-bottom: 0.45rem; color: var(--cloud-dark); font-size: 0.64rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; }
-  .expertise-list dd { margin: 0; color: var(--slate-medium); font-family: var(--font-serif); font-size: 1rem; line-height: 1.5; }
-
-  .credential-list { margin: 0; padding: 0; list-style: none; }
-  .credential-list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--stone); color: var(--slate-medium); font-size: 0.78rem; line-height: 1.4; }
-  .credential-list li:first-child { padding-top: 0; border-top: 0; }
-  .credential-list time { color: var(--cloud-dark); font-size: 0.65rem; }
-
-  .experience-item { display: grid; grid-template-columns: minmax(125px, 0.36fr) minmax(0, 1fr); gap: clamp(1.5rem, 3vw, 2.75rem); padding: 2.25rem 0; border-top: 1px solid var(--stone); }
-  .experience-item:first-child { padding-top: 0; border-top: 0; }
-  .experience-meta > p:last-child { margin: 0.45rem 0 0; color: var(--cloud-dark); font-size: 0.7rem; }
-  .employment-type { margin-bottom: 0.55rem; }
-  .experience-copy h3 { font-size: clamp(1.35rem, 2vw, 1.7rem); line-height: 1.2; }
-  .experience-copy .institution { margin: 0.25rem 0 0; font-size: 0.83rem; }
-  .experience-copy ul { display: grid; gap: 0.55rem; margin: 1.25rem 0 0; padding: 0; color: var(--slate-medium); font-size: 0.86rem; line-height: 1.65; list-style: none; }
-  .experience-copy li { position: relative; padding-left: 1.15rem; }
-  .experience-copy li::before { position: absolute; top: 0; left: 0; color: var(--clay-deep); content: "—"; }
-
-  .publication-list { margin: 0; padding: 0; counter-reset: publications; list-style: none; }
-  .publication-list li { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.5rem; padding: 1.5rem 0 1.5rem 3rem; align-items: start; border-top: 1px solid var(--stone); counter-increment: publications; }
-  .publication-list li:first-child { padding-top: 0; border-top: 0; }
-  .publication-list li::before { position: absolute; top: 1.75rem; left: 0; color: var(--cloud-dark); content: "0" counter(publications); font-size: 0.65rem; }
-  .publication-list li:first-child::before { top: 0.25rem; }
-  .publication-list h3 { font-size: 1.15rem; line-height: 1.35; }
-  .publication-list p { margin: 0.45rem 0 0; color: var(--cloud-dark); font-size: 0.76rem; line-height: 1.5; }
-  .publication-list a { margin-top: 0.15rem; }
-
-  .project-item { display: grid; grid-template-columns: 62px minmax(0, 1fr); gap: 1.5rem; padding: 1.75rem 0; border-top: 1px solid var(--stone); }
-  .project-item:first-child { padding-top: 0; border-top: 0; }
-  .project-item h3 { font-size: 1.25rem; line-height: 1.3; }
-  .project-item div > p { margin: 0.65rem 0 0; color: var(--slate-medium); font-size: 0.84rem; line-height: 1.65; }
-  .project-item a { margin-top: 1rem; }
-
-  .resume-closing { display: flex; margin-top: clamp(1rem, 2vw, 1.5rem); padding-top: 2rem; align-items: center; justify-content: space-between; border-top: 1px solid var(--slate-dark); }
-  .resume-closing p { margin: 0; color: var(--cloud-dark); font-family: var(--font-serif); font-size: 0.95rem; font-style: italic; }
-
-  @media (max-width: 900px) {
-    .resume-page { background: var(--ivory-light); }
-    .resume-grid { grid-template-columns: 1fr; }
-    .resume-sidebar { grid-template-rows: none; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-
-  @media (max-width: 640px) {
-    .resume-page { padding: 3rem 0.5rem 4rem; }
-    .resume-document { width: calc(100% - 1rem); }
-    .resume-masthead { grid-template-columns: 1fr; align-items: start; }
-    h1 { font-size: clamp(3.75rem, 21vw, 6rem); line-height: 0.84; }
-    .resume-actions { width: 100%; justify-content: space-between; }
-    .identity-strip { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; }
-    .identity-strip > * { padding: 0.5rem 0; }
-    .identity-strip > *::after { display: none; }
-    .resume-sidebar { grid-template-columns: 1fr; gap: 0; }
-    .experience-item { grid-template-columns: 1fr; gap: 0.85rem; }
-    .experience-meta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-    .experience-meta > p:last-child { margin: 0; }
-    .publication-list li { grid-template-columns: 1fr; gap: 1rem; }
-    .publication-list a { margin-top: 0; }
-  }
-
-  @media (max-width: 380px) {
-    .resume-actions { align-items: stretch; flex-direction: column; }
-    .resume-open { align-self: flex-start; }
-    .resume-download { width: 100%; }
-    .identity-strip { grid-template-columns: 1fr; }
-    .project-item { grid-template-columns: 1fr; gap: 0.65rem; }
-  }
-
-  @media print {
-    .resume-page { padding: 0; background: white; }
-    .resume-actions, .resume-closing { display: none; }
-    .resume-masthead { grid-template-columns: 1fr; }
-    .resume-section, .experience-item, .project-item, .publication-list li { break-inside: avoid; }
-  }
-</style>
+<script>
+  import "../scripts/resume";
+</script>
