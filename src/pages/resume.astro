@@ -29,6 +29,12 @@ const chartPosition = (date: string) =>
 const navigation = [
   { id: "overview", label: "Overview", icon: "grid", count: null },
   {
+    id: "education",
+    label: "Education",
+    icon: "education",
+    count: education.length,
+  },
+  {
     id: "experience",
     label: "Experience",
     icon: "briefcase",
@@ -40,12 +46,6 @@ const navigation = [
     label: "Research",
     icon: "book",
     count: publications.length,
-  },
-  {
-    id: "education",
-    label: "Education",
-    icon: "education",
-    count: education.length,
   },
   { id: "toolkit", label: "Skills & toolkit", icon: "code", count: null },
 ];
