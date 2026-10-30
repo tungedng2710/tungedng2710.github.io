@@ -7,13 +7,13 @@ export const experience = [
     period: "March 2022 — Present",
     type: "Full-time",
     highlights: [
-      "Research and develop intelligent document processing systems that extract structured information from forms, tables, scanned documents, and semi-structured layouts.",
-      "Fine-tune vision-language models for document information extraction, including layout understanding, key-field recognition, and structured output generation.",
-      "Develop layout-analysis and table-extraction modules that preserve reading order and support OCR, information extraction, and validation workflows.",
-      "Build end-to-end license-plate recognition pipelines spanning image preprocessing, vehicle and plate detection, OCR, post-processing, and validation.",
-      "Deploy license-plate recognition models with NVIDIA Triton Inference Server and optimize inference workflows for traffic-monitoring systems.",
-      "Develop traffic-violation recognition features by combining detection, tracking, license-plate recognition, and rule-based video analytics.",
-      "Research and develop speech-enhancement models for the Viettel Meeting platform.",
+      "Conduct research and development in intelligent document processing, with an emphasis on structured information extraction from forms, tables, scanned documents, and semi-structured layouts.",
+      "Fine-tune vision-language models for document understanding and information extraction, addressing layout interpretation, key-field recognition, and structured output generation.",
+      "Develop document layout analysis and table extraction modules to preserve reading order and support optical character recognition (OCR), information extraction, and validation workflows.",
+      "Design and implement end-to-end license plate recognition pipelines encompassing image preprocessing, vehicle and plate detection, OCR, post-processing, and validation.",
+      "Deploy license plate recognition models using NVIDIA Triton Inference Server and optimize inference workflows for traffic monitoring applications.",
+      "Develop methods for traffic violation recognition through the integration of object detection, tracking, license plate recognition, and rule-based video analysis.",
+      "Investigate and develop speech enhancement models for integration into the Viettel Meeting platform.",
     ],
   },
   {
@@ -24,7 +24,7 @@ export const experience = [
     period: "March 2025 — Present",
     type: "Part-time",
     highlights: [
-      "Research, design, and simulate quantitative financial alpha signals on the WorldQuant BRAIN platform using data-driven investment hypotheses.",
+      "Formulate data-driven investment hypotheses and develop quantitative alpha signals, evaluating their behaviour through simulation on the WorldQuant BRAIN platform.",
     ],
   },
   {
@@ -35,10 +35,10 @@ export const experience = [
     period: "October 2021 — March 2022",
     type: "Part-time",
     highlights: [
-      "Researched and evaluated face detection, alignment, and recognition components for real-time computer-vision applications.",
-      "Studied object-tracking algorithms under challenging conditions including occlusion, motion blur, and crowded scenes.",
-      "Prepared datasets, ran model experiments, and integrated computer-vision modules into a camera-monitoring system.",
-      "Evaluated performance and analyzed errors to improve model reliability, inference speed, and robustness.",
+      "Investigated and evaluated face detection, alignment, and recognition methods for real-time computer vision applications.",
+      "Examined object tracking algorithms under challenging visual conditions, including occlusion, motion blur, and crowded scenes.",
+      "Prepared datasets, conducted model experiments, and contributed to the integration of computer vision modules into a camera monitoring system.",
+      "Conducted performance evaluation and error analysis to identify opportunities for improving model reliability, inference efficiency, and robustness.",
     ],
   },
   {
@@ -49,10 +49,10 @@ export const experience = [
     period: "December 2020 — June 2021",
     type: "Part-time",
     highlights: [
-      "Researched facial-expression recognition and multitask-learning approaches for jointly learning facial attributes.",
-      "Built experiments for face recognition, including dataset preparation, model training, evaluation, and performance comparison.",
-      "Annotated, cleaned, and organized image datasets to improve training and validation data quality.",
-      "Visualized datasets, label distributions, and predictions to support error analysis and model improvement.",
+      "Investigated facial expression recognition and multi-task learning approaches for the joint prediction of facial attributes.",
+      "Designed and conducted face recognition experiments encompassing dataset preparation, model training, evaluation, and comparative performance analysis.",
+      "Annotated, curated, and organized image datasets to support the quality and consistency of training and validation data.",
+      "Analyzed and visualized image datasets, label distributions, and model predictions to support error analysis and guide model refinement.",
     ],
   },
   {
@@ -63,10 +63,10 @@ export const experience = [
     period: "August 2020 — October 2020",
     type: "Part-time",
     highlights: [
-      "Researched and implemented CenterNet-based object detection to localize Vietnamese identity cards in eKYC images.",
-      "Developed card-alignment workflows to crop, rotate, and normalize identity-card images before text recognition.",
-      "Applied OCR to extract identity information from Vietnamese identity cards.",
-      "Tested the detection, alignment, and OCR pipeline across varied lighting, angles, and backgrounds.",
+      "Investigated and implemented CenterNet-based object detection for Vietnamese identity card localization in electronic Know Your Customer (eKYC) applications.",
+      "Developed identity card alignment workflows incorporating cropping, rotation, and image normalization prior to text recognition.",
+      "Applied optical character recognition (OCR) to extract identity information from Vietnamese identity cards.",
+      "Evaluated the detection, alignment, and OCR pipeline under variations in illumination, capture angle, and background conditions.",
     ],
   },
 ];
